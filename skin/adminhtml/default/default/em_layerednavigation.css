@@ -1,0 +1,18 @@
+#img-ctl { position:absolute; padding: 10px 0 10px 10px; background-color: white; border: solid 1px #ccc; }
+img.sample { height:18px;display:block }
+ul.buttons { overflow: hidden; }
+ul.buttons li { float: left; margin-right: 10px }
+
+.btn::-moz-focus-inner { padding:0; border:0; } /* FF Fix */
+.btn { -webkit-border-fit:lines; } /* <- Safari & Google Chrome Fix */
+.btn { border-width:1px; border-style:solid; border-color:#ed6502 #a04300 #a04300 #ed6502; padding:1px 7px 2px 7px; background:#ffac47 url(images/btn_bg.gif) repeat-x 0 100%; color:#fff; font:bold 12px arial, helvetica, sans-serif; cursor:pointer; text-align:center !important; white-space:nowrap; }
+.btn:hover { background:#f77c16 url(images/btn_over_bg.gif) repeat-x 0 0; }
+.btn:active { background:#f77c16 url(images/btn_on_bg.gif) repeat-x 0 0; }
+.btn span { line-height:1.35em; background-repeat:no-repeat; background-position:0 50%; }
+.btn span span { background:none !important; padding:0 !important; margin:0 !important; display:inline !important; }
+.btn.add { padding-left:6px; }
+.btn.add span { padding-left:20px; }
+
+/* Google Chrome specific fix for empty buttons */
+.btn.add span:after { display:inline-block; clear:both; content:"."; font-size:0; line-height:0; height:0; overflow:hidden; }
+.btn.add span { background-image:url(images/add_btn_icon.gif); }

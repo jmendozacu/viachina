@@ -1,0 +1,260 @@
+<?php 
+    $_helper = $this->helper('catalog/product_compare');
+    $brandProduct = Mage::registry('brand_product');
+    $_items = $_helper->getItemCount() > 0 ? $_helper->getItemCollection() : null;
+    $ajaxcart = themeOptions('ajaxcart');
+?>
+<div class="box-title">
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 text-center down-arrow">
+        <h3><?php echo $this->__('Compare'); ?></h3>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="compares">
+    <div class="row">
+        <div class="compare-items">
+            <dl>
+                <dd class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="compare-item">
+                        <?php echo $this->getChildHtml('brandProduct') ?>
+                    </div>
+                </dd>
+                <?php 
+                    if($_items):
+                        $itemCount = 0;
+                        foreach($_items as $product):
+                            $itemCount++;
+                    ?>
+                <dd class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="compare-item">
+                        <div class="product-name text-align">
+                            <a href="<?php echo $this->getProductUrl($product) ?>"></a>
+                        </div>
+                        <div class="thumbnail-box">
+                            <input type="hidden" class="compare-item-id" value="<?php echo $product->getId() ?>" />
+                            <a href="<?php echo $product->getProductUrl() ?>" class="product-thumbnail">
+                                <img class="thumnail" src="<?php echo $this->helper('catalog/image')->init(Mage::getModel('catalog/product')->load($product->getId()), 'thumbnail')->resize(250) ?>">
+                            </a>
+                        </div>
+                    </div>
+                </dd>
+                <?php
+                        endforeach;
+                        
+                        if($itemCount < 3):
+                            while($itemCount < 3):
+                                $itemCount++
+                        ?>
+                <dd class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="compare-item">
+                        <div class="empty">
+                            <h1>Drag a Product to Compare</h1>
+                            <img src="<?php echo $this->getSkinUrl('images/searchbyname/drag_icon.jpg'); ?>">
+                        </div>
+                    </div>
+                </dd>                            
+                <?php
+                            endWhile;
+                        endif;
+                    else:
+                    ?>
+                <?php endif; ?>
+            </dl>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 margin20">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 col-sm-offset-5 text-center">
+                <a class="col-xs-12 btn-compare" href="<?php echo Mage::getBaseUrl() ?>searchbyname/product_compare/?comparable_id=<?php echo $brandProduct->getId() ?>&attr_group=<?php echo Mage::registry('attr_group') ?>">
+                    <span><span><?php echo $this->__('Compare'); ?></span></span>
+                    <span><span><img src="<?php echo $this->getSkinUrl('images/searchbyname/compare_icon2.png') ?>"</span></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+<?php if($ajaxcart == '1' || $ajaxcart == '2') { ?>
+    jQuery.noConflict();
+    
+    jQuery('.fancybox').live('click', function() {
+        jQuery('#fancybox-loading').show();
+        });
+    
+    jQuery('.fancybox').fancybox(
+            {
+               hideOnContentClick : true,
+               width: 630,
+               autoDimensions: true,
+               type : 'iframe',
+               showTitle: false,
+               scrolling: 'no',
+               onComplete: function(){
+                jQuery('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
+                    jQuery('#fancybox-loading').hide();
+                    jQuery('#fancybox-content').height(jQuery(this).contents().find('body').height()+30);
+                    jQuery.fancybox.resize();
+                 });
+
+               }
+            }
+        );
+    
+    function showOptions(id){
+        jQuery('#fancybox'+id).trigger('click');
+    }
+        
+    function setAjaxData(data,iframe){
+        if(data.status == 'ERROR'){
+            alert(data.message);
+        }else{
+            successMessage(data.message);
+            if(jQuery('.compare-box')){
+                jQuery('.compare-box').replaceWith(data.sidebar);
+            }
+            jQuery.fancybox.close();
+        }
+    }
+    function setLocationAjax(url,id){
+        url += 'isAjax/1';
+        url = url.replace("checkout/cart","ajax/index");
+        jQuery('#ajax_loader'+id).show();
+        try {
+            jQuery.ajax( {
+                url : url,
+                dataType : 'json',
+                success : function(data) {
+                    jQuery('#ajax_loader'+id).hide();
+                     setAjaxData(data,false);           
+                }
+            });
+        } catch (e) {
+        }
+    }
+     <?php } ?>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+<?php if($ajaxcart == '1' || $ajaxcart == '2') { ?>
+    var productAddToCompareForm = new VarienForm('product_addtocart_form');
+    productAddToCompareForm.submit = function(button, url) {
+    if (this.validator.validate()) {
+        var form = this.form;
+        var oldUrl = form.action;
+        if (url) {
+            form.action = url;
+        }
+        var e = null;
+        // Start of our new ajax code
+        if (!url) {
+            url = jQuery('#product_addtocart_form').attr('action');
+        }
+        url = url.replace("checkout/cart","catalog/product_compare"); // New Code
+        var data = jQuery('#product_addtocart_form').serialize();
+        data += '&isAjax=1';
+        
+        jQuery('#ajax_loader').show();
+        try {
+            jQuery.ajax( {
+                url : url,
+                dataType : 'json',
+                type : 'post',
+                data : data,
+                
+                success : function(data) {
+                    //alert("dd");
+                    jQuery('#ajax_loader').hide();
+                    if(data.status == 'ERROR'){
+                        alert(data.message);
+                    }else{
+                        successMessage(data.message);
+                        if(jQuery('.compare-box')){
+                        jQuery('.compare-box').replaceWith(data.sidebar);
+                        }
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("Error posting Data");
+                }
+            });
+        } catch (e) {
+        }
+        // End of our new ajax code
+        this.form.action = oldUrl;
+        if (e) {
+            throw e;
+        }
+    }
+}.bind(productAddToCartForm);
+
+    productAddToCartForm.submitLight = function(button, url){
+        if(this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm);
+<?php } else { ?>
+var productAddToCartForm = new VarienForm('product_addtocart_form');
+    productAddToCartForm.submit = function(button, url) {
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+               form.action = url;
+            }
+            var e = null;
+            try {
+                this.form.submit();
+            } catch (e) {
+            }
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                button.disabled = true;
+            }
+        }
+    }.bind(productAddToCartForm);
+
+    productAddToCartForm.submitLight = function(button, url){
+        if(this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            // Remove custom datetime validators
+            for (var methodName in Validation.methods) {
+                if (methodName.match(/^validate-datetime-.*/i)) {
+                    delete Validation.methods[methodName];
+                }
+            }
+
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm);
+
+<?php } ?>
+//]]>
+</script>

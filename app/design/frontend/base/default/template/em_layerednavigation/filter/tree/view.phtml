@@ -1,0 +1,26 @@
+<?php
+/**
+ * Template for filter items block
+ *
+ * @see Mage_Catalog_Block_Layer_Filter
+ */
+?>
+<?php
+	$this->prepareTree();
+?>
+<?php if ($removeUrl = Mage::helper('layerednavigation')->getRemoveUrl($this->_filter)): ?>
+<div class="filter-act">
+	<a  class="btn-remove" href="<?php echo $removeUrl ?>" title="<?php echo $this->__('Clear All') ?>"><?php echo $this->__('Clear All') ?></a>
+</div>
+<?php endif ?>
+
+<ol class="filter tree-filter">
+<?php echo $this->getChildHtml(); ?>
+</ol>
+<script type="text/javascript">
+//<![CDATA[
+	var treeContainer = $$('.tree-filter .selected')[0];
+	em_treeview = new EM_TreeView(treeContainer);
+	em_treeview.collapseAll();
+//]]>
+</script>

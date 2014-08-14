@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Arvfc_Fancycompare>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Arvfc_Fancycompare>
+    </modules>
+</config> 

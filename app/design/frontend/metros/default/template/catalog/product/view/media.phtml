@@ -1,0 +1,148 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+
+
+
+
+
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php
+$layout = themeOptions('productlayout');
+
+if ($layout == null || $layout == 'default')
+{ ?>
+
+
+<p class="product-image">
+    
+        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->constrainOnly(true)->keepAspectRatio(true)->resize(374,498) ?>" width="374" height="498" alt="<?php echo $this->htmlEscape($this->getImageLabel()) ?>" title="<?php echo $this->htmlEscape($this->getImageLabel()) ?>" />
+   
+</p>
+
+<?php if (count($this->getGalleryImages()) > 0): ?>
+
+<div class="default-views more-views">
+    <div id="slider" class="flexslider">
+    <?php $_iterator = 0; ?>
+    <ul class="slides">
+    <?php foreach ($this->getGalleryImages() as $_image): ?>
+        <li class="item<?php if( ++$_iterator == sizeof($this->getGalleryImages()) ): ?> last<?php endif; ?>">
+            <a href="#"><img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->resize(84,77); ?>" width="84" height="77" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" /></a>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+    </div>
+</div>
+
+<?php endif; ?>
+
+
+<?php
+}
+elseif ($layout == 'horizontal')
+{ ?>
+
+
+<p class="product-image">
+    
+        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->constrainOnly(true)->keepAspectRatio(true)->resize(500,498) ?>" width="500" height="498" alt="<?php echo $this->htmlEscape($this->getImageLabel()) ?>" title="<?php echo $this->htmlEscape($this->getImageLabel()) ?>" />
+   
+</p>
+
+<?php if (count($this->getGalleryImages()) > 0): ?>
+
+<div class="horizontal-views more-views">			
+    <div id="slider" class="flexslider">
+    <?php $_iterator = 0; ?>
+    <ul class="slides">
+    <?php foreach ($this->getGalleryImages() as $_image): ?>
+        <li class="item<?php if( ++$_iterator == sizeof($this->getGalleryImages()) ): ?> last<?php endif; ?>">
+            <a href="#"><img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->resize(84,77); ?>" width="84" height="77" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" /></a>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+    </div>
+</div>
+
+<?php endif; ?>
+
+
+<?php
+}
+elseif ($layout == 'vertical')
+{ ?>
+
+<p class="product-image">
+    
+        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->constrainOnly(true)->keepAspectRatio(true)->resize(300,498) ?>" width="300" height="498" alt="<?php echo $this->htmlEscape($this->getImageLabel()) ?>" title="<?php echo $this->htmlEscape($this->getImageLabel()) ?>" />
+   
+</p>
+
+<?php if (count($this->getGalleryImages()) > 0): ?>
+
+<div class="vertical-views more-views">			
+    <div id="slider" class="flexslider">
+    <?php $_iterator = 0; ?>
+    <ul class="slides">
+    <?php foreach ($this->getGalleryImages() as $_image): ?>
+        <li class="item<?php if( ++$_iterator == sizeof($this->getGalleryImages()) ): ?> last<?php endif; ?>">
+            <a href="#"><img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->resize(84,77); ?>" width="84" height="77" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" /></a>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+    </div>
+</div>
+
+<?php endif; ?>
+
+
+<?php
+}
+?>
+
+<script>
+  j$('#slider').flexslider({
+    animation: "slide",
+    animationLoop: false,
+    itemWidth: 86,
+    itemMargin: 9,
+   // minItems: 3,
+   // maxItems: 3,
+    //move:1,
+    controlNav: false,
+    slideshow: false
+  });
+</script>

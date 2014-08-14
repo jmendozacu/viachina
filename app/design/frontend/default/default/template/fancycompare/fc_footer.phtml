@@ -1,0 +1,261 @@
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	var fc_parent = jQuery("#fc_parent");
+	var fc_result = jQuery("#fc_result");
+	var fc_loaded = 0;
+
+	centerFC('fc_parent', "hor");
+	function centerFC(ID, align) {
+		var el = jQuery("#"+ID);
+		var _width = el.width();
+		var m = "-" + parseFloat(_width/2) + 'px';
+		if (align == "hor") {
+			var cssObj = {'marginLeft':m, 'marginRight':m, 'left': '50%'};
+		} else if (align == "hor_vert") {
+			var _height = el.height();
+			var mh = "-" + parseFloat(_height/2) + 'px';
+			var cssObj = {'marginLeft':m, 'marginRight':m, 'left': '50%', 'marginTop':mh, 'marginBottom':mh, 'top': '50%'};
+			if (ID == "fc_r") {
+				jQuery("#fc_result_par").css('max-height', _height+'px');
+			}
+		}
+		el.css(cssObj);
+	}
+
+	/** Compare the items **/
+	jQuery(document).on("click", ".fc_compare_btn", function(e) {
+		e.preventDefault();
+		var _this = jQuery(this);
+		var item_count = jQuery(".compare-items .compare-item").filter(":visible").not(".empty_item").length;
+		if (item_count <= 1) {
+			return false;
+		}
+		if (fc_loaded) {
+			jQuery("#fc_r").show();
+			/*Show/hide the floating bar*/
+			jQuery("#fc_parent").toggle();
+			return false;
+		}
+		jQuery.ajax({
+			url: fc_base_url + "show",
+			type: "POST",
+			async: false,
+			beforeSend: function() {
+				_this.attr("disabled", "disabled");
+				_this.find("span span").text("Please wait...");
+			}
+		}).done(function(data) {
+			var par = jQuery("#fc_r");
+			par.show().find("#fc_result").html(data);
+			_this.removeAttr("disabled");
+			_this.find("span span").text("Compare");
+			fc_loaded = 1;
+			centerFC("fc_r", "hor_vert");
+
+			/*Hide the floating bar*/
+			jQuery("#fc_parent").hide();
+		});
+	});
+
+	/** Close compare popup box **/
+	jQuery(document).on("click", ".fc_r_cl", function(e) {
+		e.preventDefault();
+		jQuery("#fc_r").hide();
+		/*Show the floating bar*/
+		jQuery("#fc_parent").show();
+		addEmptyFCItem();
+	});
+
+	/** Add to cart **/
+	jQuery(document).on("click", "#fc_result .btn-cart", function(e) {
+		e.preventDefault();
+		var _this = jQuery(this);
+		var item = jQuery(this).closest("td");
+		var ID = item.attr("id").split("fc_atc_");
+		var pid = jQuery.trim(ID[1]);
+		if (!pid || pid == "" || pid == "undefined") {
+			return false;
+		}
+		jQuery.ajax({
+			url: fc_base_url + "addtocart",
+			type: "POST",
+			dataType: "json",
+			data: "product="+pid,
+			beforeSend: function() {
+				_this.find("span span").text("Adding...");
+			}
+		}).done(function(data) {
+			if(data) {
+				if (data.status == "success") {
+					_this.attr("disabled", "disabled");
+					_this.find("span span").text("In Cart");
+				}
+			}
+		});
+	});
+
+	/** Add to wishlist **/
+	jQuery(document).on("click", "#fc_result .link-wishlist", function(e) {
+		e.preventDefault();
+		var _this = jQuery(this);
+		var item = jQuery(this).closest("td");
+		var ID = item.attr("id").split("fc_atc_");
+		var pid = jQuery.trim(ID[1]);
+		if (!pid || pid == "" || pid == "undefined") {
+			return false;
+		}
+		_this.text("Adding...");
+		addToWishlist(pid).done(function(data) {
+			if(data) {
+				if (data.status == "success") {
+					_this.hide();
+				} else if (data.status == "error") {
+					_this.text("Add to Wishlist");
+					alert(data.message);
+				}
+			}
+		});
+	});
+	function addToWishlist(pid) {
+		return jQuery.ajax({
+			url: fc_base_url + "addtowishlist",
+			type: "POST",
+			dataType: "json",
+			data: "product="+pid
+		})
+	}
+
+	/** Add to compare **/
+	jQuery(document).on("click", ".link-compare", function(e) {
+		var _this = jQuery(this);
+		var href = _this.attr("href").split("add/product/");
+		var pid = parseInt(href[1], 10);
+		if (jQuery("#fc_r").is(':visible')) {
+			return false;
+		}
+		if (!pid || pid == "" || pid == "undefined") {
+			return true;
+		} else {
+			e.preventDefault();
+			_this.text("Adding...");
+			addToCompare(pid).done(function(data) {
+				if(data) {
+					if (data.status == "success") {
+						_this.hide();
+						if (data.pData && data.pid) {
+							jQuery("#fc_parent").show().find(".compare-item.empty_item:first").html(data.pData).removeClass("empty_item").attr("id", "fc_"+data.pid);
+						} else {
+							jQuery("#fc_parent").show();
+						}
+						fc_loaded = 0;
+					} else if (data.status == "error") {
+						_this.text("Add to Compare");
+						alert(data.message);
+					}
+				}
+			});
+		}
+	});
+	function addToCompare(pid) {
+		return jQuery.ajax({
+			url: fc_base_url + "addtocompare",
+			type: "POST",
+			dataType: "json",
+			data: "product="+pid
+		})
+	}
+
+	/** Remove the item from compare list **/
+	jQuery(document).on("click", ".fc_remove", function(e) {
+		e.preventDefault();
+		var item = jQuery(this).closest(".compare-item");
+		var pid = jQuery.trim(item.attr("id")).split("fc_");
+		if (!pid[1] || pid[1] == "" || pid[1] == "undefined") {
+			return false;
+		} else {
+			removeItem(pid[1]).done(function(data) {
+				if(data) {
+					if (data.status == "success") {
+						item.hide("slow", function() {
+							addEmptyFCItem();
+						});
+						fc_loaded = 0;
+					}
+				}
+			});
+		}
+	});
+	jQuery(document).on("click", ".btn-remove.fc_rm", function(e) {
+		e.preventDefault();
+		var TD = jQuery(this).closest("td");
+		var ID = TD.attr("id").split("_");
+		if (ID[2] && ID[2] != "" && ID[2] != "undefined") {
+			removeItem(ID[2]).done(function(data) {
+				if(data) {
+					if (data.status == "success") {
+						var ind = TD.index();
+						ind = ind - 1;
+						jQuery("#product_comparison").find("tr").each(function() {
+							if (data.fc_count <= 2) {
+								jQuery("#product_comparison").find(".btn-remove.fc_rm").hide();
+							}
+							jQuery(this).find("td:eq("+ind+")").remove();
+							jQuery("#product_comparison").find("colgroup col:eq("+ind+")").remove();
+							centerFC("fc_r", "hor_vert");
+						});
+						fc_loaded = 0;
+						/** Remove item from floating bar **/
+						jQuery("#fc_parent").find("#fc_" + ID[2]).remove();
+					}
+				}
+			});
+		}
+	});
+	function removeItem(pid) {
+		return jQuery.ajax({
+			url: fc_base_url + "remove",
+			type: "POST",
+			dataType: "json",
+			data: "product="+pid
+		});
+	}
+	function addEmptyFCItem() {
+		var item_count = jQuery(".compare-items").find(".compare-item").filter(':visible').length;
+		var diff = fc_count - item_count;
+		if (diff > 0) {
+			var htm = '<div class="compare-item empty_item">';
+			htm += '<div class="thumb_holder">';
+			htm += '<img class="thumbnail">';
+			htm += '</div>';
+			htm += '<p class="description">Add Another Item</p>';
+			htm += '</div>';
+			for (var i=0; i<diff; i++) {
+				jQuery(".compare-items").append(htm);
+			}
+		}
+	}
+
+	/** Close & clear the compare floating bar **/
+	jQuery(document).on("click", "#fc_close", function(e) {
+		e.preventDefault();
+		jQuery.ajax({
+			url: fc_base_url + "clear",
+			type: "POST",
+			dataType: "json"
+		}).done(function(data) {
+			if(data) {
+				if (data.status == "success") {
+					jQuery("#fc_parent").slideUp();
+				} else if (data.status == "error") {
+					alert(data.message);
+				}
+			}
+		});
+	});
+	
+	function cl(str) {
+		console.log(str);
+	}
+	
+});
+</script>

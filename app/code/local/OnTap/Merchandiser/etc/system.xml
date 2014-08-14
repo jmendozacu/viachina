@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+    	<merchandiser>
+            <class>merchandiser-top</class>
+            <label>Visual Merchandiser</label>
+            <tab>catalog</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>40</sort_order>
+            <show_in_default>1</show_in_default>
+            <groups>
+            	<hint>
+                    <frontend_model>merchandiser/adminhtml_system_config_fieldset_hint</frontend_model>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </hint>
+                <options translate="label">
+                    <label>Visual Merchandising options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <expanded>1</expanded>
+                    <fields>
+                        <attribute_codes translate="label">
+                            <label>List Attribute Codes</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <comment>Use commas ',' to separate multiple attibute codes.</comment>
+                        </attribute_codes>
+                        <column_count translate="label">
+                            <label>Column count</label>
+							<comment><![CDATA[Default number of columns in Visual Merchandiser window]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <validate>validate-number</validate>
+                        </column_count>
+                        <show_creation_date translate="label">
+                            <label>Show creation date </label>
+							<comment><![CDATA[Shows the product creation date for each product in the Visual Merchandiser window]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </show_creation_date>
+                        <show_extra_images translate="label">
+                            <label>Show extra images </label>
+							<comment><![CDATA[This option shows additional gallery images for each product as thumbnails]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <validate>validate-number</validate>
+                        </show_extra_images>
+                        <max_images_thumbnail translate="label">
+                            <label>Max extra images thumbnail </label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <validate>validate-number</validate>
+                            <depends><show_extra_images>1</show_extra_images></depends>
+                        </max_images_thumbnail>
+                        <hide_invisible translate="label">
+                            <label>Hide Invisible Products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                       	</hide_invisible>
+                       	<hide_disabled translate="label">
+                            <label>Hide Disabled Products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                       	</hide_disabled>
+                       	<hide_product_position_field translate="label">
+                            <label>Hide Category Position input fields</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                       	</hide_product_position_field>
+                        <ajax_page_load translate="label">
+                            <label>Ajax page load threshold </label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <validate>validate-number</validate>
+                            <comment>When a category contains more products than this number, then Ajax page loads are enabled. Leave field empty to disable Ajax page loads.</comment>
+                        </ajax_page_load>
+                    </fields>
+                </options>
+                <index translate="label">
+                    <label>Indexing options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <disabled translate="label">
+                            <label>Disable Smart Category indexing</label>
+                            <comment><![CDATA[If Smart Category indexing is enabled, categories load faster at the front-end]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </disabled>
+                        <disable_catindex translate="label">
+                            <label>Disable category re-indexing</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </disable_catindex>
+                    </fields>
+                </index>    
+            </groups>
+        </merchandiser>
+    </sections>
+</config>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <IcebergCommerce_Lightbox>
+            <version>1.1.0</version>
+        </IcebergCommerce_Lightbox>
+    </modules>
+    <global>
+		<blocks>
+			<icebergcommerce_lightbox>
+				<class>IcebergCommerce_Lightbox_Block</class>
+			</icebergcommerce_lightbox>
+		</blocks>
+	</global>
+    <frontend>
+        <layout>
+            <updates>
+                <icebergcommerce_lightbox>
+                    <file>icebergcommerce_lightbox.xml</file>
+                </icebergcommerce_lightbox>
+            </updates>
+        </layout>
+    </frontend>
+	<adminhtml>
+		<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <iblightbox>
+                                            <title>Iceberg Commerce - Lightbox</title>
+                                        </iblightbox>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+	</adminhtml>
+</config>

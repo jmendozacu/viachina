@@ -1,0 +1,142 @@
+@media screen and (max-width: 1023px) {
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 10px auto;
+}
+.toggleMenu {
+background-color: #03997e;
+font-family: 'FontAwesome';
+font-size: 42px;
+padding: 10px 13px 6px 13px;
+color: #FFF;
+text-decoration: none;
+text-align: left;
+}
+.toggleMenu:hover{text-decoration:none;}
+.toggleMenu span {}
+#nav {
+    list-style: none;
+    *zoom: 1;
+    position: absolute;
+    width: 100%;
+     
+     
+}
+#nav:before,
+#nav:after {
+    content: " "; 
+    display: table; 
+}
+#nav:after {
+    clear: both;
+}
+#nav ul {
+    list-style: none;
+    width: 9em;
+}
+#nav a {
+    padding: 10px 15px;
+    color:#050505;
+    text-align: left;
+    font-size: 13px;
+}
+#nav li {
+    position: relative;
+    background-color: #F9F9F9;
+}
+#nav > li {
+    float: left;
+    border-top: 1px solid #e2e2e2;
+}
+#nav > li > .parent {
+    background-image: url("http://webdesigntutsplus.s3.amazonaws.com/tuts/378_tessa/tessa-lt-dropdowns-21c7868/images/downArrow.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}
+#nav > li > a {
+    display: block;
+}
+#nav li  ul {
+    position: absolute;
+    left: -9999px;
+}
+#nav > li.hover > ul {
+    left: 0;
+}
+#nav li li.hover ul {
+    left: 100%;
+    top: 0;
+}
+#nav li li a {
+    display: block;
+    
+    position: relative;
+    z-index:100;
+    padding-left: 30px;
+    
+}
+#nav li li{background-color: #F9F9F9; border-top: 1px solid #e2e2e2;}
+#nav li li li a {
+    padding-left: 50px;
+    z-index:200;
+    
+}
+#nav li li li{background-color: #F9F9F9; border-top: 1px solid #e2e2e2;}
+}
+@media screen and (max-width: 1023px) {
+    .active {
+        display: block;
+    }
+    #nav > li {
+        float: none;
+    }
+    #nav > li > .parent {
+        background-position: 95% 50%;
+    }
+  
+    #nav > li > .parent {
+   background-image: none; 
+  }
+    #nav li .more {
+        background-image: url("http://webdesigntutsplus.s3.amazonaws.com/tuts/378_tessa/tessa-lt-dropdowns-21c7868/images/downArrow.png");
+        background-repeat: no-repeat;
+        background-position: 95% 50%;
+        float: right;
+      	width: 20%;
+    		
+    		padding: 8px 40px;
+    		margin: 2px 5px 2px 0px;
+        cursor: pointer;
+    		z-index: 200;
+        position: relative;
+    }
+  #nav li .more:before {
+  content: "";
+ 
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -2px;
+  }
+  
+  
+  
+    #nav ul {
+        display: block;
+        width: 100%;
+    }
+   #nav > li.hover > ul , #nav li li.hover ul {
+        position: static;
+    }
+   
+
+}
+
+@media only screen and (max-width: 320px)  {
+   #nav{
+		position: relative;
+   }
+}

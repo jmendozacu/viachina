@@ -1,0 +1,478 @@
+<config>
+	<tabs>
+        <mycustom_tab translate="label" module="ExtraConfig">
+            <label>PEER SYSTEM</label>
+            <sort_order>1</sort_order>
+        </mycustom_tab>
+    </tabs>
+    <sections>
+        <mygeneral translate="label" module="ExtraConfig">
+			<label>Theme Options</label>
+            <sort_order>1</sort_order>
+            <class>superclass</class>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <tab>mycustom_tab</tab>
+            <groups>
+		
+		<colors translate="label">
+                    <label>Colors</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <primary_color translate="label">
+			    			<label>Primary Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>11</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </primary_color>
+			<secondary_color translate="label">
+			    			<label>Secondary Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>12</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </secondary_color>
+			
+                        		
+                    </fields>
+                </colors>
+		<menu translate="label">
+                    <label>Menu</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <menu_background translate="label">
+			    			<label>Menu Background</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>21</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </menu_background>
+			<menu_fonts translate="label">
+			    			<label>Menu Fonts</label>
+                            <frontend_type>select</frontend_type>
+			    <frontend_model>gfont/adminhtml_system_config_form_field_titlefont</frontend_model>
+							<source_model>gfont/config_titlefont</source_model>
+							<sort_order>22</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </menu_fonts>
+			<menu_title_fonts_color translate="label">
+			    			<label>Menu Title Fonts Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>23</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </menu_title_fonts_color>
+			<menu_title_fonts_size translate="label">
+			    			<label>Menu Title Fonts Size</label>
+                            <frontend_type>text</frontend_type>
+							<sort_order>24</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </menu_title_fonts_size>
+			<menu_fonts_color translate="label">
+			    			<label>Menu Fonts Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>25</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </menu_fonts_color>
+			<menu_fonts_size translate="label">
+			    			<label>Menu Fonts Size</label>
+                            <frontend_type>text</frontend_type>
+							<sort_order>26</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </menu_fonts_size>
+			<menu translate="label">
+			    			<label>Display Mega Menu</label>
+                            <frontend_type>select</frontend_type>
+			    <source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>27</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </menu>
+			<menu_withlogo translate="label">
+			    			<label>Display Menu With Logo</label>
+                            <frontend_type>select</frontend_type>
+			    <source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>28</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </menu_withlogo>
+                        		
+                    </fields>
+                </menu>
+		<sidebar translate="label">
+                    <label>Sidebar</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <sidebar_background_color translate="label">
+			    			<label>Sidebar Background Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>31</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </sidebar_background_color>
+			<sidebar_title_fonts translate="label">
+			    			<label>Sidebar Title Fonts</label>
+                            <frontend_type>select</frontend_type>
+			    <frontend_model>gfont/adminhtml_system_config_form_field_bodyfont</frontend_model>
+							<source_model>gfont/config_bodyfont</source_model>
+							<sort_order>32</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </sidebar_title_fonts>
+			<sidebar_title_fonts_color translate="label">
+			    			<label>Sidebar Title Fonts Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>33</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </sidebar_title_fonts_color>
+			<sidebar_title_fonts_size translate="label">
+			    			<label>Sidebar Title Fonts Size</label>
+                            <frontend_type>text</frontend_type>
+							<sort_order>34</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </sidebar_title_fonts_size>
+			<sidebar_fonts_color translate="label">
+			    			<label>Sidebar Fonts Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>35</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </sidebar_fonts_color>
+                        		
+                    </fields>
+                </sidebar>
+		
+		<product_grid_view translate="label">
+                    <label>Product Grid View</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <product_grid_box_border translate="label">
+			    			<label>Product Grid Box Border (On/Off)</label>
+                            <frontend_type>select</frontend_type>
+			    <source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>41</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </product_grid_box_border>
+			<product_grid_box_hovereffect translate="label">
+			    			<label>Product Grid Box Hovereffect</label>
+                            <frontend_type>select</frontend_type>
+			    <source_model>ExtraConfig/Hovereffect</source_model>
+							<sort_order>41</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </product_grid_box_hovereffect>
+			
+			<product_grid_box_image_bgcolor translate="label">
+			    			<label>Product Grid Box Image BGcolor</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>42</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </product_grid_box_image_bgcolor>
+			<product_grid_box_color translate="label">
+			    			<label>Product Grid Box Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>42</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </product_grid_box_color>
+			<product_grid_box_font_color translate="label">
+			    			<label>Product Grid Box Font Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>43</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </product_grid_box_font_color>
+                        		
+                    </fields>
+                </product_grid_view>
+		
+		<product_list_view translate="label">
+                    <label>Product List View</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <product_list_image_border translate="label">
+			    			<label>Product List Image Border (On/Off)</label>
+                            <frontend_type>select</frontend_type>
+			    <source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>51</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </product_list_image_border>
+			
+			<product_list_active_color translate="label">
+			    			<label>Product List Active Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>52</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </product_list_active_color>
+                        		
+                    </fields>
+                </product_list_view>
+		
+		<footer translate="label">
+                    <label>Footer</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <footer_background_color translate="label">
+			    			<label>Footer Background Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>61</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </footer_background_color>
+			
+			
+			<footer_title_font_color translate="label">
+			    			<label>Footer Title Font Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>62</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </footer_title_font_color>
+			<footer_text_font_color translate="label">
+			    			<label>Footer Text Font Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>63</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </footer_text_font_color>
+			<footer_link_font_color translate="label">
+			    			<label>Footer Link Font Color</label>
+                            <frontend_type>color</frontend_type>
+							<sort_order>64</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </footer_link_font_color>
+                        		
+                    </fields>
+                </footer>
+		
+                
+                <background translate="label">
+                    <label>Background Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>70</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <background_color translate="label">
+			    			<label>Background-color</label>
+						<comment>OR </comment>
+                            <frontend_type>color</frontend_type>
+							<sort_order>71</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </background_color>
+			<background_pattern translate="label">
+			    			<label>Background-Pattern</label>
+						<comment>OR </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ExtraConfig/Pattern</source_model>
+							<sort_order>72</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </background_pattern>
+			<background_image translate="label">
+			    			<label>Background-image</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">custom/image</upload_dir> 
+                            <base_url type="media" scope_info="1">custom/image</base_url>
+							<sort_order>73</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </background_image>
+			
+                        <bg_repeat translate="label">
+			    			<label>Background-repeat</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ExtraConfig/Repeat</source_model>
+							<sort_order>74</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </bg_repeat>
+                        <bg_attachment translate="label">
+			    			<label>Background-attachment</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ExtraConfig/Attachment</source_model>
+							<sort_order>75</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </bg_attachment> 
+                        <bg_position_x translate="label">
+			    			<label>Background-position (X)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ExtraConfig/Positionx</source_model>
+							<sort_order>76</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </bg_position_x> 
+                        <bg_position_y translate="label">
+			    			<label>Background-position (Y)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ExtraConfig/Positiony</source_model>
+							<sort_order>77</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </bg_position_y>              
+                                                   
+                    </fields>
+                </background>
+		
+                
+                <product_list translate="label">
+                    <label>Product List Page</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>80</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <column_count translate="label">
+			    			<label>Products per row</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ExtraConfig/Columncount</source_model>
+							<sort_order>81</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </column_count>
+			<productlayout translate="label">
+			    			<label>Product Detail Layout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ExtraConfig/Productlayout</source_model>
+							<sort_order>82</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </productlayout>
+			
+                                     
+                    </fields>
+                </product_list>
+		
+		<extra_settings translate="label">
+                    <label>Extra Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>90</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <backtotop translate="label">
+			    			<label>Enable back to Top Button</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>91</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </backtotop>
+			<instock translate="label">
+			    			<label>Display In Stock label</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>92</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </instock>
+			<responsiveness translate="label">
+			    			<label>Enable Responsiveness</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>93</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </responsiveness>
+			<ajaxcart translate="label">
+			    			<label>Ajax Cart</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ExtraConfig/Ajaxcart</source_model>
+							<sort_order>94</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </ajaxcart>
+			
+                                     
+                    </fields>
+                </extra_settings>
+		
+		
+		
+                
+            </groups>
+        </mygeneral>
+    </sections>
+</config>

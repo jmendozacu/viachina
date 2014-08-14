@@ -1,0 +1,26 @@
+<?php
+$helper = Mage::helper('merchandiser');
+$categoryId = $this->getRequest()->getParam('category_id');
+$storeId = $this->getRequest()->getParam('store_id');
+$currentPage = $this->getRequest()->getParam('current_page');
+$pageLimit = $this->getRequest()->getParam('extra_products');
+
+
+$category = Mage::getModel('catalog/category')->load($categoryId);
+
+       $productCollection = $this->getProductCollection();
+$productCollection->setPage($currentPage, $pageLimit);
+
+$currentPosition=((int)$currentPage-1)*(int)$pageLimit + 1;
+
+if (0 < $productCollection->count()) :
+    foreach ($productCollection as $_product) :
+        $productBox =  $this->getLayout()->createBlock('merchandiser/adminhtml_catalog_product_list')->setTemplate('merchandiser/new/category/productbox.phtml');
+        $productBox->setPid($_product->getId());
+        $productBox->setCurrentPosition($currentPosition);
+        echo $productBox->toHtml();
+    endforeach;
+else :
+    echo $helper->__('false');
+endif;
+?>

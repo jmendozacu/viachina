@@ -1,0 +1,18 @@
+<?php if (Mage::getSingleton('core/session')->getData('adminFormKey')) : ?>
+    <?php if ($_category  = $this->getCurrentCategory()) : ?>
+        <?php
+        $url = $this->getUrl("merchandiser/merchandiser", array('category_id' => $_category->getId()));
+        $session = Mage::getSingleton('customer/session');
+        $fromSession = $session->getData('user');
+        $windowParams = 'menubar=no,location=no,width=1000px,left=140px';
+        ?>
+        <button type="button" onclick="window.open('<?php echo $url ?>', 'merchandiser.category.edit', '<?php echo $windowParams ?>')"><?php echo Mage::helper('merchandiser')->__('Launch Merchandiser') ?></button>
+    <?php endif; ?>
+<script type="text/javascript">
+<!--
+function updateCurrentPage() {
+    window.location.reload();
+}
+//-->
+</script>
+<?php endif; ?>

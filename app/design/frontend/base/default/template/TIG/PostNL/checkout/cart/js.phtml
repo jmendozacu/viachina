@@ -1,0 +1,82 @@
+<?php
+/**
+ *                  ___________       __            __
+ *                  \__    ___/____ _/  |_ _____   |  |
+ *                    |    |  /  _ \\   __\\__  \  |  |
+ *                    |    | |  |_| ||  |   / __ \_|  |__
+ *                    |____|  \____/ |__|  (____  /|____/
+ *                                              \/
+ *          ___          __                                   __
+ *         |   |  ____ _/  |_   ____ _______   ____    ____ _/  |_
+ *         |   | /    \\   __\_/ __ \\_  __ \ /    \ _/ __ \\   __\
+ *         |   ||   |  \|  |  \  ___/ |  | \/|   |  \\  ___/ |  |
+ *         |___||___|  /|__|   \_____>|__|   |___|  / \_____>|__|
+ *                  \/                           \/
+ *                  ________
+ *                 /  _____/_______   ____   __ __ ______
+ *                /   \  ___\_  __ \ /  _ \ |  |  \\____ \
+ *                \    \_\  \|  | \/|  |_| ||  |  /|  |_| |
+ *                 \______  /|__|    \____/ |____/ |   __/
+ *                        \/                       |__|
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Creative Commons License.
+ * It is available through the world-wide-web at this URL:
+ * http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ * If you are unable to obtain it through the world-wide-web, please send an email
+ * to servicedesk@totalinternetgroup.nl so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this module to newer
+ * versions in the future. If you wish to customize this module for your
+ * needs please contact servicedesk@totalinternetgroup.nl for more information.
+ *
+ * @copyright   Copyright (c) 2014 Total Internet Group B.V. (http://www.totalinternetgroup.nl)
+ * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ */
+?>
+<?php $_checkoutJsUrl        = $this->getCheckoutJsUrl(); ?>
+<?php $_checkoutPremiumJsUrl = $this->getCheckoutPremiumJsUrl(); ?>
+<?php $_continueUrl          = $this->getContinueUrl(); ?>
+<?php $_environment          = $this->getEnvironment(); ?>
+<?php $_checkUserLoggedIn = true; ?>
+<script type="text/javascript" src="<?php echo $_checkoutJsUrl; ?>"></script>
+<script type="text/javascript" src="<?php echo $_checkoutPremiumJsUrl; ?>"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    var pingUrl = '<?php echo $this->getUrl('postnl/checkout/ping'); ?>';
+    window.startPostnlCheckoutPing = function() {
+        if (typeof pingUrl == 'undefined') {
+            return false;
+        }
+
+        $('waiting_for_ping_spinner').show();
+
+        new Ajax.Request(pingUrl,{
+            method: 'get',
+            parameters: null,
+            onComplete: function(response) {
+                var responseText = response.responseText;
+                $('waiting_for_ping_spinner').hide();
+
+                if (responseText == 'OK') {
+                    $('postnl_checkout_seperator').show();
+                    $('postnl_checkout').show();
+                } else {
+                    $('postnl_checkout_link_disabled').show();
+                }
+            }
+        });
+
+        postnlcheckoutWidget = new PostNLCheckout(
+            '<?php echo $this->getUrl('postnl/checkout/prepareOrder'); ?>',
+            '<?php echo $_continueUrl; ?>',
+            <?php echo $_environment; ?>
+        );
+
+        return true;
+    };
+    //]]>
+</script>

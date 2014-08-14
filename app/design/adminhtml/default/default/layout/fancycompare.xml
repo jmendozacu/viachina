@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.1">
+    <fancycompare_adminhtml_fancycompare_index>
+        <reference name="content">
+            <block type="fancycompare/adminhtml_fancycompare" name="fancycompare" />
+        </reference>
+    </fancycompare_adminhtml_fancycompare_index>
+</layout>

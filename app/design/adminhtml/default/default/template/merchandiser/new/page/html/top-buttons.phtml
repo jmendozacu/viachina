@@ -1,0 +1,134 @@
+<?php
+$key = Mage::getSingleton('adminhtml/url')->getSecretKey('merchandiser', 'adminhtml_saveOrdering');
+if ($newKey = Mage::getSingleton('core/session')->getData('adminFormKey') ) {
+    $oldKey = Mage::getSingleton('core/session')->getData('_form_key');
+    Mage::getSingleton('core/session')->setData('_form_key', $newKey);
+    $url = $this->getUrl('merchandiser/adminhtml/saveOrdering');
+    Mage::getSingleton('core/session')->setData('_form_key', $oldKey);
+}else
+	$newKey = Mage::getSingleton('core/session')->getFormKey();
+$catId = $this->getRequest()->getParam('category_id');
+$storeId = $this->getRequest()->getParam('store_id');
+$_columnCount = Mage::helper('merchandiser')->getColumnCount($this->getRequest()->getParam('column_count'));
+$helper = Mage::helper('merchandiser');
+$actions = $helper->getConfigAction();
+$_category = Mage::getModel('catalog/category')->load($catId);
+Mage::getSingleton('core/session')->setIsAttachedAction($_category->getCatalogAction());
+?>
+<div class="page-title category-title">
+    <h1><?php echo $_category->getName() ?></h1>
+</div>
+
+<div id="category-link" class="top-button">
+
+</div>
+
+<div id="select-action-container" class="top-button">
+    <label for="actionMenu"><?php echo $helper->__('Sort Logic: ') ?></label>
+    <select id="actionMenu" name="actionMenu">
+        <?php 
+     //   $action_index = 0;
+        foreach ($actions as $action_index => $action) :
+        ?>
+            <option value="<?php echo $action_index ?>"><?php echo $action['name'] ?></option>
+        <?php 
+      //  $action_index++;
+        endforeach;
+        ?>
+        <?php /* <option value="massproductassignment"><?php echo $helper->__('Mass Product Assignment') ?></option> */ ?>
+    </select>
+
+    <button onclick="processActionMenu(); return false;" class="button" type="button">
+        <span><span><?php echo $helper->__('Submit') ?></span></span>
+    </button>
+
+</div>
+
+<div id="select-container" class="top-button">
+ 	<button onclick="openMassProductAssignment(); return false;" class="button" type="button">
+        <span><span><?php echo $helper->__('Open Mass Product Assignment') ?></span></span>
+    </button>
+	<?php /* ?>
+    <select id="changeColumn">
+        <option value="1"><?php echo $helper->__('1 column') ?> </option>
+        <option value="2">2 <?php echo $helper->__('columns') ?> </option>
+        <option value="3">3 <?php echo $helper->__('columns') ?> </option>
+        <option value="4">4 <?php echo $helper->__('columns') ?> </option>
+        <option value="5">5 <?php echo $helper->__('columns') ?> </option>
+        <option value="6">6 <?php echo $helper->__('columns') ?> </option>
+        <option value="7">7 <?php echo $helper->__('columns') ?> </option>
+    </select>
+    <button onclick="processChangeColumn(); return false;" class="button" type="button">
+        <span><span><?php echo $helper->__('Submit') ?></span></span>
+    </button>
+    <?php */ ?>
+	
+<form id="product-refresh-form" action="" method="post">
+    <input type="hidden" name="category_id" value="<?php echo $catId ?>" />
+    <input type="hidden" name="store_id" value="<?php echo $storeId ?>" />
+    <input type="hidden" value="<?php echo $newKey ?>" name="form_key" />
+    <input type="hidden" name="column_count" id="column_count" value="" />
+    <input type="hidden" name="action_index" id="action_index" value="" />
+
+    <script type="text/javascript">
+        //<![CDATA[
+        jQuery.noConflict();
+        jQuery(document).ready(function() {
+            jQuery('#changeColumn').val('<?php echo $_columnCount ?>').attr('selected',true);
+        });
+
+        function processActionMenu(){
+            var slec = jQuery('#actionMenu').val();
+            jQuery('#action_index').val(slec);
+ //           if(slec == "massproductassignment") 
+   //         	openMassProductAssignment();
+     //       else {
+                submitAction();
+       //     }
+        }
+
+        function processChangeColumn(){
+            var slec = jQuery('#changeColumn').val();
+            jQuery('#column_count').val(slec);
+            submitMerchandiserSelect(this);
+
+        }
+
+        function submitMoveInStockToTheTop(form){
+            jQuery('#dimwindow').show();
+            jQuery('#spinner2').show();
+            var f=$('product-refresh-form'); f.action='<?php echo $this->getUrl('merchandiser/adminhtml/moveInStockToTheTop') ?>'; f.submit();
+        }
+
+        function submitMerchandiserSelect(form) {
+            var f=$('product-refresh-form'); f.action='<?php echo $this->getUrl('merchandiser/adminhtml/changeColumn') ?>'; f.submit();
+        }
+
+        function submitNewestFirst(form){
+            jQuery('#dimwindow').show();
+            jQuery('#spinner2').show();
+            var f=$('product-refresh-form'); f.action='<?php echo $this->getUrl('merchandiser/adminhtml/orderByCreatedDate') ?>'; f.submit();
+        }
+
+        function submitAction(){
+            jQuery('#dimwindow').show();
+            jQuery('#spinner2').show();
+            var f=$('product-refresh-form'); f.action='<?php echo $this->getUrl('merchandiser/adminhtml/processAction') ?>'; f.submit();
+        }
+        //]]>
+    </script>
+</form>
+</div>
+<div class="col-right">
+<!--<div style="float:right; position:fixed;top:5px; right:5px; z-index:999;">-->
+<?php echo $this->getChildHtml('merchandiserSearch'); ?>
+</div>
+<?php 
+if (!is_null(Mage::getSingleton('core/session')->getIsAttachedAction())) :
+?>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    // alert('Please note: Products in this category are controlled by an action.');
+});
+</script>
+<?php endif; ?>

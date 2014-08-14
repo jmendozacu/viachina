@@ -1,0 +1,27 @@
+<div id="promo-code">
+	<?php if ( strlen( Mage::getSingleton( 'checkout/session' )->getQuote()->getCouponCode() ) ): ?>
+		<span id="coupon-cancel-link"><a href="javascript:void(0)" onClick="checkout.cancelCoupon()"><?php echo $this->__( 'Click here to cancel Promo Code' ) ?></a></span>
+		<span class="please-wait" id="coupon-cancel-please-wait" style="display:none;">
+			<img src="<?php echo $this->getSkinUrl( 'images/anattadesign/awesomecheckout/opc-ajax-loader.gif' ) ?>" alt="<?php echo $this->__( 'Canceling Coupon...' ) ?>" title="<?php echo $this->__( 'Canceling Coupon...' ) ?>" class="v-middle" /> <?php echo $this->__( 'Canceling Coupon...' ) ?>
+		</span>
+	<?php else: ?>
+		<a href="javascript:void(0)" onClick="jQuery('#discount-coupon-form-wrapper').slideToggle(400)"><?php echo $this->__( 'Click here if you have a Promo Code' ) ?></a>
+	<?php endif; ?>
+</div>
+<div id="discount-coupon-form-wrapper"<?php if ( !strlen( $this->getCouponCode() ) ): ?> style="display:none;"<?php endif; ?>>
+	<form id="discount-coupon-form" action="<?php echo $this->getUrl( 'checkout/cart/couponPost' ) ?>" method="post">
+		<div class="discount">
+			<h2><?php echo $this->__( 'Promo Code' ) ?></h2>
+			<div class="discount-form">
+				<input type="hidden" name="remove" id="remove-coupone" value="0" />
+				<div class="input-box clearfix">
+					<input class="input-text" id="coupon_code" name="coupon_code" value="<?php echo $this->htmlEscape( $this->getCouponCode() ) ?>" />
+					<button id="coupon_apply_button" type="button" title="<?php echo $this->__( 'Apply Coupon' ) ?>" class="button" onclick="checkout.applyCoupon()" value="<?php echo $this->__( 'Apply Coupon' ) ?>"><span><span><?php echo $this->__( 'Apply' ) ?></span></span></button>
+					<span class="please-wait" id="coupon-apply-please-wait" style="display:none;">
+						<img src="<?php echo $this->getSkinUrl( 'images/anattadesign/awesomecheckout/opc-ajax-loader.gif' ) ?>" alt="<?php echo $this->__( 'Applying Coupon...' ) ?>" title="<?php echo $this->__( 'Applying Coupon...' ) ?>" class="v-middle" /> <?php echo $this->__( 'Applying Coupon...' ) ?>
+					</span>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

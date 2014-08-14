@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<layout verion="0.1.0">
+    <adminhtml_catalog_product_attribute_edit>
+        <reference name="js">
+            <block type="adminhtml/template" name="adjnav_attribute_js" template="adjnav/attribute/js.phtml"></block>
+        </reference>
+    </adminhtml_catalog_product_attribute_edit>
+</layout>
+<!--
+/**
+ * Layered Navigation Pro
+ *
+ * @category:    AdjustWare
+ * @package:     AdjustWare_Nav
+ * @version      2.5.1
+ * @license:     3aooztWVyQyLq3pTjVKXjSrcsuymFTgXHjf7iclwH0
+ * @copyright:   Copyright (c) 2013 AITOC, Inc. (http://www.aitoc.com)
+ */
+-->

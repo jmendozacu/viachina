@@ -1,0 +1,40 @@
+<?php
+/**
+ * Template for filter items block
+ *
+ * @see Mage_Catalog_Block_Layer_Filter
+ */
+?>
+<?php
+	$_item = $this->getItem();
+	$label = $_item->getLabel();
+	$displayCount = $this->shouldDisplayProductCount();
+?>
+<?php if ($_item->isSelected() || $_item->getCount() || $this->getChildHtml()): ?>
+<li <?php if($_item->isSelected()) echo 'class="selected"'; ?>>
+	<div class="label">
+	<?php if($_item->isSelected()): ?>
+		<?php echo $label; ?>
+		<?php if ($displayCount):?>
+		(<?php echo $_item->getCount() ?>)
+		<?php endif ?>
+	<?php elseif($_item->getCount()): ?>
+		<a href="<?php echo $this->urlEscape($_item->getUrl()) ?>"><?php echo $label; ?></a>
+		<?php if ($displayCount):?>
+		(<?php echo $_item->getCount() ?>)
+		<?php endif ?>
+	<?php elseif ($this->getChildHtml()):?>
+		<?php echo $label; ?>
+		<?php if ($displayCount):?>
+		(<?php echo $_item->getCount() ?>)
+		<?php endif ?>
+	<?php endif ?>
+	</div>
+
+	<?php if ($this->getChildHtml()): ?>
+	<ol>
+		<?php echo $this->getChildHtml(); ?>
+	</ol>
+	<?php endif ?>
+</li>
+<?php endif ?>

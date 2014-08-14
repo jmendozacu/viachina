@@ -1,0 +1,7 @@
+/var/
+/media/cache/
+/media/catalog/product/cache/
+/app/code/core/
+/lib/Zend/
+/lib/Mage/
+/lib/Varien/

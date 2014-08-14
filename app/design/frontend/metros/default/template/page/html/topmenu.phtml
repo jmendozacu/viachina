@@ -1,0 +1,191 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Page_Block_Html_Topmenu
+ */
+?>
+<?PHP $megamenu = themeOptions('menu'); ?>
+<?php
+if($megamenu == null || $megamenu == '1' ) { ?>
+<script>
+   
+	
+          var ww = document.body.clientWidth;
+
+j$(document).ready(function() {
+  j$("#nav li a").each(function() {
+    if (j$(this).next().length > 0) {
+    	j$(this).addClass("parent");
+		};
+	})
+	
+	j$(".toggleMenu").click(function(e) {
+		e.preventDefault();
+		j$(this).toggleClass("active");
+		j$("#nav").toggle();
+	});
+	adjustMenu();
+})
+
+j$(window).bind('resize orientationchange', function() {
+	ww = document.body.clientWidth;
+	
+	adjustMenu();
+});
+
+var adjustMenu = function() {
+    
+	if (ww < 1023) {
+    // if "more" link not in DOM, add it
+    if (!j$(".more")[0]) {
+    j$('<div class="more">&nbsp;</div>').insertBefore(j$('li a.parent')); 
+    }
+
+		//j$(".toggleMenu").css("display", "inline-block");
+		if (!j$(".toggleMenu").hasClass("active")) {
+			j$("#nav").hide();
+		} else {
+			j$("#nav").show();
+		}
+		j$("#nav li").unbind('mouseenter mouseleave');
+		j$("#nav li a.parent").unbind('click');
+    j$("#nav li .more").unbind('click').bind('click', function() {
+			
+			j$(this).parent("li").toggleClass("hover");
+		});
+	} 
+	else if (ww >= 1023) {
+    // remove .more link in desktop view
+    j$('.more').remove(); 
+		j$(".toggleMenu").css("display", "none");
+		j$("#nav").show();
+		j$("#nav li").removeClass("hover");
+		j$("#nav li a").unbind('click');
+		j$("#nav li").unbind('mouseenter mouseleave').bind('mouseenter mouseleave', function() {
+		 	// must be attached to li so that mouseleave is not triggered when hover over submenu
+		 	j$(this).toggleClass('hover');
+		});
+	}
+}
+
+
+    </script>
+
+<?php $_menu = $this->getHtml('level-top') ?>
+<?php if($_menu): ?>
+
+<div class="nav-container">
+    <a class="toggleMenu" title="Menu" href="#"></a>
+    <ul id="nav">
+        <li class="<?php if (Mage::helper('core/url')->getCurrentUrl() === Mage::helper('core/url')->getHomeUrl()):?> active<?php endif;?>"><a href="<?php echo $this->getUrl('')?>"><span><?php echo $this->__('Home') ?></span></a></li>
+        <?php echo $_menu ?>
+    </ul>
+</div>
+<?php endif ?>
+
+
+<?php } else { ?>
+
+<script>
+    
+	
+          var ww = document.body.clientWidth;
+
+j$(document).ready(function() {
+  j$("#nav li a").each(function() {
+    if (j$(this).next().length > 0) {
+    	j$(this).addClass("parent");
+		};
+	})
+	
+	j$(".toggleMenu").click(function(e) {
+		e.preventDefault();
+		j$(this).toggleClass("active");
+		j$("#nav").toggle();
+	});
+	adjustMenu();
+})
+
+j$(window).bind('resize orientationchange', function() {
+	ww = document.body.clientWidth;
+
+	adjustMenu();
+});
+
+var adjustMenu = function() {
+	if (ww < 1023) {
+    // if "more" link not in DOM, add it
+    if (!j$(".more")[0]) {
+    j$('<div class="more">&nbsp;</div>').insertBefore(j$('li a.parent')); 
+    }
+
+		j$(".toggleMenu").css("display", "initial");
+		if (!j$(".toggleMenu").hasClass("active")) {
+			j$("#nav").hide();
+		} else {
+			j$("#nav").show();
+		}
+		j$("#nav li").unbind('mouseenter mouseleave');
+		j$("#nav li a.parent").unbind('click');
+    j$("#nav li .more").unbind('click').bind('click', function() {
+			
+			j$(this).parent("li").toggleClass("hover");
+		});
+	} 
+	else if (ww >= 1023) {
+    // remove .more link in desktop view
+    j$('.more').remove(); 
+		j$(".toggleMenu").css("display", "none");
+		j$("#nav").show();
+		j$("#nav li").removeClass("hover");
+		j$("#nav li a").unbind('click');
+		j$("#nav li").unbind('mouseenter mouseleave').bind('mouseenter mouseleave', function() {
+		 	// must be attached to li so that mouseleave is not triggered when hover over submenu
+		 	j$(this).toggleClass('hover');
+		});
+	}
+}
+
+
+    </script>
+
+<?php $_menu = $this->getHtml('level-top') ?>
+<?php if($_menu): ?>
+
+<div class="default-container">
+    <a class="toggleMenu" title="Menu" href="#"></a>
+    <ul id="nav">
+        <li class="<?php if (Mage::helper('core/url')->getCurrentUrl() === Mage::helper('core/url')->getHomeUrl()):?> active<?php endif;?>"><a href="<?php echo $this->getUrl('')?>"><span><?php echo $this->__('Home') ?></span></a></li>
+        <?php echo $_menu ?>
+    </ul>
+</div>
+<?php endif ?>
+
+<?php } ?>

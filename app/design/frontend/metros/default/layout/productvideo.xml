@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Open Biz Ltd
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file OPEN-BIZ-LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://mageconsult.net/terms-and-conditions
+ *
+ * @category   Magecon
+ * @package    Magecon_ProductVideo
+ * @version    2.0.0
+ * @copyright  Copyright (c) 2012 Open Biz Ltd (http://www.mageconsult.net)
+ * @license    http://mageconsult.net/terms-and-conditions
+ */
+-->
+<layout version="0.1.0">
+    
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addJs" ifconfig="productvideo/general_settings/general_enabled">
+                <script>magecon/productvideo/jquery-loader.js</script>
+            </action>
+            <action method="addJs" ifconfig="productvideo/general_settings/general_enabled">
+                <script>magecon/productvideo/fancybox/jquery.fancybox-1.3.4.pack.js</script>
+            </action>
+            <action method="addJs" ifconfig="productvideo/general_settings/general_enabled">
+                <script>magecon/productvideo/fancybox/video.js</script>
+            </action>
+            <action method="addCss" ifconfig="productvideo/general_settings/general_enabled">
+                <stylesheet>css/magecon/productvideo/jquery.fancybox-1.3.4.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="product.info.media">
+            <action method="setTemplate" ifconfig="productvideo/general_settings/general_enabled_images">
+                <template>productvideo/catalog/product/view/media.phtml</template>
+            </action>
+            <block type="productvideo/catalog_product_view_video" name="product.info.media.video" as="video" template="productvideo/catalog/product/view/video.phtml" />
+        </reference>
+    </catalog_product_view>
+	
+    <review_product_list>
+        <reference name="head">
+            <action method="addJs" ifconfig="productvideo/general_settings/general_enabled">
+                <script>magecon/productvideo/jquery.min.js</script>
+            </action>
+            <action method="addJs" ifconfig="productvideo/general_settings/general_enabled">
+                <script>magecon/productvideo/fancybox/jquery.fancybox-1.3.4.pack.js</script>
+            </action>
+            <action method="addJs" ifconfig="productvideo/general_settings/general_enabled">
+                <script>magecon/productvideo/fancybox/video.js</script>
+            </action>
+            <action method="addCss" ifconfig="productvideo/general_settings/general_enabled">
+                <stylesheet>css/magecon/productvideo/jquery.fancybox-1.3.4.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="product.info.media">
+            <action method="setTemplate" ifconfig="productvideo/general_settings/general_enabled_images">
+                <template>productvideo/catalog/product/view/media.phtml</template>
+            </action>
+            <action method="disableGallery"/>
+            <block type="productvideo/catalog_product_view_video" name="product.info.media.video" as="video" template="productvideo/catalog/product/view/video.phtml" />
+        </reference>
+    </review_product_list>
+	
+</layout>

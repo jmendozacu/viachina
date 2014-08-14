@@ -1,0 +1,39 @@
+<?php
+$mostSold = $this->getMostSoldCollection();
+$_helper = $this->helper('catalog/output');
+?>
+<div class="products">
+    <dl class="product-line row">
+        <?php $count = 0 ?>
+        <?php foreach($mostSold as $product): ?>
+            <?php $_product = Mage::getModel('catalog/product')->load($product->getId()) ?>
+            <dd class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                <div class="product-main">
+                    <div class="product-image">
+                        <a href="<?php echo $_product->getProductUrl() ?>">
+                            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize(250) ?>" />
+                        </a>
+                    </div>
+                    <div class="product-name">
+                        <a href="<?php echo $_product->getProductUrl()?>"><?php echo $_product->getName() ?></a>
+                    </div>
+                </div>
+            </dd>
+
+            <?php $count++ ?>
+            <?php if($count == 4): ?>
+            </dl>
+            <div class="more-view-link">
+                <a href="" class="more-view"><span><?php echo $this->__('More SmartPhones ') ?></span><img src="<?php echo Mage::getBaseUrl('skin')?>frontend/metros/default/images/searchbyname/more_btn2.jpg"></a>
+            </div>
+            <div class="clearfix"></div>
+            <dl class="product-line row">
+            <?php endif; ?>
+
+        <?php endforeach; ?>
+    </dl>
+    <div class="more-view-link">
+        <a href="" class="more-view"><span><?php echo $this->__('More SmartPhones ') ?></span><img src="<?php echo Mage::getBaseUrl('skin')?>frontend/metros/default/images/searchbyname/more_btn2.jpg"></a>
+    </div>
+    <div class="clearfix"></div>
+</div>

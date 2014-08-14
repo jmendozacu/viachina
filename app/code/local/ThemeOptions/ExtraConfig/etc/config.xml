@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <ThemeOptions_ExtraConfig>
+            <version>1.0.0</version>
+            <depends>
+            <!-- no dependencies -->
+            </depends>
+        </ThemeOptions_ExtraConfig>
+    </modules>
+	<global>
+		<models>
+            <!-- ... -->
+            <ExtraConfig>
+                <class>ThemeOptions_ExtraConfig_Model</class>
+            </ExtraConfig>   
+            <!-- ... -->
+        </models>
+		<helpers>
+			<ExtraConfig>
+				<class>ThemeOptions_ExtraConfig_Helper</class>
+			</ExtraConfig>
+		</helpers>
+	    <resources />
+	    <extraconfig />
+	    <blocks>
+            <mygeneral><class>ThemeOptions_ExtraConfig_Block</class></mygeneral>
+		</blocks>
+	</global>
+	<!---->
+	<default>
+	    <mygeneral>
+			<product_grid_view>
+			    <product_grid_box_border>1</product_grid_box_border>
+			</product_grid_view>
+			<product_list_view>
+			    <product_list_image_border>1</product_list_image_border>
+			</product_list_view>
+			<menu>
+			    <menu>1</menu>
+			    <menu_withlogo>1</menu_withlogo>
+			</menu>
+			<product_list>
+			    <column_count>3</column_count>
+			    <productlayout>default</productlayout>
+			</product_list>
+			<extra_settings>
+			    <backtotop>1</backtotop>
+			    <responsiveness>1</responsiveness>
+			    <instock>1</instock>
+			    <ajaxcart>2</ajaxcart>
+			</extra_settings>
+	    </mygeneral>
+		
+	</default>
+	<!---->
+    <adminhtml>   
+        <layout>
+            <updates>
+                <ExtraConfig>
+                    <file>options.xml</file>
+                </ExtraConfig>
+            </updates>
+        </layout>
+    </adminhtml>     
+</config>

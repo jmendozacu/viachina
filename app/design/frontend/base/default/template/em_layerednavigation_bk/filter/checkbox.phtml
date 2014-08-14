@@ -1,0 +1,26 @@
+<?php
+/**
+ * Template for filter items block
+ *
+ * @see Mage_Catalog_Block_Layer_Filter
+ */
+?>
+<?php if ($removeUrl = Mage::helper('layerednavigation')->getRemoveUrl($this->_filter)): ?>
+<div class="filter-act">
+	<a class="btn-remove" href="<?php echo $removeUrl ?>" title="<?php echo $this->__('Clear All') ?>"><?php echo $this->__('Clear All') ?></a>
+</div>
+<?php endif ?>
+
+<ol>
+<?php foreach ($this->getItems() as $_item): ?>
+    <li>
+		<?php $inputId = $_item->getFilter()->getRequestVar().'_'.$_item->getValue() ?>
+		<input type="checkbox" id="<?php echo $inputId ?>" name="<?php echo $_item->getFilter()->getRequestVar(); ?>" value="<?php echo $this->urlEscape($_item->getUrl(true)) ?>" <?php if ($_item->isSelected()):?>checked="checked"<?php endif ?> />
+		<label for="<?php echo $inputId ?>"><?php echo $_item->getLabel() ?> 
+			<?php if ($this->shouldDisplayProductCount()): ?>
+			(<span><?php echo $_item->getCount() ?></span>)
+			<?php endif ?>
+		</label>
+    </li>
+<?php endforeach ?>
+</ol>

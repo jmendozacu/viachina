@@ -1,0 +1,90 @@
+<?php
+/**
+ * Layered Navigation Pro
+ *
+ * @category:    AdjustWare
+ * @package:     AdjustWare_Nav
+ * @version      2.5.1
+ * @license:     3aooztWVyQyLq3pTjVKXjSrcsuymFTgXHjf7iclwH0
+ * @copyright:   Copyright (c) 2013 AITOC, Inc. (http://www.aitoc.com)
+ */
+$items        = $this->getItemsArray();
+$displayStyle = $this->getColumnsNum();
+$displayType = $this->getAttributeDisplayType();
+
+?>
+
+<?php if ('default' == $displayType):?>
+
+<ol>
+<?php if ($displayStyle <=1): // one column ?>
+    <?php foreach ($items as $_key => $_item): ?>
+        <li class="<?php echo $this->getFeaturedItemStyle($_key) ?>"><?php echo $_item?></li>
+    <?php endforeach ?>
+<?php elseif (3 == $displayStyle): // only images ?>
+<li>
+    <div class="adj-icons-filter-one-column">
+    <?php foreach ($items as $_item) echo $_item ?>
+    </div>
+</li>
+<?php else: $n = count($items); $middle = ceil($n/2); //two columns ?>
+<li>
+    <div class="adj-icons-filter-two-column">
+        <?php for ($i = 0; $i < $middle; ++$i) : ?>
+            <div class="<?php echo $this->getFeaturedItemStyle($i) ?>"><?php echo $items[$i] ?></div> 
+        <?php endfor ?>
+    </div>
+    <div class="adj-icons-filter-two-column">
+        <?php for ($i = $middle; $i < $n; ++$i) : ?>
+            <div class="<?php echo $this->getFeaturedItemStyle($i) ?>"><?php echo $items[$i] ?></div>
+        <?php endfor ?>
+    </div>
+</li>
+<?php endif ?>
+
+<?php if ($this->isShowMoreButton()) : ?>
+<li class="attr-val-more-li-<?php echo $this->getVar() ?>">
+    <a href="javascript:void(0);" class="attr-val-more" rel="<?php echo $this->getVar() ?>"><?php echo $this->__('Show more') ?></a>
+</li>
+<?php endif ?>
+</ol>
+<?php elseif ('dropdown' == $displayType): ?>
+    <select id="adj-nav-select" onchange="adjnavNavigation.attributeMakeRequest(this.value)">
+        <option value="?<?php echo $this->getVar()?>=&order=position&no_cache=true">Please Select</option>
+        <?php foreach ($this->getItems() as $_item): ?>
+            <option class="adjnav-attr-dropdown" value="?<?php echo $this->getVar()?>=<?php echo $_item->getValueString()?>&order=position&p=clear" <?php if($_item->getCount() == 0): ?> disabled <?php endif; ?> <?php if($this->isSelected($_item)): ?> selected="selected"<?php endif; ?>>
+            <?php echo $_item->getLabel() ?>(<?php echo $_item->getCount() ?>)
+            </option>
+        <?php endforeach; ?>
+    </select>
+<?php elseif ('container' == $displayType): ?>
+    <?php $height = Mage::getStoreConfig('design/adjnav/select_height')?>
+    <div class="aitcontainer" style="max-height: <?php echo $height ?>px">
+        <ol>
+            <?php if ($displayStyle <=1): // one column ?>
+                <?php foreach ($items as $_key => $_item): ?>
+                    <li class="<?php echo $this->getFeaturedItemStyle($_key) ?>"><?php echo $_item?></li>
+                <?php endforeach ?>
+            <?php elseif (3 == $displayStyle): // only images ?>
+                <li>
+                    <div class="adj-icons-filter-one-column">
+                        <?php foreach ($items as $_item) echo $_item ?>
+                    </div>
+                </li>
+            <?php else: $n = count($items); $middle = ceil($n/2); //two columns ?>
+                <li>
+                    <div class="adj-icons-filter-two-column">
+                        <?php for ($i = 0; $i < $middle; ++$i) : ?>
+                            <div class="<?php echo $this->getFeaturedItemStyle($i) ?>"><?php echo $items[$i] ?></div>
+                        <?php endfor ?>
+                    </div>
+                    <div class="adj-icons-filter-two-column">
+                        <?php for ($i = $middle; $i < $n; ++$i) : ?>
+                            <div class="<?php echo $this->getFeaturedItemStyle($i) ?>"><?php echo $items[$i] ?></div>
+                        <?php endfor ?>
+                    </div>
+                </li>
+            <?php endif ?>
+        </ol>
+    </div>
+<?php endif ?>

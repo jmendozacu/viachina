@@ -1,0 +1,151 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+$ajaxcart = themeOptions('ajaxcart'); 
+$show_num_items = 4; //fixed number of items to show
+$show_index_array = array();
+$index_iterator = 0;
+?>
+<?php if($this->getItems()->getSize()): ?>
+<div class="block block-related">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Related Products') ?></span></strong>
+    </div>
+    <div class="block-content">
+        <p class="block-subtitle"><?php echo $this->__('Check items to add to the cart or') ?>&nbsp;<a href="#" onclick="selectAllRelated(this); return false;"><?php echo $this->__('select all') ?></a></p>
+        <ul class="products-grid">
+        <?php $show_index_array = range(0,($this->getItems()->getSize()-1)); ?>
+        <?php shuffle($show_index_array); ?>
+        <?php $show_index_array = array_slice($show_index_array, 0, $show_num_items); ?>
+        <?php foreach($this->getItems() as $_item): ?>
+        <?php if(in_array($index_iterator, $show_index_array)): ?>
+            <li class="column3 item">
+                <?php if(!$_item->isComposite() && $_item->isSaleable()): ?>
+                    <?php if (!$_item->getRequiredOptions()): ?>
+                        <input type="checkbox" class="checkbox related-checkbox" id="related-checkbox<?php echo $_item->getId() ?>" name="related_products[]" value="<?php echo $_item->getId() ?>" />
+                    <?php endif; ?>
+                <?php endif; ?>
+		
+		<?php if($ajaxcart == '2') { ?>
+		<a href='<?php echo $this->getUrl('ajax/index/options',array('product_id'=>$_item->getId()));?>' class='fancybox quick-view' id='fancybox<?php echo $_item->getId()?>'><?php echo $this->__('Quick-View') ?></a>
+		<?php } ?>
+		
+                <a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->constrainOnly(true)->keepAspectRatio(true)->resize(272,385) ?>" width="272" height="385" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" /></a>
+                <div class="productgrid-area">
+                    
+                                                            <?php  $productName = $this->htmlEscape($_item->getName());
+									if(strlen($productName) > 31) {
+										$productName = mb_strimwidth($productName,0,31,"...",'utf-8');
+									} ?>
+                        <h3 class="product-name"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $productName; ?></a></h3>
+                        <?php echo $this->getPriceHtml($_item, true, '-related') ?>
+                        <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                            <a href="<?php echo $this->getAddToWishlistUrl($_item) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a>
+                        <?php endif; ?>
+                   
+                </div>
+            </li>
+        <?php endif ?>
+        <?php $index_iterator++; ?>
+        <?php endforeach ?>
+        </ul>
+        <script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+    </div>
+    <script type="text/javascript">
+    //<![CDATA[
+    $$('.related-checkbox').each(function(elem){
+        Event.observe(elem, 'click', addRelatedToProduct)
+    });
+
+    var relatedProductsCheckFlag = false;
+    function selectAllRelated(txt){
+        if (relatedProductsCheckFlag == false) {
+            $$('.related-checkbox').each(function(elem){
+                elem.checked = true;
+            });
+            relatedProductsCheckFlag = true;
+            txt.innerHTML="<?php echo $this->__('unselect all') ?>";
+        } else {
+            $$('.related-checkbox').each(function(elem){
+                elem.checked = false;
+            });
+            relatedProductsCheckFlag = false;
+            txt.innerHTML="<?php echo $this->__('select all') ?>";
+        }
+        addRelatedToProduct();
+    }
+
+    function addRelatedToProduct(){
+        var checkboxes = $$('.related-checkbox');
+        var values = [];
+        for(var i=0;i<checkboxes.length;i++){
+            if(checkboxes[i].checked) values.push(checkboxes[i].value);
+        }
+        if($('related-products-field')){
+            $('related-products-field').value = values.join(',');
+        }
+    }
+    //]]>
+    </script>
+    
+    <script type="text/javascript">
+     <?php if($ajaxcart == '1' || $ajaxcart == '2') { ?>
+	jQuery.noConflict();
+	
+	jQuery('.fancybox').live('click', function() {
+	    jQuery('#fancybox-loading').show();
+        });
+	
+	jQuery('.fancybox').fancybox(
+			{
+			   hideOnContentClick : true,
+			   width: 630,
+			   autoDimensions: true,
+               type : 'iframe',
+			   showTitle: false,
+			   scrolling: 'no',
+			   onComplete: function(){
+				jQuery('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
+					jQuery('#fancybox-loading').hide();
+					jQuery('#fancybox-content').height(jQuery(this).contents().find('body').height()+30);
+					jQuery.fancybox.resize();
+				 });
+
+			   }
+			}
+		);
+	
+	function showOptions(id){
+		jQuery('#fancybox'+id).trigger('click');
+	}
+		
+	
+        <?php } ?>
+</script>
+    
+</div>
+<?php endif ?>

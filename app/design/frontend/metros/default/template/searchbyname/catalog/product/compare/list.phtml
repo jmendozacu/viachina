@@ -1,0 +1,189 @@
+<?php $_total=$this->getItems()->getSize()+1 ?>
+<?php $comparableProduct = Mage::registry('comparable_product') ?>
+<?php if($_total): ?>
+    <table class="data-table compare-table" id="product_comparison">
+        <?php $_i=0 ?>
+        <?php while($_i < $_total): ?>
+            <?php if($_i++%10==0): ?>
+                <col width="1" />
+            <?php endif; ?>
+            <col width="<?php echo floor(100/$_total); ?>%" />
+        <?php endwhile; ?>
+
+        <tbody>
+        <tr class="product-shop-row">
+            <?php $_i=0 ?>
+            <?php foreach($this->getItems() as $_item): ?>
+                <?php if($_i++%10==0): ?>
+                    <th><div class="label-column"><p>Do you need a Fancy Brand for the Quality you need?</p></div><p class="add-to-box">&nbsp;</p></th>
+                    <td>
+                        <div class="product-box">
+                            <h2 class="product-name"><a href="#" onclick="setPLocation('<?php echo $comparableProduct->getName() ?>', true)" title="<?php echo $this->stripTags($comparableProduct->getName(), null, true) ?>"><?php echo $this->helper('catalog/output')->productAttribute($comparableProduct, $comparableProduct->getName(), 'name') ?></a></h2>
+                            <a class="product-image" href="#" onclick="setPLocation('<?php echo $comparableProduct->getProductUrl() ?>', true)" title="<?php echo $this->stripTags($comparableProduct->getName(), null, true) ?>"><img src="<?php echo $this->helper('catalog/image')->init($comparableProduct, 'small_image')->resize(200); ?>" width="200" height="200" alt="<?php echo $this->stripTags($comparableProduct->getName(), null, true) ?>" /></a>
+                            <?php echo $this->getReviewsSummaryHtml($comparableProduct, 'short') ?>
+                            <?php echo $this->getPriceHtml($comparableProduct, true, '-compare-list-top') ?>
+                        </div>
+                        <p class="add-to-box">&nbsp;</p>
+                    </td>
+                <?php endif; ?>
+                <td>
+                    <div class="product-box">
+                        <h2 class="product-name"><a href="#" onclick="setPLocation('<?php echo $this->getProductUrl($_item) ?>', true)" title="<?php echo $this->stripTags($_item->getName(), null, true) ?>"><?php echo $this->helper('catalog/output')->productAttribute($_item, $_item->getName(), 'name') ?></a></h2>
+                        <a class="product-image" href="#" onclick="setPLocation('<?php echo $this->getProductUrl($_item) ?>', true)" title="<?php echo $this->stripTags($_item->getName(), null, true) ?>"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(200); ?>" width="200" height="200" alt="<?php echo $this->stripTags($_item->getName(), null, true) ?>" /></a>
+                        <?php echo $this->getReviewsSummaryHtml($_item, 'short') ?>
+                        <?php echo $this->getPriceHtml($_item, true, '-compare-list-top') ?>
+                    </div>
+                    <?php if($_item->isSaleable()): ?>
+                        <p class="add-to-box">
+                            <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setPLocation('<?php echo $this->helper('catalog/product_compare')->getAddToCartUrl($_item) ?>', true)">
+                                <span><span><img src="<?php echo $this->getSkinUrl('images/searchbyname/addcart_icon.png'); ?>" /></span></span>
+                                <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+                            </button>
+                        </p>
+                    <?php else: ?>
+                        <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                    <?php endif; ?>
+                </td>
+            <?php endforeach; ?>
+        </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <th><span class="label"><?php echo $this->__('Match') ?></span></th>
+                <td><div class="product-details"><span>&nbsp;</span></div></td>
+                <?php foreach($this->getItems() as $_item): ?>
+                <td>
+                    <div class="product-match-bar">
+                        <div class="col-xs-3 col-sm-3 nopadding prog">
+                            <div class="label">Match</div>
+                        </div>
+                        <?php $total = 0; $equal = 0; ?>
+                        <?php foreach($this->getAttributes() as $_attribute): ?>
+                            <?php $_codeItems = split('_',$_attribute->getData('attribute_code')) ?>
+                            <?php if($_attribute->getData('attribute_group_id') == Mage::registry('comparable_attr_group') && $_codeItems[count($_codeItems)-1] != "filter"): ?>
+                                <?php $total++ ?>
+                                <?php $_attrVal = split(',', $_item->getData($_attribute->getAttributeCode())) ?>
+                                <?php if($_item->getData($_attribute->getAttributeCode()) == $comparableProduct->getData($_attribute->getAttributeCode()) || in_array($comparableProduct->getData($_attribute->getAttributeCode()), $_attrVal)): ?>
+                                    <?php $equal++ ?>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                        <div class="col-xs-7 col-sm-7 nopadding">
+                            <div class="progress">
+                                <?php $matchPercent = floor(100*$equal/$total) ?>
+                                <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $matchPercent ?>%">
+                                    <span class="sr-only"><?php echo $matchPercent ?>% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 font17 int-val"><p><?php echo $matchPercent ?>%</p></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </td>
+                <?php endforeach; ?>
+            </tr>
+            <tr>
+                <th><span class="label"><?php echo $this->__('Save') ?></span></th>
+                <td><div class="product-details"><spna>&nbsp;</spna></div></td>
+                <?php foreach($this->getItems() as $_item): ?>
+                <td>
+                    <div class="product-save-bar">
+                        <div class="col-xs-3 col-sm-3 nopadding prog">
+                            <div class="label">Save</div>
+                        </div>
+                        <div class="col-xs-7 col-sm-7 nopadding">
+                            <div class="progress">
+                                <?php $originPrice = $comparableProduct->getData('price') ?>
+                                <?php $save = floor(100* ($originPrice - $_item->getData('price'))/$originPrice) ?>
+                                <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $save ?>%;">
+                                    <span class="sr-only"><?php echo $save ?>% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 font17 int-val"><p><?php echo $save ?>%</p></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </td>
+                <?php endforeach; ?>
+            </tr>
+            <tr>
+                <th><span class="label"><?php echo $this->__('Price') ?></span></th>
+                <td><div class="product-details"><?php echo $this->getPriceHtml($comparableProduct, true, '-compare-list-top') ?></div></td>
+                <?php foreach($this->getItems() as $_item): ?>
+                <td><div class="product-details"><?php echo $this->getPriceHtml($_item, true, '-compare-list-top') ?></div></td>
+                <?php endforeach; ?>
+            </tr>
+            <?php foreach ($this->getAttributes() as $_attribute): ?>
+                <?php $_codeItems = split('_',$_attribute->getData('attribute_code')) ?>
+                <?php if($_attribute->getData('attribute_group_id') == Mage::registry('comparable_attr_group') && $_codeItems[count($_codeItems)-1] != "filter"): ?>
+            <tr class="border-bottom">
+                <?php $_i=0 ?>
+                <?php foreach($this->getItems() as $_item): ?>
+                    <?php if($_i++%10==0): ?>
+                        <th><span class="label"><?php echo $_attribute->getStoreLabel() ?></span></th>
+                        <td>
+                            <div class="product-details">
+                                <?php switch ($_attribute->getAttributeCode()) {
+                                    case "price": ?>
+                                        <?php echo $this->getPriceHtml($comparableProduct, true, '-compare-list-' . $_attribute->getCode()) ?>
+                                        <?php break;
+                                    default: ?>
+                                        <div class="std">
+                                            <?php echo $this->helper('catalog/output')->productAttribute($comparableProduct, $this->getProductAttributeValue($comparableProduct, $_attribute), $_attribute->getAttributeCode()) ?>
+                                        </div>
+                                    <?php break;
+                                } ?>
+                            </div>
+                        </td>
+                    <?php endif; ?>
+                    <td>
+                        <div class="product-details">
+                        <?php switch ($_attribute->getAttributeCode()) {
+                            case "price": ?>
+                                <?php echo $this->getPriceHtml($_item, true, '-compare-list-' . $_attribute->getCode()) ?>
+                                <?php break;
+                            default: ?>
+                                <div class="std">
+                                    <?php $_attrVal = split(',', $_item->getData($_attribute->getAttributeCode())) ?>
+                                    <?php if($_item->getData($_attribute->getAttributeCode()) == $comparableProduct->getData($_attribute->getAttributeCode()) || in_array($comparableProduct->getData($_attribute->getAttributeCode()), $_attrVal)): ?>
+                                        <span><img src="<?php echo $this->getSkinUrl('images/searchbyname/match_icon.png')?>" /></span>
+                                    <?php else: ?>
+                                        <span><img src="<?php echo $this->getSkinUrl('images/searchbyname/notmactch_icon.png') ?>" /></span>
+                                    <?php endif; ?>
+                                    <?php echo $this->helper('catalog/output')->productAttribute($_item, $this->getProductAttributeValue($_item, $_attribute), $_attribute->getAttributeCode()) ?>
+                                </div>
+                            <?php break;
+                        } ?>
+                        </div>
+                    </td>
+                <?php endforeach; ?>
+
+            </tr>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </tbody>
+        <tbody>
+            <tr class="add-to-row">
+                <?php $_i=0 ?>
+                <?php foreach($this->getItems() as $_item): ?>
+                    <?php if($_i++%10==0): ?>
+                        <th><div><span>&nbsp;</span></div></th>
+                        <td><div><span>&nbsp;</span></div></td>
+                    <?php endif; ?>
+                    <td>
+                        <?php if($_item->isSaleable()): ?>
+                            <p class="add-to-box">
+                                <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setPLocation('<?php echo $this->helper('catalog/product_compare')->getAddToCartUrl($_item) ?>', true)">
+                                    <span><span><img src="<?php echo $this->getSkinUrl('images/searchbyname/addcart_icon.png'); ?>" /></span></span>
+                                    <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+                                </button>
+                            </p>
+                        <?php else: ?>
+                            <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                        <?php endif; ?>
+                    </td>
+                <?php endforeach; ?>
+            </tr>
+        </tbody>
+    </table>
+<?php endif; ?>

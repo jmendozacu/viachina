@@ -1,0 +1,60 @@
+<?php
+/* @var $this Mage_Catalog_Block_Product_Compare_Sidebar */
+?>
+<?php 
+$_helper = $this->helper('catalog/product_compare');
+$_items = $_helper->getItemCount() > 0 ? $_helper->getItemCollection() : null;
+$fc_count = 4;
+?>
+
+<style type="text/css">
+</style>
+
+<?php if ($_helper->getItemCount() < 1): ?>
+<?php $display = 'display:none'; ?>
+<?php endif; ?>
+<div id="fc_parent" class="scroll" style="<?php echo $display ?>">
+	<div class="compare-items">
+		<?php $i = 1; ?>
+		<?php foreach($_items as $_index => $_item): ?>
+			<?php if ($i < 5): ?>
+			<?php $_product = Mage::getSingleton('catalog/product')->load($_item->getId()); ?>
+			<div class="compare-item" id="fc_<?php echo $_item->getId() ?>">
+				<div class="thumb_holder">
+					<img class="thumbnail" src="<?php echo $_product->getThumbnailUrl() ?>">
+				</div>
+				<p class="description"><a href="<?php echo $this->getProductUrl($_item) ?>" class="product-name"><?php echo $this->helper('catalog/output')->productAttribute($_item, $_item->getName(), 'name') ?></a></p>
+				<a href="<?php echo $_helper->getRemoveUrl($_item) ?>" class="fc_remove"><span class="delete" title="Remove"></span></a>
+			</div>
+			<?php $i++; ?>
+			<?php endif; ?>
+		<?php endforeach; ?>
+		<?php $diff = $fc_count - $_helper->getItemCount() ?>
+		<?php for ($i = 0; $i < $diff; $i++): ?>
+			<div class="compare-item empty_item">
+				<div class="thumb_holder">
+					<img class="thumbnail">
+				</div>
+				<p class="description">Add Another Item</p>
+			</div>
+		<?php endfor; ?>
+	</div>
+	<div class="compare-controls">
+		<button type="button" title="<?php echo $this->__('Compare') ?>" class="button fc_compare_btn" ><span><span><?php echo $this->__('Compare') ?></span></span></button>	
+		<span id="fc_close" class="fc_close" title="Close & clear compare items"></span>
+	</div>
+</div>
+
+<div id="fc_r">
+	<div id="fc_result_par">
+		<div id="fc_result"></div>
+	</div>
+	<div class="fc_r_cl">
+		<span title="Close" class="fc_close"></span>
+	</div>
+</div>
+
+<script type="text/javascript">
+var fc_count = '<?php echo $fc_count ?>';
+var fc_base_url = '<?php echo $this->getUrl('fancycompare/index') ?>';
+</script>

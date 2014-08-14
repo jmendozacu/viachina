@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<config>
+    <tabs>
+        <fancycompare_tab module="fancycompare" translate="label">
+            <label>Fancycompare Config</label>
+            <sort_order>100</sort_order>
+        </fancycompare_tab>
+    </tabs>
+    <sections>
+        <fancycompareconfig module="fancycompare" translate="label">
+            <label>Configuration</label>
+            <sort_order>200</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <tab>fancycompare_tab</tab>
+            <groups>
+                <fancycompare_group translate="label">
+                    <label>Fancycompare Config</label>
+                    <!--<comment>This is example of custom configuration.</comment>-->
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<fancycompare_load_jq translate="label comment">
+							<label>Load External jQuery</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Set to No if external jQuery file should not be loaded (in case you already have jQuery added in your site).</comment>
+						</fancycompare_load_jq>
+					</fields>
+                </fancycompare_group>
+            </groups>
+        </fancycompareconfig>
+    </sections>
+</config>

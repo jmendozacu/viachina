@@ -1,0 +1,58 @@
+<!--@subject {{var store.getFrontendName()}}: {{var subject}} @-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+    <td align="center" valign="top" style="padding:20px 0 20px 0">
+        <table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #0270C0;">
+            <!-- [ header starts here] -->
+                <tr>
+                    <td valign="top">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td rowspan="2" align="left" valign="middle"><a href="{{store url=""}}"><img src="{{media url='email/viachina-emlogo.png'}}" alt="{{var logo_alt}}" border="0"/></a></td>
+    <td align="right" valign="bottom"><img src="{{media url='certifications/trusted-shops.png'}}" alt="Trusted Shops Certification" border="0"/></td>
+  </tr>
+  <tr>
+    <td align="right" valign="top" style="font-size:12px;"><a href="http://www.viachina.com/en/awraf/index/stats/" style="color:#1E7EC8;font-size:12px;">Tell a Friend</a> | <a href="http://support.viachina.com/" style="color:#1E7EC8;font-size:12px;">Support</a> | <a href="{{store url="customer/account/"}}" style="color:#1E7EC8;font-size:12px;">My Account</a></td>
+  </tr>
+</table>
+</td></tr>
+                <tr>
+                    <td valign="top" align="left">
+<h1 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">Beste {{var request.getCustomerName()}},</h1>
+<p>Je Retouraanvraag is ontvangen en goedgekeurd. Je kunt via onderstaande link de retourbon uitprinten (Knop: Print Label):<br/>
+<a href="{{var request.getUrl()}}">{{var request.getUrl()}}</a>.<br/>
+Dit label graag toevoegen bij de zending.<br/></p>
+
+<p>Je kunt je retour opsturen naar:<br/>
+ViaChina<br/>
+Postbus 7182<br/>
+3000 PV Rotterdam<br/>
+Nederland<br/>
+</p>
+<p>Klik vervolgens in het retour overzicht op de knop "Bevestig Verzending" zodat wij weten dat we je retour zending kunnen verwachten. Zorg ervoor dat je het verzendbewijs bewaard, hier kunnen we eventueel om vragen mochten er problemen zijn met de zending.</p>
+
+<p style="font-size:12px; line-height:16px; margin:0 0 12px 0;">Je kunt de status van je retouraanvraag bekijken via de volgende link: <a href="{{var request.getUrl()}}">{{var request.getUrl()}}</a>.</p>
+<p style="font-size:12px; line-height:16px; margin:0 0 12px 0;"><strong>Verder  willen je graag bedanken dat je ons op de hoogte hebt gesteld van je retourzending.</strong></p>
+                    </td>
+              </tr>
+                <tr>
+                    <td>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #0270C0;">
+  <tr>
+    <td width="50%" align="left" valign="top"><img src="{{media url='email/email-support-aaron.jpg'}}" alt="viaChina Sales &amp; Support" border="0" style="margin:10px 0px 10px 10px;" /></td>
+    <td width="50%" align="right" valign="top"><img src="{{media url='email/viachina-emlogo.png'}}" alt="{{var logo_alt}}" border="0" style="margin:10px 10px 10px 0px;" /></td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="top" bgcolor="#0270C0" align="center" style="background:#0270C0; text-align:center;font-size:9px; color:#fff; padding:5px 0;"><p>Je ontvangt deze e-mail omdat je een retouraanvraag hebt gedaan voor een product dat je bij viaChina hebt gekocht. Is dit niet het geval, contacteer dan ons supportteam via <a href="mailto:support@viachina.com">support@viachina.com</a>.</p></td>
+    </tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+</div>
+</body>

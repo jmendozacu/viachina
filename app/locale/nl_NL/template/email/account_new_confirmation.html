@@ -1,0 +1,67 @@
+﻿Beste {{htmlescape var=$customer.name}},<!--@subject Account bevestiging voor {{var customer.name}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+"store url=\"customer/account/\"":"Customer Account Url",
+"htmlescape var=$customer.name":"Customer Name",
+"var customer.email":"Customer Email",
+"store url=\"customer/account/confirm/\" _query_id=$customer.id _query_key=$customer.confirmation _query_back_url=$back_url":"Confirmation Url",
+"htmlescape var=$customer.password":"Customer password"}
+@-->
+
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+    <td align="center" valign="top" style="padding:20px 0 20px 0">
+        <table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #0270C0;">
+            <!-- [ header starts here] -->
+                    <tr>
+                        <td valign="top">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td rowspan="2" align="left" valign="middle"><a href="{{store url=""}}"><img src="{{media url='email/viachina-emlogo.png'}}" alt="{{var logo_alt}}" border="0"/></a></td>
+    <td align="right" valign="bottom"><img src="{{media url='certifications/trusted-shops.png'}}" alt="Trusted Shops Certification" border="0"/></td>
+  </tr>
+  <tr>
+    <td align="right" valign="top" style="font-size:12px;"><a href="http://www.viachina.com/en/awraf/index/stats/" style="color:#1E7EC8;font-size:12px;">Tell a Friend</a> | <a href="http://support.viachina.com/" style="color:#1E7EC8;font-size:12px;">Helpdesk</a></td>
+  </tr>
+                </table>
+</td>
+                    </tr>
+                    <!-- [ middle starts here] -->
+                    <tr>
+                        <td valign="top">
+                            <h1 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">Beste {{htmlescape var=$customer.name}},</h1>
+                            <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;">Je e-mail {{var customer.email}} moet bevestigd worden voordat je ermee kan inloggen in onze winkel.</p>
+                            <p style="font-size:12px; line-height:16px; margin:0 0 8px 0;">Maak gebruik van  <a href="{{store url="customer/account/confirm/" _query_id=$customer.id _query_key=$customer.confirmation _query_back_url=$back_url}}" style="color:#1E7EC8;">deze bevestigingslink</a>.om de e-mail te bevestigen en direct in te kunnen loggen. Deze link is slechts eenmaal geldig.</p>
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0 0 16px 0; padding:13px 18px; background:#f9f9f9;">
+                                Gebruik de volgende notatie als je wordt verzocht in te loggen:<br/>  <strong>E-mail:</strong> {{var customer.email}}<br/>  <strong>Wachtwoord:</strong> {{htmlescape var=$customer.password}}</p>
+                            <p style="font-size:12px; line-height:16px; margin:0;">Mocht je vragen hebben over je account of andere zaken, neem dan gerust contact met ons op via <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a> of telefonisch op het nummer {{config path='general/store_information/phone'}}.</p>
+                        </td>
+                    </tr>
+                    <tr>
+            </tr>
+            <tr>
+                <td>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #0270C0;">
+<tr>
+    <td width="10%" align="left" valign="top"><img src="{{media url='email/email-sales-norah.jpg'}}" alt="ViaChina Sales &amp; Support" border="0" width="400px" style="margin:20px 0px 20px 20px;" /></td>
+  </tr>
+  <tr>
+     <td colspan="2" valign="top" bgcolor="#0270C0" align="center" style="background:#0270C0; text-align:center;font-size:9px; color:#fff; padding:5px 0;"><p></td>
+    </tr>
+			  </table>
+              </td>
+            </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>

@@ -1,0 +1,151 @@
+<?php
+$helper = Mage::helper('merchandiser');
+$productCollection = $this->getCategoryProductCollection($this->getCategoryId())
+                        ->addAttributeToSelect(array('id','visibility'));
+$columnCount = $helper->getColumnCount($this->getRequest()->getParam('column_count'));
+$attrcodeCount = $helper->getAttributeCodesCount();
+$productbox_height_apprx = 300 + $attrcodeCount*15;
+$ajax_page_load = $helper->getAjaxPageLoad();
+$category = Mage::getModel('catalog/category')->load($this->getCategoryId());
+?>
+
+<input type="hidden" id="removed_product_ids" >
+<div id='no-product-message' style="display:none"></div>
+
+<?php if(trim($category->getMerchandiserHeroproducts()) != ''){ ?>
+	<div class="hero-products">
+		<div class="hero-products-block">
+			<ul class="">
+			<?php
+				$productObject = Mage::getModel('catalog/product');
+				$iCounter = 0; 
+				foreach (explode("," , $category->getMerchandiserHeroproducts()) as $heroSku){
+				$iCounter++;
+					if($productId = $productObject->getIdBySku(trim($heroSku))){ 
+						$productBox =  $this->getLayout()->createBlock('merchandiser/adminhtml_catalog_product_list')->setTemplate('merchandiser/new/category/heroproductbox.phtml');
+				        $productBox->setPid($productId);
+				        $productBox->setCurrentPosition($iCounter);
+				        echo $productBox->toHtml();
+					}
+				}
+			?>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+<?php } ?>
+
+
+<ul class="column columns-<?php echo $columnCount ?>" id="infinite_scroll">
+    <li class="dragbox" id="dragbox-empty">
+        <input type="hidden" class="id" name="product[<?php echo $helper->getEmptyId() ?>]" value="<?php echo $helper->getEmptyId() ?>" />
+        <div class="dragbox-content">&nbsp;</div>
+    </li>
+</ul>
+<?php
+$visibleCount = 0;
+$currentPosition=1;
+if (0 < $productCollection->count()) :
+    foreach ($productCollection as $_product) :
+        $pId = $_product->getId();
+        $isVisible = !($_product->getVisibility() == 1 || $_product->getVisibility() == 3); 
+        if((!$isVisible && Mage::helper('merchandiser')->isHideInvisibleProducts()) || !$helper->isEnabledProduct($_product) && Mage::helper('merchandiser')->isHideDisabledProducts()){ ?>
+            <input id="sku-<?php echo str_replace(" ","_",$_product->getSku()) ?>" type="hidden" class="not-visible productid productid<?php echo $pId ?>" name="product[<?php echo $pId ?>]" value="99999" />
+        <?php }else{ 
+        $visibleCount++; ?>
+            <input id="sku-<?php echo str_replace(" ","_",$_product->getSku()) ?>" type="hidden" class="productid productid<?php echo $pId ?>" name="product[<?php echo $pId ?>]" value="<?php echo $currentPosition++ ?>" />
+        <?php } 
+    endforeach;
+endif;
+
+$totalCount = $productCollection->count();
+if(Mage::helper('merchandiser')->isHideInvisibleProducts() || Mage::helper('merchandiser')->isHideDisabledProducts()){
+	$totalCount = $visibleCount;
+}
+
+?>
+
+<div id="spinner"><img src="<?php echo $this->getSkinUrl('merchandiser/images/rule-ajax-loader.gif') ?>" alt="Spinner"> Loading...</div>
+<div id="spinner2"><img src="<?php echo $this->getSkinUrl('merchandiser/images/rule-ajax-loader.gif') ?>" alt="Spinner">  Processing</div>
+
+<div id="footer-message"></div>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    sendAjaxRequest();
+    observerScrollBar();
+});
+
+var isRunning = false;
+var currentPage = 1;
+
+function observerScrollBar(){
+    jQuery(window).unbind('scroll').bind('scroll', function () { 
+       if (jQuery(window).scrollTop() + 1 >= 0.6*(jQuery(document).height() - jQuery(window).height()) ) {
+        if(jQuery('.dragbox').size() -1 >= <?php echo $totalCount ?>){
+            unObserverScrollbar();
+        }
+        else if(!isRunning)
+            sendAjaxRequest();
+        }
+    });
+}
+
+function sendAjaxRequest(){
+    jQuery.ajax({
+            type: "GET",
+            url: "<?php echo Mage::helper("adminhtml")->getUrl('*/*/loadajax/', array('_secure' => Mage::app()->getFrontController()->getRequest()->isSecure(),'asid' => $this->getRequest()->getParam('asid'))) ?>",
+            cache: false,
+            data: { 
+                category_id: "<?php echo $this->getCategoryId() ?>", 
+                store_id: "<?php echo $this->getStoreId() ?>",
+                asid: "<?php echo $this->getRequest()->getParam('asid') ?>",
+                extra_products: getNumberExtraProducts(),
+                current_page: currentPage
+            },
+            beforeSend: function (){
+                jQuery('#spinner').show();
+                isRunning = true;
+            },
+            success: function(databack){
+                if (databack == 'false') {
+                    unObserverScrollbar();
+                }
+                else {
+                    jQuery(databack).insertBefore('#dragbox-empty');
+                    currentPage++;
+                    removeDuplicatesAfterAjax();
+                    initFunction();
+                }
+                $('no-product-message').innerHTML = "<h3><?php echo $this->__("No Products"); ?></h3>"; 
+                jQuery('#spinner').hide();
+                isRunning = false;
+            }
+        }).done(function( databack ) {
+    });
+}
+
+function getNumberExtraProducts(){
+    var hwindow = jQuery(window).height();
+    var hheader = 56; //jQuery('body').height();
+    var hproductbox = <?php echo $productbox_height_apprx ?>;
+    var column_count = <?php echo $columnCount ?>;
+    var max_row = 3;
+    if (hproductbox > 0) {
+        max_row = (hwindow - hheader)/hproductbox;
+        max_row = Math.floor(max_row) + 1;
+    }
+    var extra_products = max_row * column_count;
+    <?php if ((int)$ajax_page_load < 1 || $ajax_page_load == "" || $productCollection->count() < (int)$ajax_page_load) : ?>
+    return <?php echo $productCollection->count() ?>;
+    <?php else: ?>
+    return extra_products;
+    <?php endif; ?>
+}
+
+function unObserverScrollbar(){
+    jQuery(window).unbind('scroll');
+}
+
+</script>

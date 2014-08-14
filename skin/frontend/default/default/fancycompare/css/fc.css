@@ -1,0 +1,119 @@
+#fc_parent {
+	width: 712px;
+	border: 1px solid red;
+	margin-bottom: 10px;
+	z-index: 40;
+	background-color: #d7eaf0;
+	border: 1px solid #a9d9e7;
+	font-size: 11px;
+	margin: 6px 6px 0 0;
+	overflow: visible;
+}
+#fc_parent.static {
+
+}
+#fc_parent.scroll {
+	position: fixed;
+	top: 0;
+}
+#fc_parent .compare-items {
+	float: left;
+	height: 68px;
+	overflow: hidden;
+}
+.compare-items .compare-item {
+	background-color: #e7f2f6;
+	float: left;
+	height: 58px;
+	width: 130px;
+	position: relative;
+	margin: 4px 18px 0 5px;
+}
+.compare-items .compare-item .thumb_holder {
+	border: 1px solid #a9d9e7;
+	background-color: #FFF;
+	display: block;
+	float: left;
+	height: 50px;
+	margin: 3px 4px 3px 3px;
+	width: 43px;
+}
+.compare-items .compare-item.empty_item .thumb_holder {
+	background: url("../images/fc_add_item.jpg") no-repeat scroll 0 4px white;
+}
+.compare-items .compare-item .thumb_holder IMG {
+	max-height: 42px;
+	max-width: 42px;
+	margin: 6px auto 0;
+	display: block;
+}
+.compare-items .compare-item P {
+	display: block;
+	height: 54px;
+	margin-top: 3px;
+	overflow: hidden;
+	text-align: left;
+	width: 72px;
+}
+.compare-items .compare-item.empty_item P {
+	color: #999;
+}
+.compare-item .delete, .compare-cart-wrapper .close {
+	background: url("../images/fc_item_close.gif") transparent;
+	cursor: pointer;
+	display: block;
+	height: 16px;
+	position: absolute;
+	right: -8px;
+	bottom: -7px;
+	width: 17px;
+}
+#fc_parent .compare-controls {
+	float: right;
+	height: 68px;
+	left: -5px;
+	position: relative;
+	text-align: left;
+	width: 90px;
+}
+#fc_parent button {
+	margin: 22px 10px 0 0;
+}
+.fc_close {
+	background: url("../images/fc_close_icon.png") transparent;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+	right: -12px;
+	top: -4px;
+	display: block;
+	position: absolute;
+	bottom: -4px;
+}
+#fc_r {
+	position: fixed;
+	min-height: 40%;
+	max-height: 80%;
+	min-width: 40%;
+	max-width: 80%;
+	display: none;
+	box-shadow: 0 1px 30px #000000;
+	background-color: #ffffff;
+	border: 1px solid #eeeeee;
+	border-radius: 5px;
+	overflow: visible;
+	z-index: 10;
+}
+#fc_result_par {
+	overflow: auto;
+}
+#fc_result {
+	padding:5px;
+}
+#fc_r .fc_r_cl {
+    float: right;
+    height: 100%;
+    position: absolute;
+    right: 4px;
+    top: -5px;
+}

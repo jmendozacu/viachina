@@ -1,0 +1,4 @@
+<?php
+class OnTap_Merchandiser_Block_Adminhtml_Catalog_Product_List extends Mage_Catalog_Block_Product_Abstract{
+	
+}

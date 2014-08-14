@@ -1,0 +1,41 @@
+<div id="checkout-review" class="onepagecheckout_block">
+	<input type='hidden' id='opc_s_data' value='<?php echo Mage::helper('onepagecheckout')->getSUrl();?>'/>
+    <div class="op_block_title"><?php echo $this->__('Review Your Order') ?></div>
+    <div id="checkout-review-load">
+        <?php echo $this->getChildHtml('info') ?>
+    </div>
+    <div id="checkout-review-submit">    
+        <?php echo $this->getChildHtml('agreements') ?>
+        <div class="buttons-set" id="review-buttons-container">
+        <button type="submit" title="<?php echo $this->__('Place Order Now') ?>" class="button btn-checkout" onclick="checkout.save(); return false;"><?php echo $this->__('Place Order Now') ?></button>
+        
+            test
+    <?php $store_id = Mage::app()->getStore()->getStoreId(); ?>
+    
+    <?php
+	if($store_id=='1'){?>
+    <div class="text">When placing an order you agree to the Terms of Service of viaChina. </div>
+	<?php }?>
+    <?php
+	if($store_id=='2'){?>
+    <div class="text">Bij het plaatsen van een order ga je akkoord met de Algemene Voorwaarden van ViaChina.</div>
+	<?php }?>
+    <?php
+	if($store_id=='3'){?>
+    <div class="text">En passant une commande, vous acceptez les Conditions d'viaChina.</div>
+	<?php }?>
+    <?php
+	if($store_id=='4'){?>
+    <div class="text">Bei einer Bestellung erklären Sie sich mit den Nutzungsbedingungen viaChina.</div>
+	<?php }?>
+    <?php
+	if($store_id=='5'){?>
+    <div class="text">When placing an order you agree to the Terms of Service of viaChina.</div>
+	<?php }?>
+
+            <span id="review-please-wait" style="display:none;float:right;">
+                <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Submitting order information...') ?>" title="<?php echo $this->__('Submitting order information...') ?>" class="v-middle" /> <?php echo $this->__('Submitting order information...') ?>
+            </span>
+        </div>
+    </div>
+</div>

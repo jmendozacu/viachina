@@ -1,0 +1,110 @@
+<?php
+$helper = Mage::helper('merchandiser');
+$attrcodes = $helper->getAttributeCodes();
+$attrcodeCount = $helper->getAttributeCodesCount();
+$this->addPriceBlockType('simple', 'catalog/product_price', 'merchandiser/new/category/price.phtml');
+$this->addPriceBlockType('grouped', 'catalog/product_price', 'merchandiser/new/category/price-grouped.phtml');
+$this->addPriceBlockType('configurable', 'catalog/product_price', 'merchandiser/new/category/price-
+    configurable.phtml');
+$currentPosition = $this->getCurrentPosition();
+$pId = $this->getPid();
+$_product = Mage::getModel('catalog/product')->load($pId);
+
+//print_r($_product->getData()); exit;
+
+$productClasses = array();
+$productClasses[] = "attrs-".$attrcodeCount;
+if (!$helper->isEnabledProduct($_product)) {
+    $productClasses[] = 'disabled';
+}
+if($_product->getVisibility() == 3 || $_product->getVisibility() == 1){
+	$productClasses[] = 'invisible';
+}
+if (!$_product->isSaleable()) {
+   // $productClasses[] = 'not-saleable';
+} 
+?>
+
+<li id="sku-<?php echo str_replace(" ","_",$_product->getSku()) ?>" class="dragbox product-shop productid product<?php echo $pId ?> <?php echo implode(' ', $productClasses) ?>">
+    <div class="product-shop">
+        <h2 class="product-name">
+            <strong><span class="dragbox-position-container"><span class="dragbox-position"><?php echo $currentPosition ?></span>.&nbsp;</span><?php echo $_product->getName() ?></strong>
+            <?php if($_product->getTypeId() == "bundle") {echo $helper->getBundlePrice($pId);} else{ 
+             echo $this->getPriceHtml($_product, true); } ?>
+            <?php echo $helper->getStockQtyHtml($_product) ?>
+        </h2>
+        <input type="hidden" class="productid input-product-position productid<?php echo $pId ?>" name="product[<?php echo $pId ?>]" value="<?php echo $currentPosition++ ?>" />
+        <div class="dragbox-content">
+            <div class="cols2">
+                <div class="cols2-left">
+                    <div class="product-image-container">
+                        <a href="<?php echo Mage::helper('merchandiser/image')->init($_product, 'small_image')->resize(135); ?>" style="display:none"></a>
+                        <img id="product-image-<?php echo $pId ?>" class="product-image" src="<?php echo Mage::helper('merchandiser/image')->init($_product, 'small_image')->resize(135); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                    </div>
+                    <?php if ($helper->getShowExtraImages()) :
+                        $moreImagesCount = $helper->getMoreImageCount();
+                        $images = Mage::getModel('catalog/product')->load($pId)->getMediaGalleryImages();
+                    ?>
+                    <div class="product-image-more">
+                        <?php if($images): $imagecount=0;
+                            foreach($images as $_image): 
+                                if(++$imagecount > $moreImagesCount) break; ?>
+                                <div class="product-image-more-item">
+                                    <a href="<?php echo $this->helper('merchandiser/image')->init($_product, 'small_image', $_image->getFile())->resize(135); ?>" >
+                                        <img src="<?php echo $this->helper('merchandiser/image')->init($_product, 'small_image', $_image->getFile())->resize(35); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel());?>" title="<?php echo $this->htmlEscape($_image->getLabel());?>" />
+                                    </a>
+                                </div>
+                           <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <div class="cols2-right">
+                    <div><strong><?php echo $helper->__('SKU') ?></strong>:&nbsp;<?php echo $_product->getSku() ?></div>
+                    <?php if ($helper->getShowCreationDate()) : ?>
+                    <div><strong><?php echo $helper->__('Creation date') ?></strong>:&nbsp;<?php echo $_product->getCreatedAt() ?></div>
+                    <?php endif; ?>
+                    <?php if(!is_null($attrcodes)) : ?>
+                        <?php foreach ($attrcodes as $attrcode) : ?>
+                            <?php
+                            if (strcmp($attrcode, '') == 0) continue;
+                            $eav_attr = Mage::getModel('catalog/resource_eav_attribute')->loadByCode('catalog_product',$attrcode);
+                            if ($eav_attr->getId()===null) continue;
+                            $_attributeLabel = $_product->getResource()->getAttribute($attrcode)->getFrontendLabel(); 
+                            $_attributeValue = $_product->getResource()->getAttribute($attrcode)->getFrontend()->getValue($_product);
+                            ?>
+                            <?php if($_attributeValue) :  ?>
+                            <div>
+                                <strong><?php echo $_attributeLabel; ?>:&nbsp;</strong><?php echo $_attributeValue; ?>
+                            </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                    <div id="box-button" class="buttons">
+                        <a href="#" onclick="return false;" class="remove-button">
+                            <img src="<?php echo $this->getSkinUrl('merchandiser/images/cross.png') ?>" alt="<?php echo $helper->__('Detach from category') ?>" title="<?php echo $helper->__('Detach from category') ?>" />
+                        </a>
+                        <a href="#" onclick="return false;" class="category-add-button">
+                            <img src="<?php echo $this->getSkinUrl('merchandiser/images/add.png') ?>" alt="<?php echo $helper->__('Add to category') ?>" title="<?php echo $helper->__('Add to category') ?>" />
+                            <?php echo $helper->__('Add to category') ?>
+                        </a>
+                        <a href="#" onclick="return false;" class="cancel-remove-button">
+                            <img src="<?php echo $this->getSkinUrl('merchandiser/images/error_msg_icon.gif') ?>" alt="<?php echo $helper->__('Cancel detach') ?>" title="<?php echo $helper->__('Cancel detach') ?>" />
+                            <?php echo $helper->__('Cancel detach') ?>
+                        </a>
+                        <!--<a href="#" onclick="return false;" class="move-to-bottom-button">
+                            <img src="<?php  /* echo $this->getSkinUrl('merchandiser/images/arrow_down.png') */ ?>" alt="<?php /*echo $helper->__('Move to top')*/ ?>" title="<?php /*echo $helper->__('Move to top')*/ ?>" />
+                        </a>-->
+                        <a href="#" onclick="return false;" class="move-to-top-button">
+                            <img src="<?php echo $this->getSkinUrl('merchandiser/images/arrow_up.png') ?>" alt="<?php echo $helper->__('Move to top') ?>" title="<?php echo $helper->__('Move to top') ?>" />
+                        </a>
+                        
+                      
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="cannot-add"><?php echo $helper->__('Already in category') ?></p>
+    </div>
+</li>

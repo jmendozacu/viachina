@@ -1,0 +1,146 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Cart cross sell items template
+ *
+ * @see Mage_Checkout_Block_Cart_Crosssell
+ */
+?>
+<?php $ajaxcart = themeOptions('ajaxcart'); ?>
+<?php if($this->getItemCount()): ?>
+<div class="crosssell">
+    <h2><?php echo $this->__('Based on your selection, you may be interested in the following items:') ?></h2>
+    <?php $_iterator = 0; ?>
+    <ul class="products-grid">
+    <?php foreach ($this->getItems() as $_item): ?>
+        <li class="column3 item<?php if( ++$_iterator == sizeof($this->getItems()) ): ?> last<?php endif; ?>">
+            
+	    <?php if($ajaxcart == '2') { ?>
+		<a href='<?php echo $this->getUrl('ajax/index/options',array('product_id'=>$_item->getId()));?>' class='fancybox quick-view' id='fancybox<?php echo $_item->getId()?>'><?php echo $this->__('Quick-View') ?></a>
+	    <?php } ?>
+	    
+	    <a class="product-image" href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->constrainOnly(true)->keepAspectRatio(true)->resize(272,385); ?>" width="272" height="385" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" /></a>
+            <div class="productgrid-area">
+		
+						<?php  $productName = $this->htmlEscape($_item->getName());
+									if(strlen($productName) > 31) {
+										$productName = mb_strimwidth($productName,0,31,"...",'utf-8');
+									} ?>
+                <h3 class="product-name"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $productName; ?></a></h3>
+                <?php echo $this->getPriceHtml($_item, true) ?>
+                
+            <div class="actions">
+                <?php if($ajaxcart == '1' || $ajaxcart == '2') { ?>
+                    <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart ajx-cart" onclick="setLocationAjax('<?php echo $this->getAddToCartUrl($_item) ?>','<?php echo $_item->getId()?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                <?php } else { ?>
+		    <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_item) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+		<?php } ?>
+                <ul class="add-to-links">
+                    <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                        <li><a href="<?php echo $this->getAddToWishlistUrl($_item) ?>" title="<?php echo $this->__('Add to Wishlist') ?>" class="link-wishlist"><?php echo $this->__('') ?></a></li>
+                    <?php endif; ?>
+                    <?php if($_compareUrl=$this->getAddToCompareUrl($_item)): ?>
+                        <li><span class="separator">|</span> <a href="<?php echo $_compareUrl ?>" title="<?php echo $this->__('Add to Compare') ?>" class="link-compare"><?php echo $this->__('') ?></a></li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+            </div>
+            <div id='ajax_loader<?php echo $_item->getId()?>' class="ajaxcartpro_progress" style="display: none;">
+		    <img src="<?php echo $this->getSkinUrl('ajaxcart/images/al.gif'); ?>">
+		    <p><?php echo $this->__('Please wait...') ?></p>
+		    <div><?php echo $this->__('We are updating Shopping Bag.') ?></div>
+		</div>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+    <script type="text/javascript">decorateList('crosssell-products-list', 'none-recursive')</script>
+</div>
+<?php endif; ?>
+<script type="text/javascript">
+     <?php if($ajaxcart == '1' || $ajaxcart == '2') { ?>
+	jQuery.noConflict();
+	
+	jQuery('.fancybox').live('click', function() {
+	    jQuery('#fancybox-loading').show();
+        });
+	
+	jQuery('.fancybox').fancybox(
+			{
+			   hideOnContentClick : true,
+			   width: 630,
+			   autoDimensions: true,
+               type : 'iframe',
+			   showTitle: false,
+			   scrolling: 'no',
+			   onComplete: function(){
+				jQuery('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
+					jQuery('#fancybox-loading').hide();
+					jQuery('#fancybox-content').height(jQuery(this).contents().find('body').height()+30);
+					jQuery.fancybox.resize();
+				 });
+
+			   }
+			}
+		);
+	
+	function showOptions(id){
+		jQuery('#fancybox'+id).trigger('click');
+	}
+		
+	function setAjaxData(data,iframe){
+		if(data.status == 'ERROR'){
+			alert(data.message);
+		}else{
+		    successMessage(data.message);
+			if(jQuery('.block-cart')){
+	            jQuery('.block-cart').replaceWith(data.sidebar);
+	        }
+	        if(jQuery('.header .links')){
+	            jQuery('.header .links').replaceWith(data.toplink);
+	        }
+	        jQuery.fancybox.close();
+		}
+	}
+	function setLocationAjax(url,id){
+		url += 'isAjax/1';
+		url = url.replace("checkout/cart","ajax/index");
+		jQuery('#ajax_loader'+id).show();
+		try {
+			jQuery.ajax( {
+				url : url,
+				dataType : 'json',
+				success : function(data) {
+					jQuery('#ajax_loader'+id).hide();
+         			setAjaxData(data,false);           
+				}
+			});
+		} catch (e) {
+		}
+	}
+        <?php } ?>
+</script>

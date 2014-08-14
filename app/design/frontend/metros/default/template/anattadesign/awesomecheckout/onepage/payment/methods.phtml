@@ -1,0 +1,103 @@
+<dl class="sp-methods" id="checkout-payment-methods-list">
+	<h2><?php echo $this->__('Choose a method of payment:'); ?></h2>
+	<?php
+	$methods = $this->getMethods();
+	$oneMethod = count( $methods ) <= 1;
+        $storeCode=Mage::app()->getStore()->getCode();
+        
+	?>
+	<?php
+	foreach ( $methods as $_method ):
+		$_code = $_method->getCode();
+	?>
+            <dt class="<?php echo $_code; ?> border">
+                <div class="method_label">
+                    <?php if ( !$oneMethod ): ?>
+                        <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape( $_method->getTitle() ) ?>" onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if ( $this->getSelectedMethodCode() == $_code ): ?> checked="checked"<?php endif; ?> class="radio" />
+                    <?php else: ?>
+                        <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" /></span>
+                                    <?php $oneMethod = $_code; ?>
+                    <?php endif; ?>
+                    <label for="p_method_<?php echo $_code ?>"><?php echo $this->getMethodTitle( $_method ) ?> <?php echo $this->getMethodLabelAfterHtml( $_method ) ?></label>
+                </div>
+            <div class="method_img">
+                <?php 
+                if ($_code=="adyen_cc") :
+                ?>
+              
+                <?php
+                    if ($storeCode=="eu"):
+                ?>
+                    <span class="adyen_cc_eu"></span>
+                <?php
+                    elseif ($storeCode=="en"):
+                ?>
+                    <span class="adyen_cc_en"></span>
+               <?php
+                    elseif ($storeCode=="de"):
+                ?>
+                    <span class="adyen_cc_de"></span>
+               <?php
+                    elseif ($storeCode=="fr"):
+                ?>
+                    <span class="adyen_cc_fr"></span>     
+               <?php
+                    elseif ($storeCode=="nl"):
+                ?>
+                    <span class="adyen_cc_nl"></span>     
+                <?php
+                    endif;
+                elseif ($_code=="adyen_hpp") :
+               
+               
+                else:
+                ?>
+                <span class="label-img"></span>
+                <?php
+
+
+                endif;
+
+
+                ?>
+                </div>    
+            </dt>
+            <?php if ( $html = $this->getPaymentMethodFormHtml( $_method ) ): ?>
+            <dd class="<?php echo $_code; ?> border">
+                    <?php echo $html; ?>
+            </dd>
+            <?php endif; ?>
+	<?php endforeach; ?>
+</dl>
+<div class="clear"></div>
+<?php echo $this->getChildChildHtml( 'additional' ); ?>
+<script type="text/javascript">
+jQuery(function() {
+	var purchaseorder_html = jQuery('dd.purchaseorder').html();
+	jQuery('dt.purchaseorder').append(purchaseorder_html);
+	jQuery('dd.purchaseorder').remove();
+});
+	//<![CDATA[
+<?php echo $this->getChildChildHtml( 'scripts' ); ?>
+	jQuery('#co-payment-form dd :input').attr('disabled', 'disabled');
+<?php if ( is_string( $oneMethod ) ): ?>
+		payment.switchMethod('<?php echo $oneMethod ?>');
+<?php elseif ( $this->getSelectedMethodCode() ): ?>
+		payment.switchMethod('<?php echo $this->getSelectedMethodCode() ?>');
+<?php else: ?>
+		jQuery('input[name="payment[method]"]:first').attr('checked', 'checked');
+		payment.switchMethod(jQuery('input[name="payment[method]"]:first').val());
+<?php endif; ?>
+
+<?php if ( Mage::getSingleton( 'checkout/session' )->getQuote()->getUseCustomerBalance() ) { ?>
+	if (isFullyPaidAfterCustomerBalanceApplication) {
+		jQuery('#p_method_free').prop('checked',true).parent().hide();
+		jQuery('#checkout-payment-method-load').hide();
+	} else {
+		jQuery('#checkout-payment-method-load').show();
+		jQuery('input[name="payment[method]"]:first').prop('checked',true);
+		payment.switchMethod(jQuery('input[name="payment[method]"]:first').val());
+	}
+<?php } ?>
+	//]]>
+</script>

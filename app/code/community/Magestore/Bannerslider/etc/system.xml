@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<magestore translate="label">
+			<label>PEER SYSTEM</label>
+			<sort_order>2</sort_order>
+		</magestore>
+	</tabs>
+	<sections>
+		<bannerslider translate="label" module="bannerslider">
+			<label>Banner Slider</label>
+			<tab>magestore</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>999</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<banner_option translate="label">
+				<label>Banner Option</label>
+				<frontend_type>text</frontend_type>
+				<sort_order>1</sort_order>
+				<show_in_default>1</show_in_default>
+				<show_in_website>1</show_in_website>
+				<show_in_store>1</show_in_store>
+					<fields>
+						<choose_banner translate="label">
+							<label>Choose Banner</label>
+							
+							<frontend_type>select</frontend_type>
+							<source_model>bannerslider/system_config_banneroption</source_model> 
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</choose_banner>
+					</fields>
+				</banner_option>
+				
+				<settings translate="label">
+				<label>Camera Slider Settings</label>
+				<frontend_type>text</frontend_type>
+				<sort_order>2</sort_order>
+				<show_in_default>1</show_in_default>
+				<show_in_website>1</show_in_website>
+				<show_in_store>1</show_in_store>
+					<fields>
+						<time_delay translate="label, comment">
+							<label>Slider Interval</label>
+							<comment><![CDATA[in milisecond. - Default is 7000 ms  ]]></comment>
+							<frontend_type>text</frontend_type>
+							<validate>validate-digits</validate>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</time_delay>
+						<show_description translate="label, comment">
+							<label>Show description</label>
+							<comment><![CDATA[show description in front of image]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_description>
+						<effect translate="label, comment">
+							<label>Annimation</label>
+							<comment><![CDATA[image effect]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>bannerslider/system_config_effect</source_model> 
+							<sort_order>15</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</effect>
+						<loader translate="label, comment">
+							<label>Loader</label>
+							<comment><![CDATA[image effect]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>bannerslider/system_config_loader</source_model> 
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</loader>
+						
+						<height_ratio translate="label, comment">
+							<label>Height</label>
+							<comment><![CDATA[px (Default is 360)]]></comment>
+							<frontend_type>text</frontend_type>
+							<validate>validate-digits</validate>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</height_ratio>
+					</fields>
+				</settings>
+				
+				<flex_settings translate="label">
+				<label>Flex Slider Settings</label>
+				<frontend_type>text</frontend_type>
+				<sort_order>3</sort_order>
+				<show_in_default>1</show_in_default>
+				<show_in_website>1</show_in_website>
+				<show_in_store>1</show_in_store>
+					<fields>
+						<slideshowspeed translate="label, comment">
+							<label>Slideshow Speed</label>
+							<frontend_type>text</frontend_type>
+							<validate>validate-digits</validate>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</slideshowspeed>
+						<animation translate="label, comment">
+							<label>Annimation</label>
+							<comment><![CDATA[image effect]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>bannerslider/system_config_animation</source_model> 
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</animation>
+						<animationspeed translate="label, comment">
+							<label>Animation Speed</label>
+							<frontend_type>text</frontend_type>
+							<validate>validate-digits</validate>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</animationspeed>
+						<show_description translate="label, comment">
+							<label>Show description</label>
+							<comment><![CDATA[show description in front of image]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_description>
+						
+						
+					</fields>
+				</flex_settings>
+			</groups>
+		</bannerslider>
+	</sections>
+</config>

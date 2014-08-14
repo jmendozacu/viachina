@@ -1,0 +1,17 @@
+<div id="img-ctl" class="controls">
+	<ul class="buttons">
+        <li><div class="btn add"><span><span><span><?php echo $this->__('Add') ?></span></span></span></div></li>
+        <li><div class="btn remove"><span><span><span><?php echo $this->__('Remove') ?></span></span></span></div></li>
+    </ul>
+</div>
+<script type="text/javascript">
+document.observe("dom:loaded", function() {
+	var options = {
+		grid: '#optionsGrid_table',
+		panel: '#img-ctl',
+		uploadUrl: '<?php echo $this->getUploadUrl(); ?>',
+		removeUrl: ''
+	};
+	imagePanel = new ImagePanel(options);
+});
+</script>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <OnTap_Merchandiser>
+            <active>false</active>
+            <codePool>local</codePool>
+        </OnTap_Merchandiser>
+    </modules>
+</config>

@@ -1,0 +1,152 @@
+    
+		
+		
+			<div class="new-arrow">
+			    <h2 class="page-title subtitle"><?php echo $this->__('Latest Products') ?></h2>
+			
+			</div>
+			
+		      <div class="loading">
+			<div id="main-slider" class="flexslider carousel">
+			<?php if (($_products = $this->getProductCollection()) && $_products->getSize()):
+				
+			?>	
+				<?php $_columnCount = $this->getColumnCount(); ?>
+				<?php $i=0; foreach ($_products->getItems() as $_product): ?>
+				
+				<?php if ($i++%$_columnCount==0): ?>
+				<ul class="slides product-latest">
+				<?php endif ?>
+				
+				<li class="latest-product item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+				      
+				      <div class="latest-image">
+					  <a  href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>" ><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->constrainOnly(true)->keepAspectRatio(true)->resize(191,201) ?>" width="191" height="201" alt="<?php echo $this->htmlEscape($_product->getName()) ?>" /></a>
+				      </div>
+				      
+				      <div class="latest-area">
+					
+									<?php  $productName = $this->htmlEscape($_product->getName());
+									if(strlen($productName) > 21) {
+										$productName = substr($productName,0,21)."...";
+									} ?>
+					  <h3 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>"><?php echo $productName; ?></a></h3>
+					  <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+					    <?php echo $this->getPriceHtml($_product, true, '-new') ?>
+					  
+					  <div class="actions">
+						<?php if($_product->isSaleable()): ?>
+						<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+						<?php else: ?>
+						<p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+						<?php endif; ?>
+						<div class="add-to-links">
+						    <?php if ($this->helper('wishlist')->isAllow()) : ?>
+							<a href="<?php echo $this->getAddToWishlistUrl($_product) ?>" title="<?php echo $this->__('Add to Wishlist') ?>" class="link-wishlist"><?php echo $this->__('') ?></a>
+						    <?php endif; ?>
+						    <?php if ($_compareUrl = $this->getAddToCompareUrl($_product)): ?>
+							<span class="separator">|</span> <a href="<?php echo $_compareUrl ?>" title="<?php echo $this->__('Add to Compare') ?>" class="link-compare"><?php echo $this->__('') ?></a>
+						    <?php endif; ?>
+						
+						</div>
+						
+						
+					  </div>
+					  
+					  
+				      </div>
+				      
+				</li>
+				
+				<?php if ($i%$_columnCount==0 || $i==count($_products)): ?>
+					
+				</ul>
+				<?php endif ?>
+				<?php endforeach; ?>
+				<?php endif; ?>
+			</div>
+		
+	    </div>
+		
+<script type="text/javascript">
+    var ww = document.body.clientWidth;
+    if (ww > 1199) {
+      j$('#main-slider').flexslider({
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: 394,
+        itemMargin: 9,
+        minItems: 1,
+        maxItems: 3,
+	move:1,
+	controlNav: false,
+	slideshowSpeed: 7000,          
+	animationSpeed: 1000,
+	slideshow: false,
+	start: function(slider){
+          j$('div').removeClass('loading');
+        }
+      });
+    }
+    else if (ww < 479) {
+	j$('#main-slider').flexslider({
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: 312,
+        itemMargin: 0,
+        minItems: 1,
+        maxItems: 3,
+	move:1,
+	controlNav: false,
+	slideshowSpeed: 7000,          
+	animationSpeed: 1000,
+	slideshow: false,
+	start: function(slider){
+          j$('div').removeClass('loading');
+        }
+      });
+    }
+    else if (ww < 767) {
+	j$('#main-slider').flexslider({
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: 394,
+        itemMargin: 9,
+        minItems: 1,
+        maxItems: 3,
+	move:1,
+	controlNav: false,
+	slideshowSpeed: 7000,          
+	animationSpeed: 1000,
+	slideshow: false,
+	start: function(slider){
+          j$('div').removeClass('loading');
+        }
+      });
+    }
+    else if (ww < 1199) {
+	j$('#main-slider').flexslider({
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: 371,
+        itemMargin: 9,
+        minItems: 1,
+        maxItems: 3,
+	move:1,
+	controlNav: false,
+	slideshowSpeed: 7000,          
+	animationSpeed: 1000,
+	slideshow: false,
+	start: function(slider){
+          j$('div').removeClass('loading');
+        }
+      });
+    }
+</script>
+
+		
+		
+		
+		
+		
+		

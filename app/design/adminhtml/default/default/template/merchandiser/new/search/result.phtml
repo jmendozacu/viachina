@@ -1,0 +1,27 @@
+
+<?php if ($this->getResultCount()): ?>
+    <p class="advanced-search-amount">
+        <?php echo $this->helper('catalogsearch')->__('<strong>%d item(s)</strong> were found using the following search criteria', $this->getResultCount()); ?>
+    </p>
+    <script type="text/javascript">
+        jQuery('.col-right').height('100%');
+    </script>
+<?php else: ?>
+    <p class="error-msg"><?php echo $this->helper('catalogsearch')->__('No items were found using the following search criteria.');?></p>
+    <script type="text/javascript">
+        jQuery('.col-right').height('100px');
+    </script>
+<?php endif; ?>
+
+<?php if($this->getResultCount()): ?>
+    <?php
+        $limitPage = Mage::getSingleton('catalog/session')->getLimitPage();
+        Mage::getSingleton('catalog/session')->setLimitPage(OnTap_Merchandiser_Block_Search_Result::PAGE_SEARCH_RESULTS)
+    ?>
+    <div class="column" id="merchandiser-search-list">
+        <?php echo $this->getProductListHtml() ?>
+    </div>
+    <?php Mage::getSingleton('catalog/session')->setLimitPage($limitPage) ?>
+<?php endif; ?>
+
+<?php $this->getSearchCriterias(); ?>

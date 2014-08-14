@@ -1,0 +1,175 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+
+<div class="header-container">
+    <div class="header">
+	<div class="quick-access">
+	    <div class="header1">
+		<?php echo $this->getLayout()->createBlock('directory/currency')->setTemplate('directory/currency.phtml')->toHtml(); ?>
+		<?php echo $this->getChildHtml('store_language') ?>
+		<?php //echo $this->getChildHtml('topLinks') ?>
+<?php
+$store_code = Mage::app()->getStore()->getCode();
+switch ($store_code) {
+case 'nl':
+  $txtmyacct = 'MIJN ACCOUNT';
+  $txtmycart = 'MIJN WINKELWAGEN';
+  $txtlogin = 'LOG IN';
+  $txtlogout = 'AFMELDEN';
+  break;
+case 'fr':
+  $txtmyacct = 'MON COMPTE';
+  $txtmycart = 'MON PANIER';
+  $txtlogin = 'LOG IN';
+  $txtlogout = 'DÉCONNECTER';
+  break;
+case 'de':
+  $txtmyacct = 'MEIN KONTO';
+  $txtmycart = 'WARENKORB';
+  $txtlogin = 'ANMELDEN';
+  $txtlogout = 'ABMELDEN';
+  break;
+case 'en':
+  $txtmyacct = 'My Account';
+  $txtmycart = 'My Cart';
+  $txtlogin = 'LOG IN';
+  $txtlogout = 'LOG OUT';
+  break;
+case 'eu':
+  $txtmyacct = 'My Account';
+  $txtmycart = 'My Cart';
+  $txtlogin = 'LOG IN';
+  $txtlogout = 'LOG OUT';
+  break;
+} 
+?>
+            <?php    
+            
+            $enable_status = Mage::getStoreConfig('sociallogin/general/enable_sociallogin');                    
+       
+             if ($enable_status == 1) {
+             ?>
+              <ul class="links">
+                 
+             <?php
+             if ($this->helper('customer')->isLoggedIn() ) 
+             { ?>
+                 <li class="first"><a href="<?php echo $this->getUrl('customer/account')?>" title="<?php echo $txtmyacct;?>"><?php echo $txtmyacct;?></a></li>
+                    
+             <?php } else { ?>
+                 <li class="first"><a href="javascript:apptha_header_logo_Div.open1();" title="<?php echo $txtmyacct;?>"><?php echo $txtmyacct;?></a></li>
+             <?php } ?>
+                    
+<?php /*?>   <?php
+             if ($this->helper('customer')->isLoggedIn() ) 
+              { ?>
+                 <li><a href="<?php echo $this->helper('wishlist')->getListUrl()?>" title="My Wishlist">My Wishlist</a></li>
+    
+             <?php } else { ?>                                
+                 <li><a href="javascript:apptha_header_logo_Div.open1();" title="My Wishlist">My Wishlist</a></li> 
+                               
+             <?php } ?>   <?php */?>
+             
+                 <li><a href="<?php echo $this->getUrl('checkout/cart')?>" title="<?php echo $txtmycart;?>" class="top-link-cart"><?php echo $txtmycart;?></a></li>
+
+             <?php
+             if ($this->helper('customer')->isLoggedIn() ) 
+             { ?>
+
+                
+                 <li class=" last"><a href="<?php echo Mage::helper('customer')->getLogoutUrl();?>" title="<?php echo $txtlogout;?>"><?php echo $txtlogout;?></a></li>
+            
+             <?php } else { ?>                                
+                 <li class=" last"><a href="javascript:apptha_header_logo_Div.open1();" title="<?php echo $txtlogin;?>"><?php echo $txtlogin;?></a></li>
+             <?php } ?>                      
+               </ul>
+             <?php } 
+             else
+             {
+             echo $this->getChildHtml('topLinks');   
+             }?>
+
+            <!--<p class="welcome-msg"><?php echo $this->getWelcome() ?> <?php echo $this->getAdditionalHtml() ?></p>-->
+            </div>
+        </div>
+      
+        <div class="header2">
+		 <?php if ($this->getIsHomePage()):?>
+        <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+        <?php else:?>
+        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+        <?php endif?>
+        <div class="head-full-cont">
+            <div class="left head-70p search-bar"><div class="searchlogo"><?php echo $this->getChildHtml('topSearch') ?></div></div>
+            <div class="right head-30per thuisw-img">        
+		    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('cert-header-img')->toHtml(); ?>
+            </div>
+        </div>
+        <div class="clearboth"></div>
+        <div class="head-full-cont">
+        <div class="left head-80per"><?PHP $menuwithlogo = themeOptions('menu_withlogo'); ?>
+	    <?php
+	    if($menuwithlogo == null || $menuwithlogo == '1' ) { ?>
+		<?php echo $this->getChildHtml('topMenu') ?>
+		<?php } ?></div>
+        <div class="right"><div class="shopping_bg">
+                                <div class="cartlogo"></div> 
+				<!--<h1><?php echo $this->__('Shopping Bag') ?></h1>-->
+			
+                                <?php echo $this->getChildHtml('cart_sidebar') ?>
+		</div></div>
+        </div>
+		
+		<div class="clearboth"></div>
+		
+		    <?PHP $menuwithlogo = themeOptions('menu_withlogo'); ?>
+		    <?php
+		    if($menuwithlogo == '0' ) { ?>
+		    <div class="menuwithlogo">
+			<?php echo $this->getChildHtml('topMenu') ?>
+			</div>
+			<style>
+			    .header2{padding-bottom: 0px;}
+			    .header{}
+			</style>
+			<?php } ?>
+		
+	</div>
+	
+        <?php echo $this->getChildHtml('topContainer'); ?>
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+jQuery(".shopping_bg").hover(function () {
+   jQuery('.slideTogglebox').slideToggle(10);
+});
+
+</script>

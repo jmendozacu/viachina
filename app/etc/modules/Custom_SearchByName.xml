@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Custom_SearchByName>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Custom_SearchByName>
+    </modules>
+</config>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+
+<layout>
+    <layerednavigation_adminhtml_filter_index>
+        <reference name="content">
+            <block type="layerednavigation/adminhtml_filter" name="filter_list" />
+        </reference>
+    </layerednavigation_adminhtml_filter_index>
+
+    <layerednavigation_adminhtml_filter_edit>
+        <reference name="content">
+            <block type="layerednavigation/adminhtml_filter_edit" name="filter_edit" />
+        </reference>
+        <reference name="left">
+            <block type="layerednavigation/adminhtml_filter_edit_tabs" name="filter_edit_tabs" />
+        </reference>
+		<reference name="head">
+			<action method="addCss"><name>em_layerednavigation.css</name></action>
+			<action method="addJs"><script>em_layerednavigation/jquery.js</script></action>
+			<action method="addJs"><script>em_layerednavigation/jquery.fineuploader.js</script></action>
+			<action method="addJs"><script>em_layerednavigation/admin.js</script></action>
+		</reference>
+		<reference name="before_body_end">
+			<block type="layerednavigation/adminhtml_image" name="image_controls" template="em_layerednavigation/image.phtml" />
+		</reference>
+    </layerednavigation_adminhtml_filter_edit>
+
+</layout>

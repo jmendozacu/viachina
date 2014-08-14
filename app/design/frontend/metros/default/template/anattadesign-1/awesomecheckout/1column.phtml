@@ -1,0 +1,183 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="<?php echo $this->getLang() ?>"> <!--<![endif]-->
+	<head>
+		<?php echo $this->getChildHtml( 'head' ) ?>
+
+		<style type="text/css">
+			<?php echo Mage::getStoreConfig( 'awesomecheckout/appearance_options/css' ); ?>
+		</style>
+		<script type="text/javascript">
+			<?php echo Mage::getStoreConfig( 'awesomecheckout/appearance_options/js' ); ?>
+		</script>
+
+		<!-- This meta tag is required to make Prototype framework working nicely in IE9. Recommend by http://alanstorm.com/ie9_fix_for_magento  -->
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<script type="text/javascript">
+			$j = jQuery.noConflict();
+		</script>
+
+		<!-- Use this js code to make html5 working in IE8 and IE7  -->
+		<script type="text/javascript">
+			document.createElement('header');
+			document.createElement('hgroup');
+			document.createElement('nav');
+			document.createElement('menu');
+			document.createElement('section');
+			document.createElement('article');
+			document.createElement('aside');
+			document.createElement('footer');
+		</script>
+
+		<!-- exposing the checkout url in a global variable -->
+		<script type="text/javascript">
+			var ACUrl = '<?php echo Mage::getUrl( 'checkout/onepage' ); ?>';
+		</script>
+
+<style type="text/css">
+body {background-color:#fff !important;}
+ul.links { list-style:none; }
+.logo { float:left; }
+.headertop { margin:0 auto; text-align:right; position:relative; z-index:10000;padding:0px 0px 15px 0px;}
+.header1{width:1200px;margin:0 auto;}
+.header2 {width:950px;margin:0 auto;padding:30px 0px 10px 0px;display:table; position: relative;}
+.header2 .cartlogo{float: left;color: #2e2e2e;border: 0;font-family: 'FontAwesome';font-size: 22px;padding: 4px 0px 0px 9px;margin-right: 10px;}
+.header2 .shopping_bg {float: right;width: 9%;height:35px;}
+.headertop .logo { float:left; margin:0px 0 0px 0px; text-decoration:none !important; }
+.headertop .logo strong { position:absolute; top:-999em; left:-999em; width:0; height:0; font-size:0; line-height:0; text-indent:-999em; overflow:hidden; }
+.headertop h1.logo { margin:0; }
+.headertop .quick-access { float:none;/*padding:5px 0px 5px 0px;*/background-color:#f9f9f9; height: 33px; }
+.headertop .welcome-msg { margin:0; color:#fff; text-align:right;}
+.headertop .welcome-msg a { color:#ebbc58; }
+.headertop .form-search {/* width:195px; height:30px;*/ float:right; /*margin-left:30px;*/  }
+.headertop .form-search label { float:left; width:24px; height:21px; text-align:left; text-indent:-999em; overflow:hidden; word-spacing:10px;display:none;}
+.headertop .form-search input.input-text {border:none; height:21px;float:left; border-right:0; width:145px; padding:5px;font-size:11px;color:#8F8F8F;}
+
+.headertop .searchlogo{float:right;/*margin-right:10px;*/border:1px solid transparent;position: absolute;right: 110px;}
+.headertop .searchlogo:hover{border:1px solid #CCC;}
+.headertop .searchlogo:hover .form-search input.input-text{display:block;}
+.headertop .searchlogo .form-search input.input-text{display:none;}
+
+.headertop .form-search button.button { float:left; }
+.headertop .form-search button.button {height:31px;color:#2e2e2e;background:none; font-family: 'FontAwesome';font-size: 19px; padding:0px 0px 2px 8px;}
+.headertop .form-search button.button span span { background-position:100% 0; padding:0 6px 0 3px; }
+.headertop .form-search .search-autocomplete { z-index:999; /*left:auto !important; */top:51px !important; padding-right:35px; }
+.headertop .form-search .search-autocomplete ul { border:1px solid #5c7989;background-color:#FFF;}
+.headertop .form-search .search-autocomplete li { text-align:left; border-bottom:1px solid #f4eee7; padding:6px; cursor:pointer; }
+.headertop .form-search .search-autocomplete li .amount { float:right; font-family: 'open_sansbold'; color:#03997e; }
+.headertop .form-search .search-autocomplete li.odd { }
+.headertop .form-search .search-autocomplete li.selected { background-color:#E5E5E5; }
+.headertop .form-language {text-align:right; float:right;}
+.headertop .form-language label { padding-right:5px; color:#737373; vertical-align:middle; font-size:10px;}
+.headertop .form-language select { padding:0; }
+.headertop .form-language select.flags option { background-position:4px 50%; background-repeat:no-repeat; padding-left:25px; }
+.headertop .links { float:right; margin-top:10px; margin-right:100px}
+.headertop .links li { float:left;  padding:0 28px 0 7px; text-transform:uppercase;}
+.headertop .links a { color:#737373; text-decoration:none; font-size:12px;}
+.headertop .links a:hover{text-decoration:underline;}
+.header-container .top-container { clear:both; padding:5px 10px 0 12px; text-align:right; }
+.header-container .top-container a { font-size:11px; color:#ebbc58; }
+.mini-cart-div .summary-container .summary .amount {float:left;margin-top:8px;}
+.col-left .mini-cart-div {display:none;}
+.headertop .quick-access {background-color:#f9f9f9 !important; border-bottom:1px solid #f5f3f3;}
+.headertop .links a {color:#f37235 !important;}
+
+@media only screen and (max-width: 478px)  {
+.header2 {width:100%;padding:0 10px;}
+a.logo img {width:100%;}
+.thuiswinkel{text-align:center;}
+.headertop .links {margin-right:0px;float:left;}
+}
+
+@media only screen and (min-width: 479px) and (max-width: 600px)  {
+.header2 {width:100%;padding:0 15px;}
+a.logo img {width:100%;}
+.thuiswinkel{text-align:center;}
+.headertop .links {margin-right:0px;float:left;}
+}
+
+@media only screen and (min-width: 601px) and (max-width: 770px)  {
+.header2 {width:100%;padding:0 20px;}
+.headertop .logo {width:80% !important;}
+.thuiswinkel{text-align:center;}
+.headertop .links {margin-right:0px;float:left;}
+}
+
+@media only screen and (min-width: 771px) and (max-width: 1000px)  {
+.header2 {width:100%;padding:0 30px;}
+.headertop .logo {width:50% !important;}
+.thuiswinkel{text-align:center;}
+.headertop .links {margin-right:0px;float:left;}
+}
+
+@media only screen and (min-width: 1001px) and (max-width: 1199px)  {
+.header2 {width:90%;padding:0 30px;}
+.headertop .logo {width:30% !important;}
+.thuiswinkel{text-align:center;}
+.headertop .links {margin-right:0px;float:left;}
+}
+
+@media only screen and (min-width: 1200px) {
+.header2 {width:950px;}
+}
+
+.postnl-shipping-ft-img {float:left; padding-right:5px;}
+</style>
+    
+	</head>
+	<body<?php echo $this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '' ?>>
+    
+
+<div class="header-container">
+<div class="headertop">
+<div class="quick-access">
+	    <div class="header1">
+
+<ul class="links">
+                   <li class="first">
+                   <?php if ($this->helper('customer')->isLoggedIn() ) { ?>                   
+                   <a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).Mage::app()->getStore()->getCode('',array('_secure'=>true)); ?>/customer/account/" title="My Account">My Account</a>	
+				   <?php }else{ ?>
+                   <a href="#already-a-customer" onClick="jQuery('.enter_password').show();" title="Please log in first!">My Account</a>	
+                   <?php }; ?></li>
+                   <li<?php if ($this->helper('customer')->isLoggedIn() ) { echo ' class=" last"'; }; ?>><a href="<?php echo Mage::helper('checkout/cart')->getCartUrl('',array('_secure'=>true)); ?>" title="My Cart" class="top-link-cart">My Cart</a></li>
+                   <?php if ($this->helper('customer')->isLoggedIn() ) { } else { ?>
+                   <li class=" last"><a href="#already-a-customer" onClick="jQuery('.enter_password').show();">Log In</a></li>
+                   <?php } ; ?>
+</ul>
+            
+            <!--<p class="welcome-msg">Welcome, BJ Streefland! </p>-->
+            </div>
+</div>
+
+</div>
+</div>
+
+
+		<?php echo $this->getChildHtml( 'after_body_start' ) ?>
+		<?php echo Mage::getStoreConfig( 'awesomecheckout/appearance_options/custom_header' ); ?>
+		<div id="ac-page">
+			<?php if ( Mage::getStoreConfig( 'awesomecheckout/appearance_options/custom_header' ) == '' ) { ?>
+				<header id="header">
+					<a href="<?php echo Mage::helper('core/url')->getHomeUrl('',array('_secure'=>true)); ?>" title="Back to viaChina Homepage"><img id="logo" src="<?php echo Mage::helper( 'anattadesign_awesomecheckout' )->getLogoUrl(); ?>" alt="logo" /></a>
+                    
+                    <div style="float:right;">
+					<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('cert-header-img')->toHtml(); ?>
+                    </div>
+                    
+					<?php /*?><a href="<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>" class="my-cart"><abbr><?php echo $this->__('My Cart'); ?></abbr></a><?php */?>
+				</header>
+			<?php } ?>
+			<div class="clear"></div>
+			<?php echo $this->getChildHtml( 'global_notices' ) ?>
+			<?php echo $this->getChildHtml( 'breadcrumbs' ) ?>
+				<?php echo $this->getChildHtml( 'global_messages' ) ?>
+				<?php echo $this->getChildHtml( 'content' ) ?>
+			<?php echo $this->getChildHtml( 'before_body_end' ) ?>
+		</div>
+		<?php echo Mage::getStoreConfig( 'awesomecheckout/appearance_options/custom_footer' ); ?>
+	</body>
+</html>

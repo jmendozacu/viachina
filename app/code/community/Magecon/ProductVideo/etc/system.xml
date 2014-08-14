@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Open Biz Ltd
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file OPEN-BIZ-LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://mageconsult.net/terms-and-conditions
+ *
+ * @category   Magecon
+ * @package    Magecon_ProductVideo
+ * @version    2.0.0
+ * @copyright  Copyright (c) 2012 Open Biz Ltd (http://www.mageconsult.net)
+ * @license    http://mageconsult.net/terms-and-conditions
+ */
+-->
+<config>
+    <tabs>
+        <magecon translate="label" module="productvideo">
+            <label>MageConsult</label> 
+            <sort_order>100</sort_order>
+        </magecon>
+    </tabs>
+    <sections>
+        <productvideo translate="label" module="productvideo">
+            <label>Product Video</label>
+            <tab>magecon</tab>
+            <sort_order>200</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general_settings translate="label">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>		
+                    <fields>
+                        <general_enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment></comment>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </general_enabled>
+                        <general_enabled_images translate="label">
+                            <label>Enable FancyBox for Product Images Gallery</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Sets whether or not the fancybox to be used as gallery for product images.</comment>
+                            <sort_order>20</sort_order>		
+                            <depends>
+                                <general_enabled>1</general_enabled>
+                            </depends>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </general_enabled_images>
+                        <general_title_position>
+                            <label>Title Position</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>productvideo/system_config_source_fancyboxtitleposition</source_model>
+                            <comment>Sets where the title is positioned</comment>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </general_title_position>
+                        <general_transition>
+                            <label>FancyBox Transition</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>productvideo/system_config_source_fancyboxtransition</source_model>
+                            <comment>Sets the transition type.</comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </general_transition>		
+                        <general_showclose>
+                            <label>Show Close Button</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>productvideo/system_config_source_truefalse</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </general_showclose>
+                        <general_allowesc>
+                            <label>Enable ESC for Close Button</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>productvideo/system_config_source_truefalse</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </general_allowesc>
+                        <general_changespeed>
+                            <label>Transition Speed</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Speed of the fade and elastic transitions also speed of resizing when changing gallery items, in milliseconds.</comment>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </general_changespeed>
+                    </fields>
+                </general_settings>
+				
+                <picture_settings translate="label">
+                    <label>Product Images Gallery Settings</label>
+                    <frontend_type>select</frontend_type>
+                    <sort_order>200</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <picture_cyclic translate="label">
+                            <label>Picture Gallery Cyclic</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>productvideo/system_config_source_truefalse</source_model>
+                            <comment>When true, galleries will be cyclic, allowing you to keep pressing next/back.</comment>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </picture_cyclic>
+                        <picture_shownavarrow translate="label">
+                            <label>Show Navigation Arrows</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>productvideo/system_config_source_truefalse</source_model>
+                            <comment></comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </picture_shownavarrow>
+                    </fields>			
+                </picture_settings>
+                
+                <video_settings translate="label">
+                    <label>Video Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>300</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <autohide translate="label">
+                            <label>Autohide Video Controls</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>productvideo/system_config_source_autohide</source_model>
+                            <comment>Indicates whether the video controls will automatically hide after a video begins playing.</comment>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </autohide>
+                        <autoplay translate="label">
+                            <label>Autoplay</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Sets whether or not the initial video will autoplay when the player loads.</comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </autoplay>
+                        <controls translate="label">
+                            <label>Show Player Controls</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Indicates whether the video player controls will display.</comment>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </controls>
+                        <!--<loop translate="label">
+                            <label>Autorepeat</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Indicates whether the video will be repeated.</comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </loop>-->
+                        <modestbranding translate="label">
+                            <label>Hide YouTube Logo</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Indicates whether the YouTube logo will be shown in controls section.</comment>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </modestbranding>
+                        <rel translate="label">
+                            <label>Show Relative Videos</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Indicates whether the player should show related videos when playback of the initial video ends.</comment>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </rel>
+                        <showinfo translate="label">
+                            <label>Show Video Info</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Display information like the video title and uploader before the video starts playing.</comment>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </showinfo>
+                        <showtitle translate="label">
+                            <label>Show Video Title</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Indicates whether the title of the video will be below the pop-up window.</comment>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </showtitle>
+                        <theme translate="label">
+                            <label>Video Player Theme</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>productvideo/system_config_source_theme</source_model>
+                            <comment>Indicates whether the embedded player will display player controls within a dark or light control bar.</comment>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </theme>
+                        <thumbnail translate="label">
+                            <label>Default Thumbnail</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>productvideo/system_config_source_thumbnail</source_model>
+                            <comment>Indicates which thumbnail will be displayed in product view page.</comment>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </thumbnail>
+                        <width translate="label">
+                            <label>Video Player Width</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Default value 480.</comment>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </width>
+                        <height translate="label">
+                            <label>Video Player Height</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Default value 360.</comment>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </height>
+                    </fields>
+                </video_settings>
+            </groups>
+        </productvideo>
+    </sections>
+</config>

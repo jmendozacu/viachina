@@ -1,0 +1,57 @@
+<?php 
+$catId = $this->getCategoryId(); 
+$params = $this->getRequest()->getParams();
+$catId = $params['category_id'];
+$storeId = Mage::app()->getStore()->getId();
+?>
+<?php if ($catId) : ?>
+	<?php echo $this->getChildHtml('merchandiser.top.buttons'); ?>
+	<div style="float:right;">
+	<?php echo $this->getChildHtml('merchandiserSearch'); ?>
+	</div>
+	<div id="background_tilt"></div>
+    <div id="massproductassignent" class="mass_product_assignment_div">
+    	<a onclick="hideMassProducts()" class="mass-product-close-button"><?php echo $this->__("Close") ?></a>
+    	<div class="mass-product-assign-bounder">
+	        <div id="progressbar"></div>
+	        <h3><?php echo Mage::helper('merchandiser')->__('Please enter SKUs below, one per line.') ?></h3>
+	        <p id ="massproductresult" ></p>
+	        <div><br><textarea cols="180" rows="10" id="massproduct_skus" name="massproduct_skus"></textarea><br>
+	            <div class="masproduct-button">
+	                <button id="addMassButton" class="button" type="button">
+	                    <span><span>Assign Products</span></span>
+	                </button>
+	
+	                <button id="removeMassButton" class="button" type="button">
+	                    <span><span>Remove Products</span></span>
+	                </button>
+	
+	                <!--<button onclick="hideMassProducts();" class="button" type="button">
+	                    <span><span>Close Mass Product Assignment</span></span>
+	                </button>-->
+	            </div>
+	        </div>
+        </div>
+    </div>
+    <div id="merchandiser-categories">
+        <form id="product-ordering-form" method="post" action="">
+            <div class="buttons">
+                <?php echo $this->getChildHtml('merchandiser.submit.button') ?>
+                <input type="hidden" name="category_id" value="<?php echo $catId ?>" />
+                <input type="hidden" name="store_id" value="<?php echo $storeId ?>" />
+                <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />  
+            </div>
+            <?php /*echo $this->getChild('merchandiser.category.list')->setCategoryId($catId)->setStoreId($storeId)->toHtml()*/ ?>
+            <?php echo $this->getChildHtml('merchandiser.category.list') ?>
+        </form>
+    </div>
+
+    <?php if ($this->getRequest()->getParam('up' , 0) == 1) : ?>
+    <script type="text/javascript">
+       // window.opener.updateCurrentPage();
+    </script>
+    <?php endif; ?>
+
+<?php else : ?>
+    <div class="error"><?php echo Mage::helper('merchandiser')->__('No Category set') ?></div>
+<?php endif; ?>

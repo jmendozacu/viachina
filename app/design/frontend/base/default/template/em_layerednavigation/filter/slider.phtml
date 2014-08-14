@@ -1,0 +1,48 @@
+<?php
+/**
+ * Template for filter items block
+ *
+ * @see Mage_Catalog_Block_Layer_Filter
+ */
+?>
+<?php
+$data   = $this->getRangeStatistic();
+$min    = $data['min_price'];
+$max    = $data['max_price'];
+$from   = $data['from'];
+$to     = $data['to'];
+$query  = $this->getQueryTemplate();
+$valTpl = $this->getValueTemplate();
+$removeUrl = Mage::helper('layerednavigation')->getRemoveUrl($this->_filter);
+?>
+
+<?php if (!($from==$min && $to==$max) && $removeUrl): ?>
+<div class="filter-act">
+	<a class="btn-remove" href="<?php echo $removeUrl ?>" title="<?php echo $this->__('Clear All') ?>"><?php echo $this->__('Clear All') ?></a>
+</div>
+<?php endif ?>
+
+<div class="rslider">
+	<div id="track">
+		<div id="range"></div>
+		<div id="from" class="handle"></div>
+		<div id="to" class="handle"></div>
+	</div>
+	<div class="values">
+		<span id="from-val"></span>
+		<span id="to-val"></span>
+	</div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+	em_slider = new EM_Slider({
+		min: <?php echo $min ?>,
+		max: <?php echo $max ?>,
+		from: <?php echo $from ?>,
+		to: <?php echo $to ?>,
+		query: '<?php echo $query ?>',
+		valTpl: '<?php echo $valTpl ?>',
+		removeUrl: '<?php echo $removeUrl ?>'
+	});
+//]]>
+</script>

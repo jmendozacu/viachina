@@ -1,0 +1,170 @@
+<?php
+	 $category = Mage::registry('category');
+	 
+        $smartAttribute_data_form = new Varien_Data_Form();
+        $smartAttribute_data_form->setHtmlIdPrefix('smartmerch_');
+        $form_renderer = Mage::getBlockSingleton('merchandiser/adminhtml_system_config_form_field_attributes');
+        $form_fieldset = $smartAttribute_data_form->addFieldset('attributes_fieldset', array('legend' => Mage::helper('merchandiser')->__('Smart Category: Select the attributes to use')));
+
+        try {
+            $smart_cat_attr = unserialize($category->getSmartAttributes());
+        } catch (Exception $e) {
+            $smart_cat_attr = array();
+        }
+        if (is_array($smart_cat_attr)):
+            foreach ($smart_cat_attr as $attr_key => $attr_row):
+                if (!is_array($attr_row)): unset($smart_cat_attr[$attr_key]); endif;
+            endforeach;
+        endif;
+
+        $form_fieldset->addField('attributes', 'text', array('name' => 'smartmerch_attributes','title' => Mage::helper('merchandiser')->__('Attributes'),'value' => $smart_cat_attr))->setRenderer($form_renderer);
+
+?>
+<div class="entry-edit">
+	<div class="entry-edit-head">
+		<h4 class="icon-head head-edit-form fieldset-legend">
+			<?php echo Mage::helper('merchandiser')->__("Merchandiser mode") ?>
+		</h4>
+	</div>
+	<div id="merchnadiser_attributes_fieldset" class="fieldset ">
+		<div class="hor-scroll">
+			<table>
+				<tr>
+					<td><label class="merchandiser-option-lable"><?php echo Mage::helper('merchandiser')->__("How do you want to Merchandise this category") ?> :</label> </td>
+					<td>
+						<select name="general[merchandise_option]" id="group_198merchandise_option" class="select" onchange="changeMerchandiseOption(this.value); submitCategory(this.value ,'<?php echo $category->getMerchandiseOption(); ?>');">
+							<option value="2" <?php echo $category->getMerchandiseOption()==2?"selected='selected'":"";?>><?php echo Mage::helper('merchandiser')->__("Smart Category") ?></option>
+							<option value="1" <?php echo $category->getMerchandiseOption()==1?"selected='selected'":"";?>><?php echo Mage::helper('merchandiser')->__("Visual Merchandiser") ?></option>
+						</select>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="entry-edit visualmerch-content">
+	<div class="entry-edit-head">
+		<h4 class="icon-head head-edit-form fieldset-legend">
+			<?php echo Mage::helper('merchandiser')->__("Visual Merchandiser") ?>
+		</h4>
+	</div>
+	<div id="merchnadiser_attributes_fieldset" class="fieldset ">
+		<div class="hor-scroll">
+			<button style="" onclick="openPopup()" class="scalable merchandiser" type="button" title="<?php echo Mage::helper('merchandiser')->__("Show Visual Merchandiser") ?>" id="merchandiser.open.button"><span><span><span><?php echo Mage::helper('merchandiser')->__("Show Visual Merchandiser") ?></span></span></span></button>
+		</div>
+	</div>
+</div>
+
+<div class="entry-edit visualmerch-content">
+	<div class="entry-edit-head">
+		<h4 class="icon-head head-edit-form fieldset-legend">
+			<?php echo Mage::helper('merchandiser')->__("Hero Products") ?>
+		</h4>
+	</div>
+	<div id="merchnadiser_attributes_fieldset" class="fieldset ">
+		<div class="hor-scroll">
+			<table class="form-list full-width">
+				<tr>
+					<td class="label">
+						<?php echo Mage::helper('merchandiser')->__("Hero Products") ?> : 
+					</td>
+					<td class="value">
+						<input type="text" class="input-text" value="<?php echo $category->getMerchandiserHeroproducts(); ?>" onchange="$('group_198merchandiser_heroproducts').value = this.value" />
+						<p class="note">
+							<?php echo $this->__("Enter a comma separated list of SKUs that will always be displayed at the top of your category") ?>
+						</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<div class="smartmerch-content">
+	<div class="box-left">
+		<div class="entry-edit  attribute-map"><?php echo $smartAttribute_data_form->toHtml(); ?></div>
+		<div class="entry-edit">
+			<div class="entry-edit-head">
+				<h4 class="icon-head head-edit-form fieldset-legend">
+					<?php echo Mage::helper('merchandiser')->__("Sort Logic") ?>
+				</h4>
+			</div>
+			<div id="merchnadiser_attributes_fieldset" class="fieldset ">
+				<div class="hor-scroll">
+				<table class="form-list">
+					<tr>
+						<td class="label">
+							<?php echo Mage::helper('merchandiser')->__("Hero Products") ?> : 
+						</td>
+						<td class="value">
+							<input type="text" class="input-text" value="<?php echo $category->getMerchandiserHeroproducts(); ?>" id="group_198merchandiser_heroproducts" name="general[merchandiser_heroproducts]" style="width:350px" />
+							<p class="note">
+								<?php echo $this->__("Enter a comma separated list of SKUs that will always be displayed at the top of your category") ?>
+							</p>
+						</td>
+					</tr>
+				</table>
+				
+					<?php
+						$actions = Mage::helper('merchandiser')->getConfigAction();
+					?>
+					<table class="sort-logic">
+						<tr>
+							<td colspan="2"><?php echo $this->__("Sort order") ?>:</td>
+						</tr>
+						<tr>
+								<td>
+										<input type="radio" class="sorting_options_radio" name="merchandiser_sorting_options" id="" <?php if($category->getMerchandiserSortingOptions()==''){ echo "checked"; } ?> />
+								</td>
+								<td><?php echo $this->__("None") ?></td>
+						</tr>
+						<?php foreach ($actions as $actionKey => $action){ ?>
+						<tr>
+							<td>
+								<input type="radio" class="sorting_options_radio" name="merchandiser_sorting_options" id="<?php echo $actionKey ?>" <?php if($category->getMerchandiserSortingOptions()==$actionKey){ echo "checked"; } ?> />
+							</td>
+							<td><?php echo $action['name'] ?></td>
+						</tr>
+						<?php } ?>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<input type="hidden" value="<?php echo $category->getMerchandiserSortingOptions(); ?>" id="group_198merchandiser_sorting_options" name="general[merchandiser_sorting_options]" />
+	<div class="box-right">
+		<div class="entry-edit">
+	    	<div class="entry-edit-head"><h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('merchandiser')->__("Currently matched products") ?></h4></div>
+			<div class="fieldset ">
+				<div id="smart_products_grid"><?php echo $this->getChildHtml('category_smartmerch_grid'); ?></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	changeMerchandiseOption(<?php echo $category->getMerchandiseOption() ?>);
+	$$('input.sorting_options_radio').each(function(item){
+		item.observe('click' , function(){
+			$('group_198merchandiser_sorting_options').value = item.id;
+		});
+	});
+</script>
+<?php if(Mage::helper('merchandiser')->isHideProductPositionField()){ ?>
+	<style>#catalog_category_products_table tbody tr td.editable .input-text {visibility:hidden;}</style>
+<?php } ?>
+<script>
+	function submitCategory(value,savedValue){ 
+		if(value == 1 && savedValue == 2){
+			categorySubmit('<?php echo Mage::helper('adminhtml')->getUrl('*/catalog_category/save' , array('isAjax'=>'true','id'=>$category->getId())) ?>' , true);		
+		}
+	}
+</script>
+<script>
+$$('select.logic_link').each(function(item,index){
+	if(index == $$('select.logic_link').length -1)
+		item.hide();
+	else
+		item.show();
+});
+</script>

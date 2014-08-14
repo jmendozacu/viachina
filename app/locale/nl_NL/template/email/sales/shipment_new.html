@@ -1,0 +1,80 @@
+<!--@subject {{var store.getFrontendName()}}: Je bestelling # {{var order.increment_id}} is verzonden.@-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+"htmlescape var=$order.getCustomerName()":"Customer Name",
+"var store.getFrontendName()":"Store Name",
+"store url=\"customer/account/\"":"Customer Account Url",
+"var shipment.increment_id":"Shipment Id",
+"var order.increment_id":"Order Id",
+"var order.billing_address.format('html')":"Billing Address",
+"var payment_html":"Payment Details",
+"var order.shipping_address.format('html')":"Shipping Address",
+"var order.shipping_description":"Shipping Description",
+"layout handle=\"sales_email_order_shipment_items\" shipment=$shipment order=$order":"Shipment Items Grid",
+"block type='core/template' area='frontend' template='email/order/shipment/track.phtml' shipment=$shipment order=$order":"Shipment Track Details",
+"var comment":"Shipment Comment"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+<tr>
+    <td align="center" valign="top" style="padding:20px 0 20px 0">
+        <!-- [ header starts here] -->
+        <table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #0270C0;">
+            <tr>
+                <td valign="top">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td rowspan="2" align="left" valign="middle"><a href="{{store url=""}}"><img src="{{media url='email/viachina-emlogo.png'}}" alt="{{var logo_alt}}" border="0"/></a></td>
+    <td align="right" valign="bottom"><img src="{{media url='certifications/trusted-shops.png'}}" alt="Trusted Shops Certification" border="0"/></td>
+  </tr>
+  <tr>
+    <td align="right" valign="top" style="font-size:12px;"><a href="http://www.viachina.com/en/awraf/index/stats/" style="color:#1E7EC8;font-size:12px;">Tell a Friend</a> | <a href="http://support.viachina.com/" style="color:#1E7EC8;font-size:12px;">Helpdesk</a> | <a href="{{store url="customer/account/"}}" style="color:#1E7EC8;font-size:12px;">Mijn Account</a></td>
+  </tr>
+                </table>
+</td>
+            </tr>
+        <!-- [ middle starts here] -->
+            <tr>
+                <td valign="top">
+                    <h1 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">Hallo, {{htmlescape var=$order.getCustomerName()}}</h1>
+                    <p style="font-size:12px; line-height:16px; margin:0;">
+                        Je bestelling is verzonden!.<br/><br/>
+                        
+                        Op dit moment is je bestelling vertrokken uit ons distributiecentrum in China. Je kunt je bestelling van het begin tot het einde volgen met de Track & Trace code van PostNL.<br/><br/>
+                        Je vind deze Track & Trace code hieronder, maar je kunt je bestelling ook volgen door <a href="{{store url="customer/account/"}}" style="color:#1E7EC8;">in te loggen op je account</a>.</br>
+                        
+                        {{block type='core/template' area='frontend' template='email/order/shipment/track.phtml' shipment=$shipment order=$order}}
+                        <br/>
+                        Het zal nog enkele dagen duren voordat PostNL je bestelling afleverd, maar je raakt je bestelling in ieder geval nooit uit het oog.<br/><br/>
+                        
+                        Heb je vragen over je bestelling, neem dan contact met ons op via <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a>.<br/><br/>
+                        We willen je nogmaals bedanken voor je bestelling en wensen je veel plezier met je aankoop.
+                    </p>
+                    <br/>
+
+                    <p style="font-size:12px; margin:0 10px 10px 0">{{var comment}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #0270C0;">
+  <tr>
+    <td width="10%" align="left" valign="top"><img src="{{media url='email/email-support-aaron.jpg'}}" alt="ViaChina Sales &amp; Support" border="0" width="250px" height="85px" style="margin:20px 0px 20px 20px;" /></td>
+  </tr>
+
+  <tr>
+   <td colspan="2" valign="top" bgcolor="#0270C0" align="center" style="background:#0270C0; text-align:center;font-size:9px; color:#fff; padding:5px 0;"><p></td>
+    </tr></table></td></tr>
+        </table>
+    </td>
+</tr>
+</table>
+</div>
+</body>

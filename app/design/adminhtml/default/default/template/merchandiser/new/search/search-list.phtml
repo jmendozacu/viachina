@@ -1,0 +1,33 @@
+<?php if ($this->getResultCount()): ?>
+    <p class="advanced-search-amount">
+        <?php echo $this->helper('catalogsearch')->__('<strong>%d item(s)</strong> were found using the following search criteria', $this->getResultCount()); ?>
+    </p>
+    <script type="text/javascript">
+        jQuery('.col-right').height('100%');
+    </script>
+<?php else: ?>
+    <p class="error-msg"><?php echo $this->helper('catalogsearch')->__('No items were found using the following search criteria.');?></p>
+    <script type="text/javascript">
+        jQuery('.col-right').height('100px');
+    </script>
+<?php endif; ?>
+<?php
+$helper = Mage::helper('merchandiser');
+$productCollection = $this->getLoadedProductCollection()
+                    ->addAttributeToSelect(array('entity_id','visibility'))
+                   // ->addAttributeToFilter('visibility', array('nin' => array(1,3)))
+                   ;
+$currentPosition=1;
+?>
+<ul class="column">
+<?php
+if (0 < $productCollection->count()) :
+    foreach ($productCollection as $_product) :       
+        $productBox =  $this->getLayout()->createBlock('merchandiser/adminhtml_catalog_product_list')->setTemplate('merchandiser/new/search/productbox.phtml');
+        $productBox->setPid($_product->getId());
+        $productBox->setCurrentPosition($currentPosition);
+        echo $productBox->toHtml();
+    endforeach;
+endif; 
+?>
+</ul>
