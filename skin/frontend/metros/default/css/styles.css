@@ -3957,3 +3957,21 @@ display:none !important;
 .fs14, .cat-desc-body {font-size:14px !important;}
 .cat-desc-body a {color:#333399 !important; text-decoration:underline !important;}
 .cat-desc-body a:hover {text-decoration:none !important;}
+
+.homevideo{
+    
+    background:#F9F9F9;
+    margin-bottom:30px;
+    margin-top:30px;
+    text-align:center;
+    border-top-width: 5px;
+    border-top-style: solid;
+    border-top-color: rgb(255,127,38);
+
+}
+
+.halfpanel{
+    width: 50%;
+    float: left;
+
+}
