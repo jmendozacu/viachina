@@ -3264,14 +3264,22 @@ width: 164px;
     margin-top: 23%;
     width: 100%;}
 
-.nl-pamyant .nl1{ float: left; width: 43%; }
+.nl-pamyant .nl1{ float: left; width: 40%; }
 
 .nl-pamyant .nl1 ul{}
 
 .nl-pamyant .nl1 ul li{display: inline-flex;}
 
-.nl-pamyant .nl1 ul li span{border-left: 1px solid; border-right: 1px solid; width: 20%; padding: 5px;   height:40px;  }
-
+.nl-pamyant .nl1 ul li span{
+    border-left: 1px solid;
+    border-right: 1px solid;
+    width: 20%;
+    padding: 5px;
+    height: 40px;
+    margin-top: 5px;
+    padding-top: 2px;
+}
+                         
 .nl-pamyant .nl1 img{margin-left: 0;}
 
 .nl-pamyant .nl2{float: left;    width: 35%; }
@@ -3281,7 +3289,7 @@ width: 164px;
 
 .nl-pamyant .nl2 img{ /*width:83%;*/ }
 
-.nl-pamyant .nl3{float: left;    width: 17%;}
+.nl-pamyant .nl3{float: left;    width: 22%;}
 .nl-pamyant .nl3 ul{}
 .nl-pamyant .nl3 ul li{display: inline-flex;}
 .nl-pamyant .nl3 ul li span{border-left: 1px solid; border-right: 1px solid; width: 85%; padding: 5px; height:40px;  }
@@ -3964,7 +3972,7 @@ display:none !important;
     margin-bottom:30px;
     margin-top:30px;
     text-align:center;
-    border-top-width: 5px;
+    border-top-width: 2px;
     border-top-style: solid;
     border-top-color: rgb(255,127,38);
 
@@ -3974,4 +3982,21 @@ display:none !important;
     width: 50%;
     float: left;
 
+}
+
+.vimeo img{
+    width: 450px;
+}
+
+.halfpanel .panel-heading{
+    padding-bottom: 5px;
+}
+
+.halfpanel .panel-body{
+    padding-top: 5px;
+}
+
+.halfpanel h3{
+    color: #383838;
+    font-family: 'Abel';
 }
