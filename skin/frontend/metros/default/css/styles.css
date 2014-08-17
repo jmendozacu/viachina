@@ -1039,7 +1039,7 @@ margin-right: 15px;}
 .category-image { width:100%; overflow:hidden; margin:0 0 10px; text-align:center; }
 .category-image img {}
 .category-description { margin:0 0 10px; }
-.category-products { float:left;}
+.category-products { float:left; width:100%;}
 .category-banner {float:left;}
 .category-content{float:right;width:207px; background:#03997e;height:220px; padding:34px 25px 24px 25px; overflow:auto;}
 .category-content h1 {font-size:36px; color:#FFF; font-family:'open_sans_lightregular'; padding-bottom:15px;}
@@ -3021,6 +3021,43 @@ div.buttonft {width:192px;}
 
 #home-tblock-intro {width:100%; clear:both; padding-bottom:10px; margin:0 auto; text-align:center;}
 
+.homevideo{
+    
+    background:#F9F9F9;
+    margin-bottom:30px;
+    margin-top:30px;
+    text-align:center;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-top-color: rgb(255,127,38);
+    width: 100%;
+    float: left;
+}
+
+
+.halfpanel{
+    width: 50%;
+    float: left;
+
+}
+
+.vimeo img{
+    width: 80%;
+}
+
+.halfpanel .panel-heading{
+    padding-bottom: 5px;
+}
+
+.halfpanel .panel-body{
+    padding-top: 5px;
+}
+
+.halfpanel h3{
+    color: #383838;
+    font-family: 'Abel';
+}
+
 /* CUSTOM CODING RES-WISE */
 
 @media only screen and (max-width: 478px)  {
@@ -3293,7 +3330,7 @@ width: 164px;
 .nl-pamyant .nl3 ul{}
 .nl-pamyant .nl3 ul li{display: inline-flex;}
 .nl-pamyant .nl3 ul li span{border-left: 1px solid; border-right: 1px solid; width: 85%; padding: 5px; height:40px;  }
-.nl-pamyant .nl3 img{ width:100%; margin-left: 6px; margin-top: -15px;}
+.nl-pamyant .nl3 img{ width:100%; margin-left: 6px; margin-top: -5px; height:50px;}
 
 /**********************nnnnnnnnnnnnnnnn          llllllllllllllll**********************************/
 
@@ -3359,38 +3396,43 @@ width: 164px;
 .de-pamyant .de3 ul li span{border-left: 1px solid; border-right: 1px solid; width: 62%; height: 40px; }
 .de-pamyant .de3 img{ margin-left: 5%; width: 100%; margin-top: -11px;}
  
- 
-
- 
- 
+  
  
  @media only screen and (min-width: 320px) and (max-width: 900px){
-	 .en-pamyant .en1 {width: 90%; margin-bottom: 5%;}
-	 	 .en-pamyant .en2 {  width: 76%; margin-bottom: 5%;}
-		 .en-pamyant .en3 ul li span {  width: 37%; } 
-		 .en-pamyant .en3 {  width: 49%; margin-bottom: 5%;}
+	 .en-pamyant .en1 {width: 100%; margin-bottom: 0%; text-align:left; margin-left: 0%;}
+	 .en-pamyant .en2 {  width: 100%; margin-bottom: 0%; text-align:left; margin-left: 0%;}
+	 .en-pamyant .en3 ul li span {  width: 37%; text-align:left;} 
+	 .en-pamyant .en3 {  width: 100%;  text-align:left; margin-left: 0%;}
 	 
-	 .eu-pamyant .eu1 {width: 90%; margin-bottom: 5%;}
-	 	 .eu-pamyant .eu2 {  width: 76%; margin-bottom: 5%;}
-		 .eu-pamyant .eu3 ul li span {  width: 46%; }
-		 .eu-pamyant .eu3 {  width: 57%; margin-bottom: 5%;}
+	 .eu-pamyant .eu1 {width: 100%; margin-bottom: 0%; text-align:left; margin-left: 0%;}
+	 .eu-pamyant .eu2 {  width: 100%; margin-bottom: 0%; text-align:left; margin-left: 0%;}
+	 .eu-pamyant .eu3 ul li span {  width: 46%; text-align:left; }
+	 .eu-pamyant .eu3 {  width: 100%;  text-align:left; margin-left: 0%;}
+     .eu-pamyant .eu3 ul {margin-bottom: 0px;}
 		 
-		 
-	 .nl-pamyant .nl1 {  margin-bottom: 5%;  width: 100%;}
-	 .nl-pamyant .nl2 {  margin-bottom: 5%;  width: 76%;}
-	 .nl-pamyant .nl3 {  width: 34%;}
+	 .nl-pamyant .nl1 {  margin-bottom: 0%;  width: 100%; text-align:left;}
+	 .nl-pamyant .nl2 {  margin-bottom: 0%;  width: 100%; text-align:left;}
+	 .nl-pamyant .nl3 {  width: 100%; text-align:left;}
+	 .nl-pamyant .nl3 img {
+        width: 100%;      
+        margin-left: 0px;
+        margin-top: 0px;  
+        height: auto;
+     }
+	 
+	 .fr-pamyant .fr1 {  margin-bottom: 0%;  width: 100%; text-align:left; margin-left: 0%;}
+     .fr-pamyant .fr1 ul li {padding-left:0px;}
+	 .fr-pamyant .fr2 {  margin-bottom: 0%;  width: 100%; text-align:left; margin-left: 0%;}
+	 .fr-pamyant .fr3 {  width: 100%; text-align:left; margin-left: 0%;}
 	 
 	 
-	 .fr-pamyant .fr1 {  margin-bottom: 5%;  width: 100%;}
-	 .fr-pamyant .fr2 {  margin-bottom: 5%;  width: 76%;}
-	 .fr-pamyant .fr3 {  width: 34%;}
+	 .de-pamyant .de1 {  margin-bottom: 0%;  width: 100%; text-align:left; margin-left: 0%;}
 	 
+	 .de-pamyant .de2 {  margin-bottom: 0%;  width: 100%; text-align:left;}
 	 
-	 .de-pamyant .de1 {  margin-bottom: 5%;  width: 100%;}
-	 
-	 .de-pamyant .de2 {  margin-bottom: 5%;  width: 70%;}
-	 
-	 .de-pamyant .de3 {  width: 40%;}
+	 .de-pamyant .de3 {  width: 100%; text-align:left;}
+     
+     .halfpanel { width: 100%; }
 	 
 	 
 /*	 *******************************************************************   none*******************************/
@@ -3965,38 +4007,5 @@ display:none !important;
 .fs14, .cat-desc-body {font-size:14px !important;}
 .cat-desc-body a {color:#333399 !important; text-decoration:underline !important;}
 .cat-desc-body a:hover {text-decoration:none !important;}
+ 
 
-.homevideo{
-    
-    background:#F9F9F9;
-    margin-bottom:30px;
-    margin-top:30px;
-    text-align:center;
-    border-top-width: 2px;
-    border-top-style: solid;
-    border-top-color: rgb(255,127,38);
-
-}
-
-.halfpanel{
-    width: 50%;
-    float: left;
-
-}
-
-.vimeo img{
-    width: 450px;
-}
-
-.halfpanel .panel-heading{
-    padding-bottom: 5px;
-}
-
-.halfpanel .panel-body{
-    padding-top: 5px;
-}
-
-.halfpanel h3{
-    color: #383838;
-    font-family: 'Abel';
-}
