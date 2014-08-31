@@ -2,11 +2,9 @@
 <config>
     <modules>
         <MW_Dailydeal>
-            <active>false</active>
+            <active>true</active>
             <codePool>local</codePool>
-            <depends>
-                <MW_Mcore/>
-            </depends>
+            <priority>1900</priority>
         </MW_Dailydeal>
     </modules>
 </config> 

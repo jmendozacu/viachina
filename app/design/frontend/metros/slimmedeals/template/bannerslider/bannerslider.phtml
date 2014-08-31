@@ -1,0 +1,165 @@
+
+
+<?php
+
+
+	$bannerCollection = $this->getBannerCollection();
+	$configData = Mage::getStoreConfig('bannerslider');
+	$i = 0;
+    
+?>
+
+<?php $listStyle = $this->getListStyle() ?>
+
+
+<?php if ($configData['banner_option']['choose_banner'] == 'flex' || is_mobile() == true) { ?>
+<div class="clear"></div>
+<div class="loading">
+<div id="banner-slider" class="flexslider">
+	
+	<ul class="slides">
+		
+			   <?php
+	foreach ($bannerCollection as $banner):
+	?>
+		
+		<li>
+			    <img src=" <?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $banner['filename']?>" />
+			    
+				<?php if ($configData['flex_settings']['show_description'] == '1' && $banner['content'] != ""):?>
+					<div class="flex-container">	
+					<div class="container">
+				
+						<div class="summer_box">
+							
+							<div class="contenttextbox">
+							<div class="text_box">
+								
+								<h1><?php echo $banner['title']?></h1>
+								
+								
+								<p><?php echo $banner['content']; ?></p>
+								
+								<a href="<?php echo $banner['weblink'];?>" class="button" title="BUY NOW"><span><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('banner-buy-now-btn')->toHtml(); ?></span><span class="errow"></span></a>
+							 
+							</div>
+							</div>
+						</div>	
+					</div>
+					</div>
+				<?php endif;?>
+		</li>
+		
+		 <?php
+					$i++;
+					endforeach;
+			?>
+				
+	</ul>		    
+			   
+</div></div>
+    <div class="clear"></div>
+    
+    
+    <script type="text/javascript">
+  
+var vSlide = "<?php echo $configData['flex_settings']['slideshowspeed']; ?>";
+	if(vSlide == '' || vSlide == null)
+		vSlide = '7000';
+var vAnimation = '<?php echo $configData['flex_settings']['animation']?>';
+var vAnimationspeed = "<?php echo $configData['flex_settings']['animationspeed']; ?>";
+	if(vAnimationspeed == '' || vAnimationspeed == null)
+		vAnimationspeed = '600';
+
+      j$('#banner-slider').flexslider({
+        animation: vAnimation,
+	slideshowSpeed: vSlide,
+	animationSpeed: vAnimationspeed,
+	directionNav: false,
+	start: function(slider){
+          j$('div').removeClass('loading');
+        }
+      });
+
+    </script>
+    
+    <?php }
+    
+    else {
+	?>
+    <script>
+	var vTime = "<?php echo $configData['settings']['time_delay']; ?>";
+	if(vTime == '' || vTime == null)
+		vTime = '7000';
+		
+	var vmobileFx = '<?php echo $configData['settings']['effect']?>';
+	var vloader = '<?php echo $configData['settings']['loader']?>';
+	var vheight_ratio = "<?php echo $configData['settings']['height_ratio']; ?>";
+	if(vheight_ratio == '' || vheight_ratio == null)
+		vheight_ratio = '360';
+		
+		j$(function(){
+			
+			j$('#camera_wrap_1').camera({
+				height: vheight_ratio+'px',
+				thumbnails: false,
+				fx: vmobileFx,
+				mobileFx: '',
+				mobileAutoAdvance: true,
+				navigation: false,
+				loader: vloader,
+			        autoAdvance: true,
+				playPause: false,
+				transPeriod: 800,
+				minHeight:'125px',
+				time:vTime
+			});
+		});
+	</script>
+
+
+<div class="clear"></div>
+	<div class="banner">
+		
+		<div class="fluid_container template">
+			
+			<div class="camera_wrap camera_azure_skin" id="camera_wrap_1">
+			   <?php
+	foreach ($bannerCollection as $banner):
+	?>
+			    <div data-src=" <?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $banner['filename']?>">
+			    
+				<div class="camera_caption fadeFromBottom">
+				<?php if ($configData['settings']['show_description'] == '1' && $banner['content'] != ""):?>
+					<div class="container" style="height: <?php echo ($configData['settings']['height_ratio']-32); ?>px;">
+				
+						<div class="summer_box">
+							
+							<div class="contenttextbox">
+							<div class="text_box">
+								
+								<h1><?php echo $banner['title']?></h1>
+								
+								
+								<p><?php echo $banner['content']; ?></p>
+								
+								<a href="<?php echo $banner['weblink'];?>" class="button" title="BUY NOW"><span><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('banner-buy-now-btn')->toHtml(); ?></span><span class="errow"></span></a>
+							
+							</div>
+							</div>
+						</div>	
+					</div>
+				 <?php endif;?>
+					
+				</div>
+			    </div>
+			    <?php
+					$i++;
+					endforeach;
+				?>
+			</div><!-- #camera_wrap_1 -->
+	        </div><!-- .fluid_container -->
+	</div>
+    <div class="clear"></div>
+    
+    <?php } ?>

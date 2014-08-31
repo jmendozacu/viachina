@@ -46,6 +46,20 @@
 	<div class="deal-info">
 	
 		<div class="deal-info-top">
+			<div class="rightcol">	 					
+				<div class="media">	
+				<img class="image-responsive" id="image" src="<?php echo $this->helper('catalog/image')->init($_product, 'image')?>" alt="<?php $this->htmlEscape($this->getImageLabel())?>" title="<?php $this->htmlEscape($this->getImageLabel())?>" width="420" height="267"/>
+				</div>						
+				<div class="info">	
+					<?php if ($_product->getShortDescription()):?>
+				                <div class="short-description">
+				                    <h2><?php echo Mage::helper('dailydeal')->__('Quick Overview') ?></h2>
+				                    <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+				                </div>
+				            <?php endif;?>				
+				</div>
+			
+			</div>
 			<div class="leftcol">
 	
 	<?php 
@@ -176,22 +190,6 @@
 					<!-- AddThis Button END -->
 				</div>
 	
-			</div>
-	
-	
-			<div class="rightcol">						
-				<div class="media">	
-				<img id="image" src="<?php echo $this->helper('catalog/image')->init($_product, 'image')?>" alt="<?php $this->htmlEscape($this->getImageLabel())?>" title="<?php $this->htmlEscape($this->getImageLabel())?>" width="420" height="267"/>
-				</div>						
-				<div class="info">	
-					<?php if ($_product->getShortDescription()):?>
-				                <div class="short-description">
-				                    <h2><?php echo Mage::helper('dailydeal')->__('Quick Overview') ?></h2>
-				                    <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
-				                </div>
-				            <?php endif;?>				
-				</div>
-			
 			</div>
 			
 			

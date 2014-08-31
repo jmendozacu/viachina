@@ -24,7 +24,7 @@ class MW_Dailydeal_TestController extends Mage_Core_Controller_Front_Action
             echo '<br />';
         }
     }
-
+    /* 
     public function autoSendMail_Action(){
 		try {
 			MW_Dailydeal_Helper_Data::setConfigSendMailAdminNotification(MW_Dailydeal_Model_Status::SEND_MAIL_NEVER);

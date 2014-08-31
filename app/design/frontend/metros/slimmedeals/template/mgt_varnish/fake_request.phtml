@@ -1,0 +1,14 @@
+<?php
+
+$esiHelper = Mage::helper('mgt_varnish/esi');
+$canUseEsi = $esiHelper->canUseEsi();
+
+?>
+
+<script>
+new Ajax.Request('<?php echo $this->getUrl('mgtvarnish/esi/'); ?>', {
+  onSuccess: function(response) {
+      
+  }
+});
+</script>

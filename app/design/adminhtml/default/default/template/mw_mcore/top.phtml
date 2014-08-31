@@ -149,9 +149,9 @@ function active(modulename,haslink,sitetype)
 			
 			var ordernumber ="";
 			if(site=="live_site")
-				ordernumber =prompt("ACTIVATE FOR LIVE SITE\nOur license allows to activate the extension on ONLY ONE Magento installation.\nMake sure you are activating the extension on your LIVE site.\n\nPlease enter your order number or live activation key:","");
+				ordernumber =prompt("ACTIVATE FOR ONE MAGENTO INSTALLATION\nOur license permits you to activate the extension on ONLY ONE Magento installation.\nMake sure you are activating the extension on your LIVE site.\n\nPlease enter your order number or offline activation key:","");
 			else
-				ordernumber =prompt("ACTIVATE FOR DEVELOPMENT SITE\n\nPlease enter your order number or development activation key:","");
+				ordernumber =prompt("ACTIVATE FOR DEVELOPMENT SITE\n\nPlease enter your order number or offline activation key:","");
 				
 			if(!ordernumber.length)
 				orderid = "";

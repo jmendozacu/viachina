@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="http://www.viachina.com/skin/frontend/metros/default/css/colorbox.css" />
+	<!--	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+		<script src="http://www.viachina.com/js/colorbox/jquery.colorbox.js"></script>
+		<script>
+		jQuery.noConflict();
+			jQuery(document).ready(function(){
+				//Examples of how to assign the ColorBox event to elements
+			
+				jQuery(".vimeo").colorbox({iframe:true, innerWidth:800, innerHeight:409});
+		
+				
+				//Example of preserving a JavaScript event for inline calls.
+				jQuery("#click").click(function(){ 
+					jQuery('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
+					return false;
+				});
+			});
+		</script>       
+      
+<?php //$abc=$this->getLayout()->createBlock('cms/block')->setBlockId('home-block1')->toHtml(); ?>

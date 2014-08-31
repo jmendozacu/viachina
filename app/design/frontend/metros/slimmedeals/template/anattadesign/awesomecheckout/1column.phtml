@@ -1,0 +1,88 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="<?php echo $this->getLang() ?>"> <!--<![endif]-->
+	<head>
+		<?php echo $this->getChildHtml( 'head' ) ?>
+
+		<style type="text/css">
+			<?php echo Mage::getStoreConfig( 'awesomecheckout/appearance_options/css' ); ?>
+		</style>
+		<script type="text/javascript">
+			<?php echo Mage::getStoreConfig( 'awesomecheckout/appearance_options/js' ); ?>
+		</script>
+
+		<!-- This meta tag is required to make Prototype framework working nicely in IE9. Recommend by http://alanstorm.com/ie9_fix_for_magento  -->
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<script type="text/javascript">
+			$j = jQuery.noConflict();
+		</script>
+
+		<!-- Use this js code to make html5 working in IE8 and IE7  -->
+		<script type="text/javascript">
+			document.createElement('header');
+			document.createElement('hgroup');
+			document.createElement('nav');
+			document.createElement('menu');
+			document.createElement('section');
+			document.createElement('article');
+			document.createElement('aside');
+			document.createElement('footer');
+		</script>
+
+		<!-- exposing the checkout url in a global variable -->
+		<script type="text/javascript">
+			var ACUrl = '<?php echo Mage::getUrl( 'checkout/onepage' ); ?>';
+		</script>
+	</head>
+	<body<?php echo $this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '' ?>>
+		<div class="header-container">
+			<div class="headertop">
+				<div class="quick-access">
+					    <div class="header1">
+
+				<ul class="links">
+						   <li class="first">
+						   <?php if ($this->helper('customer')->isLoggedIn() ) { ?>                   
+						   <a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).Mage::app()->getStore()->getCode('',array('_secure'=>true)); ?>/customer/account/" title="My Account">My Account</a>	
+								   <?php }else{ ?>
+						   <a href="#already-a-customer" onClick="jQuery('.enter_password').show();" title="Please log in first!">My Account</a>	
+						   <?php }; ?></li>
+						   <li<?php if ($this->helper('customer')->isLoggedIn() ) { echo ' class=" last"'; }; ?>><a href="<?php echo Mage::helper('checkout/cart')->getCartUrl('',array('_secure'=>true)); ?>" title="My Cart" class="top-link-cart">My Cart</a></li>
+						   <?php if ($this->helper('customer')->isLoggedIn() ) { } else { ?>
+						   <li class=" last"><a href="#already-a-customer" onClick="jQuery('.enter_password').show();">Log In</a></li>
+						   <?php } ; ?>
+				</ul>
+					    
+					    <!--<p class="welcome-msg">Welcome, BJ Streefland! </p>-->
+					    </div>
+				</div>
+
+			</div>
+		</div>
+		<?php echo $this->getChildHtml( 'after_body_start' ) ?>
+		<?php echo Mage::getStoreConfig( 'awesomecheckout/appearance_options/custom_header' ); ?>
+		<div id="ac-page">
+			<?php if ( Mage::getStoreConfig( 'awesomecheckout/appearance_options/custom_header' ) == '' ) { ?>
+				<header id="header">
+								<a href="<?php echo Mage::helper('core/url')->getHomeUrl('',array('_secure'=>true)); ?>" title="Back to viaChina Homepage"><img id="logo" src="<?php echo Mage::helper( 'anattadesign_awesomecheckout' )->getLogoUrl(); ?>" alt="logo" /></a>
+                    
+                    <div style="float:right;">
+					<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('cert-header-img')->toHtml(); ?>
+                    </div>
+                    
+					<?php /*?><a href="<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>" class="my-cart"><abbr><?php echo $this->__('My Cart'); ?></abbr></a><?php */?>
+				</header>
+			<?php } ?>
+			<div class="clear"></div>
+			<?php echo $this->getChildHtml( 'global_notices' ) ?>
+			<?php echo $this->getChildHtml( 'breadcrumbs' ) ?>
+				<?php echo $this->getChildHtml( 'global_messages' ) ?>
+				<?php echo $this->getChildHtml( 'content' ) ?>
+			<?php echo $this->getChildHtml( 'before_body_end' ) ?>
+		</div>
+		<?php echo Mage::getStoreConfig( 'awesomecheckout/appearance_options/custom_footer' ); ?>
+	</body>
+</html>

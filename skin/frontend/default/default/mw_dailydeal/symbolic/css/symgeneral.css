@@ -22,8 +22,77 @@ ul{list-style: none !important;}
     color: #FFFFFF;
 }
 
-.deal-info .leftcol{	float:left;	width:220px; }
-.deal-info .rightcol{float:right;	width:430px; }
+.deal-info .leftcol{	float:left;	width:222px; } 
+.image-responsive {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+.deal-info .rightcol{float:right;	width:380px; }
+
+.col3-layout .deal-info .rightcol {float: none;width: 100%;}
+.col3-layout .deal-info .leftcol {float: none;width: 100%;}
+@media (max-width: 1024px) {	
+	.col2-left-layout .deal-info .rightcol , .col2-right-layout .deal-info .rightcol {
+		float: right;
+		width: 250px !important;
+	}
+	.col3-layout .deal-info .rightcol {float: none;width: 100% !important; }
+	.col3-layout .deal-info .leftcol {float: none;width: 100% !important;}
+}
+@media (max-width: 920px) {	
+	.deal-info .rightcol {
+		float: right !important;
+		width: 346px !important;
+	} 
+	.col2-left-layout .deal-info .rightcol , .col2-right-layout .deal-info .rightcol {
+		width: 250px !important;
+	}
+	.col3-layout .deal-info .rightcol {float: none;width: 100% !important; }
+	.col3-layout .deal-info .leftcol {float: none;width: 100% !important;}
+} 
+@media (max-width: 768px) {	
+	.deal-info .rightcol {
+		float: right !important;
+		width: 230px !important;
+	} 
+	
+	.col2-left-layout .deal-info .rightcol, .col2-right-layout .deal-info .rightcol {
+		width: 100% !important;
+		float:none !important;
+		margin-bottom:20px !important;
+	}
+	
+	.col2-left-layout .deal-info .leftcol, .col2-right-layout .deal-info .leftcol {
+		float: none !important;
+		width: 100% !important;
+	} 
+	.col3-layout .deal-info .rightcol {float: none;width: 100% !important; }
+	.col3-layout .deal-info .leftcol {float: none;width: 100% !important;}
+	
+	.description-content {
+	float: none !important;
+	width: 100% !important;
+	}
+	#Reviews-content {
+	float: none !important;
+	width: 100% !important;
+	}
+}    
+@media (max-width: 600px) {	
+	.deal-info .rightcol {
+		float: none !important;
+		width: 100% !important;
+	} 
+	.deal-info .leftcol {
+		float: none;
+		margin-top: 20px;
+		width: 100%;
+	}
+    .deal .price_tag {
+     margin-left: -79px !important;
+	}
+}   
 .deal-info .rightcol .media{ }
  
 .deal-info .rightcol .info{	margin-top:10px; }

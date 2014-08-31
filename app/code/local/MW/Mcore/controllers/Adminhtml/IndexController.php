@@ -183,7 +183,7 @@ class MW_Mcore_Adminhtml_IndexController extends Mage_Adminhtml_Controller_Actio
 					    		 	Mage::getModel('core/config')->saveConfig('mcore/errorSoap',1);
 									Mage::getConfig()->reinit();
 					    		 
-					    		 	echo 'It requires to enable PHP SOAP extension to activate online. Or please <a href="http://www.mage-world.com/contacts/">contact us</a> get offline activation key.</div>';
+					    		 	echo 'It requires to enable PHP SOAP extension to activate online. Or please go to <a href="http://www.mage-world.com/wiki/index.php?title=License-activation" target="_blank">this instruction</a> for generating the offline key.</div>';
 					    		 }
 					    	}
 					    	else 

@@ -1,0 +1,187 @@
+    
+    
+<style type="text/css">
+#fancybox-wrap #fancybox-content body .header{display:none;}
+
+</style>    
+		
+<?php $ajaxcart = themeOptions('ajaxcart'); ?>		
+			<div class="new-arrow">
+			    <h2 class="page-title subtitle"><?php echo $this->__('Latest Products') ?></h2>
+			
+			</div>
+			
+		      <div class="loading">
+			<div id="main-slider" class="flexslider carousel">
+			<?php if (($_products = $this->getProductCollection()) && $_products->getSize()):
+				
+			?>	
+				<?php $_columnCount = $this->getColumnCount(); ?>
+				<?php $i=0; foreach ($_products->getItems() as $_product): ?>
+				
+				<?php if ($i++%$_columnCount==0): ?>
+				<ul class="slides product-latest">
+				<?php endif ?>
+				
+				<li class="latest-product item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+				      
+				      <div class="latest-image">
+					  <?php if($ajaxcart == '2') { ?>
+					    <a href='<?php echo $this->getUrl('ajax/index/options',array('product_id'=>$_product->getId()));?>' class='fancybox quick-view' id='fancybox<?php echo $_product->getId()?>'><?php echo $this->__('Quick-View') ?></a>
+					    <?php } ?>
+					    
+					  <a  href="<?php echo $_product->getProductUrl() ?>" class="product-image" title="<?php echo $this->htmlEscape($_product->getName()) ?>" ><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->constrainOnly(true)->keepAspectRatio(true)->resize(191,201) ?>" width="191" height="201" alt="<?php echo $this->htmlEscape($_product->getName()) ?>" /></a>
+				      </div>
+				      
+				      <div class="latest-area">
+					
+									<?php  $productName = $this->htmlEscape($_product->getName());
+									if(strlen($productName) > 70) {
+										$productName = mb_strimwidth($productName,0,70,"...",'utf-8');
+									} ?>
+					  <h3 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>"><?php echo $productName; ?></a></h3>
+					  <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+					    <?php echo $this->getPriceHtml($_product, true, '-new') ?>
+					  
+					  <div class="actions">
+						<?php if($_product->isSaleable()): ?>
+						    <?php if($ajaxcart == '1' || $ajaxcart == '2') { ?>
+							<?php if ( !($_product->getTypeInstance(true)->hasRequiredOptions($_product) || $_product->isGrouped()) ) { ?>
+							<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart ajx-cart" onclick="setLocationAjax('<?php echo $this->getAddToCartUrl($_product) ?>','<?php echo $_product->getId()?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button> 
+							
+							<?php } else { ?>
+								<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+								
+							<?php }  ?>
+						    <?php } else { ?>
+							<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+						    <?php } ?>
+						<?php else: ?>
+						    <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+						<?php endif; ?>
+						<div class="add-to-links">
+						    <?php if ($this->helper('wishlist')->isAllow()) : ?>
+							<a href="<?php echo $this->getAddToWishlistUrl($_product) ?>" title="<?php echo $this->__('Add to Wishlist') ?>" class="link-wishlist"><?php echo $this->__('') ?></a>
+						    <?php endif; ?>
+						    <?php if ($_compareUrl = $this->getAddToCompareUrl($_product)): ?>
+							<span class="separator">|</span> <a href="<?php echo $_compareUrl ?>" title="<?php echo $this->__('Add to Compare') ?>" class="link-compare"><?php echo $this->__('') ?></a>
+						    <?php endif; ?>
+						
+						</div>
+						
+						
+					  </div>
+					  
+					  
+				      </div>
+				      <div id='ajax_loader2<?php echo $_product->getId()?>' class="ajaxcartpro_progress1" style="display: none;">
+							<img src="<?php echo $this->getSkinUrl('ajaxcart/images/al.gif'); ?>">
+							<p><?php echo $this->__('Please wait...') ?></p>
+							<div><?php echo $this->__('We are updating Shopping Bag.') ?></div>
+				      </div>
+				</li>
+				
+				<?php if ($i%$_columnCount==0 || $i==count($_products)): ?>
+					
+				</ul>
+				<?php endif ?>
+				<?php endforeach; ?>
+				<?php endif; ?>
+			</div>
+		
+	    </div>
+		
+<script type="text/javascript">
+    
+      j$('#main-slider').flexslider({
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: 394,
+        itemMargin: 9,
+        minItems: 1,
+        maxItems: 3,
+	move:1,
+	controlNav: false,
+	slideshowSpeed: 7000,          
+	animationSpeed: 1000,
+	slideshow: false,
+	start: function(slider){
+          j$('div').removeClass('loading');
+        }
+      });
+    
+</script>
+
+		
+		
+<script type="text/javascript">
+     <?php if($ajaxcart == '1' || $ajaxcart == '2') { ?>
+	jQuery.noConflict();
+	
+	jQuery('.fancybox').live('click', function() {
+	    jQuery('#fancybox-loading').show();
+        });
+	
+	jQuery('.fancybox').fancybox(
+			{
+			   hideOnContentClick : true,
+			   width: 630,
+			   autoDimensions: true,
+               type : 'iframe',
+			   showTitle: false,
+			   scrolling: 'no',
+			   onComplete: function(){
+				jQuery('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
+					jQuery('#fancybox-loading').hide();
+					jQuery('#fancybox-content').height(jQuery(this).contents().find('body').height()+30);
+					jQuery.fancybox.resize();
+				 });
+
+			   }
+			}
+		);
+	
+	function showOptions(id){
+		jQuery('#fancybox'+id).trigger('click');
+	}
+		
+	function setAjaxData(data,iframe){
+		if(data.status == 'ERROR'){
+			alert(data.message);
+		}else{
+		    successMessage(data.message);
+			if(jQuery('.block-cart')){
+	            jQuery('.block-cart').replaceWith(data.sidebar);
+	        }
+	        if(jQuery('')){
+	            jQuery('').replaceWith(data.toplink);
+	        }
+	        jQuery.fancybox.close();
+		}
+	}
+	function setLocationAjax(url,id){
+            if (window.location.protocol == "https:") {
+                
+                url=url.replace("http://","https://");  
+            }
+            
+		url += 'isAjax/1';
+		url = url.replace("checkout/cart","ajax/index");
+		jQuery('#ajax_loader2'+id).show();
+		try {
+			jQuery.ajax( {
+				url : url,
+				dataType : 'json',
+				success : function(data) {
+					jQuery('#ajax_loader2'+id).hide();
+         			setAjaxData(data,false);           
+				}
+			});
+		} catch (e) {
+		}
+	}
+	<?php } ?>
+</script>		
+		
+		
+		

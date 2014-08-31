@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/bootstrap.min.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/searchbybrand.css</stylesheet></action>
+        </reference>
+    </default>
+    
+    <searchbyname_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        
+        <reference name="header">
+            <remove name="top.search" />
+            <remove name="top.menu" />
+            <remove name="breadcrumbs" />
+        </reference>
+        
+        <reference name="content">
+            <block type="core/template" name="custom.search" as="customSearch" template="searchbyname/search-form.phtml" />
+	        <block type="core/template" name="custom.page.banner" as="customPageBanner" template="searchbyname/banner.phtml" />
+
+	        <block type="core/template" name="custom.most.search" as="mostSearchBlock" template="searchbyname/catalog/product/mostsearch.phtml">
+		        <block type="searchbyname/catalog_product_collection" name="most.search" as="mostSearchList" template="searchbyname/catalog/product/list/mostsearchlist.phtml" />
+	        </block>
+
+	        <block type="core/template" name="custom.most.sold" as="mostSoldBlock" template="searchbyname/catalog/product/mostsold.phtml">
+		        <block type="searchbyname/catalog_product_collection" name="most.sold" as="mostSoldList" template="searchbyname/catalog/product/list/mostsoldlist.phtml" />
+	        </block>
+        </reference>
+    </searchbyname_index_index>
+    
+    <searchbyname_result_index>
+        <label>Search Similar Products Form</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        
+        <reference name="header">
+            <remove name="top.search" />
+            <remove name="top.menu" />
+            <remove name="breadcrumbs" />
+        </reference>
+        
+        <reference name="content">
+            <block type="core/template" name="custom.search" as="customSearch" template="searchbyname/search-form.phtml" />
+
+            <block type="searchbyname/result" name="search.result" template="searchbyname/result.phtml">
+                <block type="searchbyname/catalog_product_list" name="search_result_list" template="searchbyname/catalog/product/list.phtml">
+                    <block type="searchbyname/catalog_product_list_toolbar" name="product_list_toolbar" template="searchbyname/catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                </block>
+                
+                <block type="searchbyname/catalog_product_compare_comparebox" name="catalog.compare.box" as="compareBox" template="searchbyname/catalog/product/compare/comparebox.phtml" >
+	                <block type="searchbyname/catalog_product_compare_brandproduct" name="catalog.brand.product" as="brandProduct" template="searchbyname/catalog/product/compare/brandproduct.phtml" />
+	            </block>
+                
+                <action method="setListOrders"/>
+                <action method="setListCollection"/>
+            </block>
+        </reference>
+    </searchbyname_result_index>
+    
+    <searchbyname_product_compare_index>
+	    <reference name="root">
+		    <action method="setTemplate"><template>page/1column.phtml</template></action>
+	    </reference>
+
+	    <reference name="header">
+		    <remove name="top.search" />
+		    <remove name="top.menu" />
+		    <remove name="breadcrumbs" />
+	    </reference>
+
+	    <reference name="content">
+		    <block type="core/template" name="custom.search" as="customSearch" template="searchbyname/search-form.phtml" />
+
+		    <block type="core/template" name="custom.compare" as="customCompare" template="searchbyname/catalog/product/compare.phtml">
+		        <block type="searchbyname/catalog_product_compare_list" name="product.compare" as="productCompare" template="searchbyname/catalog/product/compare/list.phtml" />
+		    </block>
+	    </reference>
+    </searchbyname_product_compare_index>
+    
+</layout>

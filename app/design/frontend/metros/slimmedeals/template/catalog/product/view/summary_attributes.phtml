@@ -1,0 +1,713 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product additional attributes template
+ *
+ * @see Mage_Catalog_Block_Product_View_Attributes
+ */
+?>
+ <?php $storeName = Mage::app()->getStore()->getName(); ?>   
+<?php
+
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct();
+ ?>
+
+<?php if($storeName=='Nederlands'){?>
+
+<table border="0" class="summary-tab">
+    <?php if($_product->getAttributeText('os_version')!=null):?>
+    <tr>
+        <td>OS Version:</td>
+        <td><?php echo $os=$_product->getAttributeText('os_version');?></td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getAttributeText('memory_internal')!=null):?>
+    <tr>
+        <td>Intern Geheugen (GB):</td>
+        <td><?php echo $memoryi=$_product->getAttributeText('memory_internal');?></td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getAttributeText('processor')!=null):?>
+    <tr>
+        <td>Processor:</td>
+        <td><?php echo $processor=$_product->getAttributeText('processor');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('memory_ram')!=null):?>
+    <tr>
+        <td>Ram Geheugen:</td>
+        <td><?php echo $memoryr=$_product->getAttributeText('memory_ram');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php 
+    $value= $_product->getResource()->getAttribute('display_size')->getFrontend()->getValue($_product);
+    if($value!=null):    
+    ?>
+    <tr>
+        <td>Scherm Afmetingen (Inch)</td>
+        <td><?php echo $value;?></td>
+    </tr>
+    <?php endif; ?>
+    
+     <?php if($_product->getAttributeText('display_resolution')!=null):?>
+    <tr>
+        <td>Scherm Resolutie:</td>
+        <td><?php echo $display=$_product->getAttributeText('display_resolution');?></td>
+    </tr>
+    <?php endif; ?>
+    <?php 
+    $value= $_product->getResource()->getAttribute('camera_front')->getFrontend()->getValue($_product);
+    if($value!=null):    
+    ?>
+    <tr>
+        <td>Front Camera:</td>
+        <td><?php echo $value;?></td>
+    </tr>
+    <?php endif; ?>
+    
+     <?php 
+    $value= $_product->getResource()->getAttribute('camera_rear')->getFrontend()->getValue($_product);
+    if($value!=null):    
+    ?>
+    <tr>
+        <td>Achterkant Camera (Megapixel):</td>
+        <td><?php echo $value;?></td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getResource()->getAttribute("network_filter")!=null):?>
+    <tr>
+        <?php 
+        $attribute = $_product->getResource()->getAttribute("network_filter"); 
+        $text="";
+        if($attribute->getFrontendInput() == 'multiselect') {
+            
+            $multiSelectArray = $_product->getAttributeText("network_filter");
+            
+            if (is_array ($multiSelectArray)==true){
+                $text=implode(', ',$multiSelectArray);
+            }
+            else {
+                $text=$multiSelectArray ;
+            }
+    
+        }
+     
+        ?>
+        <td>Netwerk:</td>
+        <td> <?php echo $text;?> </td>
+        
+        
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getResource()->getAttribute("ports")!=null):?>
+    <tr>
+        <?php 
+        $attribute = $_product->getResource()->getAttribute("ports"); 
+        $text="";
+        if($attribute->getFrontendInput() == 'multiselect') {
+            
+            $multiSelectArray = $_product->getAttributeText("ports");
+            
+            if (is_array ($multiSelectArray)==true){
+                $text=implode(', ',$multiSelectArray);
+            }
+            else {
+                $text=$multiSelectArray ;
+            }
+    
+        }
+     
+        ?>
+        <td>Ports:</td>
+        <td> <?php echo $text;?> </td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getAttributeText('micro_usb')!=null):?>
+    <tr>
+        <td>Micro USB:</td>
+        <td><?php echo $memorysd=$_product->getAttributeText('micro_usb');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('memory_micro_sd_card')!=null):?>
+    <tr>
+        <td>Micro SD Card:</td>
+        <td><?php echo $memorysd=$_product->getAttributeText('memory_micro_sd_card');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('sim_card_dual')!=null):?>
+    <tr>
+        <td>Dual Sim Card:</td>
+        <td><?php echo $simcard=$_product->getAttributeText('sim_card_dual');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('network_wifi_portable')!=null):?>
+    <tr>
+        <td>Portable Wi-Fi Hotspot:</td>
+        <td><?php echo $simcard=$_product->getAttributeText('network_wifi_portable');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('memory_sd_card')!=null):?>
+    <tr>
+        <td>SD Card:</td>
+        <td><?php echo $simcard=$_product->getAttributeText('memory_sd_card');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('color')!=null):?>
+    <tr>
+        <td>Kleur</td>
+        <td><?php echo $color=$_product->getAttributeText('color');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('brand')!=null):?>
+    <tr>
+        <td>Merk</td>
+        <td><?php echo $brand=$_product->getAttributeText('brand');?></td>
+    </tr>
+    <?php endif; ?>
+
+</table>
+
+<?php } ?>
+
+<?php if($storeName=='Francais'){?>
+<table border="0" class="summary-tab">
+    <?php if($_product->getAttributeText('os_version')!=null):?>
+    <tr>
+        <td>OS Version:</td>
+        <td><?php echo $os=$_product->getAttributeText('os_version');?></td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getAttributeText('memory_internal')!=null):?>
+    <tr>
+        <td>Mémoire Interne (GB):</td>
+        <td><?php echo $memoryi=$_product->getAttributeText('memory_internal');?></td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getAttributeText('processor')!=null):?>
+    <tr>
+        <td>Processeur:</td>
+        <td><?php echo $processor=$_product->getAttributeText('processor');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('memory_ram')!=null):?>
+    <tr>
+        <td>Mémoire RAM:</td>
+        <td><?php echo $memoryr=$_product->getAttributeText('memory_ram');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php 
+    $value= $_product->getResource()->getAttribute('display_size')->getFrontend()->getValue($_product);
+    if($value!=null):    
+    ?>
+    <tr>
+        <td>Taille de l'écran:</td>
+        <td><?php echo $value;?></td>
+    </tr>
+    <?php endif; ?>
+    
+     <?php if($_product->getAttributeText('display_resolution')!=null):?>
+    <tr>
+        <td>Résolution d'affichage:</td>
+        <td><?php echo $display=$_product->getAttributeText('display_resolution');?></td>
+    </tr>
+    <?php endif; ?>
+      <?php 
+    $value= $_product->getResource()->getAttribute('camera_front')->getFrontend()->getValue($_product);
+    if($value!=null):    
+    ?>
+    <tr>
+        <td>Caméra Avant:</td>
+        <td><?php echo $value;?></td>
+    </tr>
+    <?php endif; ?>
+    
+     <?php 
+    $value= $_product->getResource()->getAttribute('camera_rear')->getFrontend()->getValue($_product);
+    if($value!=null):    
+    ?>
+    <tr>
+        <td>Caméra Arrière (mégapixels):</td>
+        <td><?php echo $value;?></td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getResource()->getAttribute("network_filter")!=null):?>
+    <tr>
+        <?php 
+        $attribute = $_product->getResource()->getAttribute("network_filter"); 
+        $text="";
+        if($attribute->getFrontendInput() == 'multiselect') {
+            
+            $multiSelectArray = $_product->getAttributeText("network_filter");
+            
+            if (is_array ($multiSelectArray)==true){
+                $text=implode(', ',$multiSelectArray);
+            }
+            else {
+                $text=$multiSelectArray ;
+            }
+    
+        }
+     
+        ?>
+        <td>Réseau:</td>
+        <td> <?php echo $text;?> </td>        
+        
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getResource()->getAttribute("ports")!=null):?>
+    <tr>
+          <?php 
+        $attribute = $_product->getResource()->getAttribute("ports"); 
+        $text="";
+        if($attribute->getFrontendInput() == 'multiselect') {
+            
+            $multiSelectArray = $_product->getAttributeText("ports");
+            
+            if (is_array ($multiSelectArray)==true){
+                $text=implode(', ',$multiSelectArray);
+            }
+            else {
+                $text=$multiSelectArray ;
+            }
+    
+        }
+     
+        ?>
+        <td>Ports:</td>
+        <td> <?php echo $text;?> </td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getAttributeText('micro_usb')!=null):?>
+    <tr>
+        <td>Micro USB:</td>
+        <td><?php echo $memorysd=$_product->getAttributeText('micro_usb');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('memory_micro_sd_card')!=null):?>
+    <tr>
+        <td>Carte Micro SD:</td>
+        <td><?php echo $memorysd=$_product->getAttributeText('memory_micro_sd_card');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('sim_card_dual')!=null):?>
+    <tr>
+        <td>Double Carte Sim:</td>
+        <td><?php echo $simcard=$_product->getAttributeText('sim_card_dual');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('network_wifi_portable')!=null):?>
+    <tr>
+        <td>Portable Wi-Fi Hotspot:</td>
+        <td><?php echo $simcard=$_product->getAttributeText('network_wifi_portable');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('memory_sd_card')!=null):?>
+    <tr>
+        <td>SD Card:</td>
+        <td><?php echo $simcard=$_product->getAttributeText('memory_sd_card');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('color')!=null):?>
+    <tr>
+        <td>Couleur:</td>
+        <td><?php echo $color=$_product->getAttributeText('color');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('brand')!=null):?>
+    <tr>
+        <td>Marque:</td>
+        <td><?php echo $brand=$_product->getAttributeText('brand');?></td>
+    </tr>
+    <?php endif; ?>
+
+</table>
+
+<?php } ?>
+
+<?php if($storeName=='Deutsch'){?>
+
+<table border="0" class="summary-tab">
+    
+    <?php if($_product->getAttributeText('os_version')!=null):?>
+    <tr>
+        <td>OS Version:</td>
+        <td><?php echo $os=$_product->getAttributeText('os_version');?></td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getAttributeText('memory_internal')!=null):?>
+    <tr>
+        <td>Interner Speicher (GB):</td>
+        <td><?php echo $memoryi=$_product->getAttributeText('memory_internal');?></td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getAttributeText('processor')!=null):?>
+    <tr>
+        <td>Prozessor:</td>
+        <td><?php echo $processor=$_product->getAttributeText('processor');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('memory_ram')!=null):?>
+    <tr>
+        <td>Ram Speicher:</td>
+        <td><?php echo $memoryr=$_product->getAttributeText('memory_ram');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php 
+    $value= $_product->getResource()->getAttribute('display_size')->getFrontend()->getValue($_product);
+    if($value!=null):
+    ?>
+    <tr>
+        <td>Display-Größe:</td>
+        <td><?php echo $value;?></td>
+    </tr>
+    <?php endif; ?>
+    
+     <?php if($_product->getAttributeText('display_resolution')!=null):?>
+    <tr>
+        <td>Display-Auflösung:</td>
+        <td><?php echo $display=$_product->getAttributeText('display_resolution');?></td>
+    </tr>
+    <?php endif; ?>
+     <?php 
+    $value= $_product->getResource()->getAttribute('camera_front')->getFrontend()->getValue($_product);
+    if($value!=null):    
+    ?>
+    <tr>
+        <td>Frontkamera:</td>
+        <td><?php echo $value;?></td>
+    </tr>
+    <?php endif; ?>
+    
+     <?php 
+    $value= $_product->getResource()->getAttribute('camera_rear')->getFrontend()->getValue($_product);
+    if($value!=null):    
+    ?>
+    <tr>
+        <td>Rückfahrkamera (Megapixel):</td>
+        <td><?php echo $value;?></td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getResource()->getAttribute("network_filter")!=null):?>
+    <tr>
+         <?php 
+        $attribute = $_product->getResource()->getAttribute("network_filter"); 
+        $text="";
+        if($attribute->getFrontendInput() == 'multiselect') {
+            
+            $multiSelectArray = $_product->getAttributeText("network_filter");
+            
+            if (is_array ($multiSelectArray)==true){
+                $text=implode(', ',$multiSelectArray);
+            }
+            else {
+                $text=$multiSelectArray ;
+            }
+    
+        }
+     
+        ?>
+        <td>Netzwerk:</td>
+        <td> <?php echo $text;?> </td>
+        
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getResource()->getAttribute("ports")!=null):?>
+    <tr>
+          <?php 
+        $attribute = $_product->getResource()->getAttribute("ports"); 
+        $text="";
+        if($attribute->getFrontendInput() == 'multiselect') {
+            
+            $multiSelectArray = $_product->getAttributeText("ports");
+            
+            if (is_array ($multiSelectArray)==true){
+                $text=implode(', ',$multiSelectArray);
+            }
+            else {
+                $text=$multiSelectArray ;
+            }
+    
+        }
+     
+        ?>
+        <td>Ports:</td>
+        <td> <?php echo $text;?> </td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getAttributeText('micro_usb')!=null):?>
+    <tr>
+        <td>Micro USB:</td>
+        <td><?php echo $memorysd=$_product->getAttributeText('micro_usb');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('memory_micro_sd_card')!=null):?>
+    <tr>
+        <td>Micro-SD-Karte:</td>
+        <td><?php echo $memorysd=$_product->getAttributeText('memory_micro_sd_card');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('sim_card_dual')!=null):?>
+    <tr>
+        <td>Dual-Sim-Karte:</td>
+        <td><?php echo $simcard=$_product->getAttributeText('sim_card_dual');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('network_wifi_portable')!=null):?>
+    <tr>
+        <td>Portable Wi-Fi Hotspot:</td>
+        <td><?php echo $simcard=$_product->getAttributeText('network_wifi_portable');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('memory_sd_card')!=null):?>
+    <tr>
+        <td>SD Card:</td>
+        <td><?php echo $simcard=$_product->getAttributeText('memory_sd_card');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('color')!=null):?>
+    <tr>
+        <td>Farbe:</td>
+        <td><?php echo $color=$_product->getAttributeText('color');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('brand')!=null):?>
+    <tr>
+        <td>Marke:</td>
+        <td><?php echo $brand=$_product->getAttributeText('brand');?></td>
+    </tr>
+    <?php endif; ?>
+
+</table>
+
+<?php } ?>
+
+
+
+
+<?php if($storeName=='Europe' || $storeName=='English'){?>
+
+<table border="0" class="summary-tab">
+    <?php if($_product->getAttributeText('os_version')!=null):?>
+    <tr>
+        <td>OS Version:</td>
+        <td><?php echo $os=$_product->getAttributeText('os_version');?></td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getAttributeText('memory_internal')!=null):?>
+    <tr>
+        <td>Internal Memory (GB):</td>
+        <td><?php echo $memoryi=$_product->getAttributeText('memory_internal');?></td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getAttributeText('processor')!=null):?>
+    <tr>
+        <td>Processor:</td>
+        <td><?php echo $processor=$_product->getAttributeText('processor');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('memory_ram')!=null):?>
+    <tr>
+        <td>Ram Memory:</td>
+        <td><?php echo $memoryr=$_product->getAttributeText('memory_ram');?></td>
+    </tr>
+    <?php endif; ?>
+  
+    <?php 
+        $value= $_product->getResource()->getAttribute('display_size')->getFrontend()->getValue($_product);
+        if($value!=null):
+    ?>
+    <tr>
+        <td>Display Size (Inch)</td>
+        <td><?php echo $value;?></td>
+    </tr>
+    <?php endif; ?>
+    
+     <?php if($_product->getAttributeText('display_resolution')!=null):?>
+    <tr>
+        <td>Display Resolution:</td>
+        <td><?php echo $display=$_product->getAttributeText('display_resolution');?></td>
+    </tr>
+    <?php endif; ?>
+    <?php 
+    $value= $_product->getResource()->getAttribute('camera_front')->getFrontend()->getValue($_product);
+    if($value!=null):    
+    ?>
+    <tr>
+        <td>Front Camera:</td>
+        <td><?php echo $value;?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php 
+    $value= $_product->getResource()->getAttribute('camera_rear')->getFrontend()->getValue($_product);
+    if($value!=null):    
+    ?>
+    <tr>
+        <td>Rear Camera (Megapixel):</td>
+        <td><?php echo $value;?></td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getResource()->getAttribute("network_filter")!=null):?>
+    <tr>
+        <?php 
+        $attribute = $_product->getResource()->getAttribute("network_filter"); 
+        $text="";
+        if($attribute->getFrontendInput() == 'multiselect') {
+            
+            $multiSelectArray = $_product->getAttributeText("network_filter");
+            
+            if (is_array ($multiSelectArray)==true){
+                $text=implode(', ',$multiSelectArray);
+            }
+            else {
+                $text=$multiSelectArray ;
+            }
+    
+        }
+     
+        ?>
+        <td>Network:</td>
+        <td> <?php echo $text;?> </td>
+            
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getResource()->getAttribute("ports")!=null):?>
+    <tr>
+           <?php 
+        $attribute = $_product->getResource()->getAttribute("ports"); 
+        $text="";
+        if($attribute->getFrontendInput() == 'multiselect') {
+            
+            $multiSelectArray = $_product->getAttributeText("ports");
+            
+            if (is_array ($multiSelectArray)==true){
+                $text=implode(', ',$multiSelectArray);
+            }
+            else {
+                $text=$multiSelectArray ;
+            }
+    
+        }
+     
+        ?>
+        <td>Ports:</td>
+        <td> <?php echo $text;?> </td>
+    </tr>
+    <?php endif; ?>
+    <?php if($_product->getAttributeText('micro_usb')!=null):?>
+    <tr>
+        <td>Micro USB:</td>
+        <td><?php echo $memorysd=$_product->getAttributeText('micro_usb');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('memory_micro_sd_card')!=null):?>
+    <tr>
+        <td>Micro SD Card:</td>
+        <td><?php echo $memorysd=$_product->getAttributeText('memory_micro_sd_card');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('sim_card_dual')!=null):?>
+    <tr>
+        <td>Dual Sim Card:</td>
+        <td><?php echo $simcard=$_product->getAttributeText('sim_card_dual');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('network_wifi_portable')!=null):?>
+    <tr>
+        <td>Portable Wi-Fi Hotspot:</td>
+        <td><?php echo $simcard=$_product->getAttributeText('network_wifi_portable');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('memory_sd_card')!=null):?>
+    <tr>
+        <td>SD Card:</td>
+        <td><?php echo $simcard=$_product->getAttributeText('memory_sd_card');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('color')!=null):?>
+    <tr>
+        <td>Color</td>
+        <td><?php echo $color=$_product->getAttributeText('color');?></td>
+    </tr>
+    <?php endif; ?>
+    
+    <?php if($_product->getAttributeText('brand')!=null):?>
+    <tr>
+        <td>Brand</td>
+        <td><?php echo $brand=$_product->getAttributeText('brand');?></td>
+    </tr>
+    <?php endif; ?>
+</table>
+
+<?php } ?>
+
+<?php /*?><?php echo $_product->getAttributeName() ?>
+<?php if($_additional = $this->getAdditionalData()): ?>
+  <div class="collateral-box attribute-specs">
+  <table cellspacing="1" class="data-table" id="product-attribute-specs-table" border="">
+  <?php foreach ($_additional as $_data): ?>
+  <tr>
+  <td class="label"><?php echo $this->__($_data['label']) ?></td>
+  <td class="data"><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+  </tr>
+  <?php endforeach; ?>
+  </table>
+  <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
+  </div>
+  <?php endif;?>
+<?php */?>

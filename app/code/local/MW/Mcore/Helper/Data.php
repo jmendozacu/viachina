@@ -6,6 +6,7 @@ class MW_Mcore_Helper_Data extends Mage_Core_Helper_Abstract
     const MESS_97 = " extension is activated successfully!";
     const MESS_100 = "Activate failed. Please enter a valid activation key."; 
     const CONFIG_FILE = "config.xml";
+    public $guide_url = "http://www.mage-world.com/wiki/index.php?title=License-activation";	
     
     public $module_company = array();
 	public function updatestatus($module_special_name="",$timeend=0) //timeend!=0 when checkstatus extendtrial
@@ -254,7 +255,8 @@ class MW_Mcore_Helper_Data extends Mage_Core_Helper_Abstract
 				
 		$linkactive = "active('".strtolower($modulename)."',1,'live_site')";
 		$linkactivedev = "active('".strtolower($modulename)."',1,'dev_site')";
-		$encmodule = $this->encryptMyName($modulename);										
+		$encmodule = $this->encryptMyName($modulename);		
+									
 		$url = Mage::helper('adminhtml')->getUrl('mcore/adminhtml_index/trial/module/'.$encmodule); // Mage::getUrl('mcore/index/trial/module/'.$encmodule);
 		if(isset($arr_mod_inf[1]))
 		{
@@ -281,7 +283,7 @@ class MW_Mcore_Helper_Data extends Mage_Core_Helper_Abstract
 						
 						if($timeexpried <60) 
 						{	
-							$announce = 'will expire in <b>1</b> minute. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a> <span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a> ';			
+							$announce = 'will expire in <b>1</b> minute. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a> <span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->guide_url.'">Activation Guide</a>';			
 							if($position=="detail")
 							{
 								$announce = 'The trial will expire in <b>1</b> minute. ';
@@ -291,7 +293,7 @@ class MW_Mcore_Helper_Data extends Mage_Core_Helper_Abstract
 						{
 							if(ceil($timeexpried/60)==1)
 							$minute = "minute";
-							$announce = 'will expire in <b>'.ceil($timeexpried/60).' '.$minute.'</b>. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a> <span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a>';
+							$announce = 'will expire in <b>'.ceil($timeexpried/60).' '.$minute.'</b>. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a> <span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a><span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->guide_url.'">Activation Guide</a>';
 							if($position=="detail")
 							{
 							$announce = 'The trial will expire in <b>'.ceil($timeexpried/60).'</b> '.$minute.'. ';
@@ -302,7 +304,7 @@ class MW_Mcore_Helper_Data extends Mage_Core_Helper_Abstract
 						{	
 							  if(ceil($timeexpried/3600) == 1)
 							  $hour = "hour";						
-							  $announce = 'will expire in <b>'.ceil($timeexpried/3600).'</b> hours. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a> <span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a>';
+							  $announce = 'will expire in <b>'.ceil($timeexpried/3600).'</b> hours. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a> <span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a><span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->guide_url.'">Activation Guide</a>';
 							  if($position=="detail")
 							  {
 							  $announce = 'The trial will expire in <b>'.ceil($timeexpried/3600).'</b> hours.';
@@ -312,7 +314,7 @@ class MW_Mcore_Helper_Data extends Mage_Core_Helper_Abstract
 						{	
 							if(ceil($timeexpried/(3600*24)) == 1)
 							$day = "day";						 												 
-							$announce =  'will expire in <b>'.ceil($timeexpried/(3600*24)).'</b> '.$day.'. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a> <span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a>';
+							$announce =  'will expire in <b>'.ceil($timeexpried/(3600*24)).'</b> '.$day.'. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a> <span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a><span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->guide_url.'">Activation Guide</a>';
 							if($position=="detail")
 							{
 							$announce = 'The trial will expire in <b>'.ceil($timeexpried/(3600*24)).'</b> '.$day.'.';
@@ -330,7 +332,7 @@ class MW_Mcore_Helper_Data extends Mage_Core_Helper_Abstract
 					
 					$this->setModuleInfo($modulename, $arr_mod_inf);
 										
-					$announce = ' is disabled. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a><span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a>   <span style="padding: 0 5px;">|</span> <a href="'.$url.'">Extend 7 days trial</a>';	
+					$announce = ' is disabled. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a><span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a>   <span style="padding: 0 5px;">|</span> <a href="'.$url.'">Extend 7 days trial</a><span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->guide_url.'">Activation Guide</a>';	
 					if($position=="detail")
 					{
 					 $announce = 'The trial  is expired.';
@@ -342,7 +344,7 @@ class MW_Mcore_Helper_Data extends Mage_Core_Helper_Abstract
 				$this->insertNotification("disabled",$modulename);
 				if(intval($arr_mod_inf[1])==0)
 				{									
-					$announce = ' is disabled. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a> <span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a> <span style="padding: 0 5px;">|</span> <a href="'.$url.'">Extend 7 days trial</a>';	
+					$announce = ' is disabled. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a> <span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a> <span style="padding: 0 5px;">|</span> <a href="'.$url.'">Extend 7 days trial</a><span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->guide_url.'">Activation Guide</a>';	
 					if($position=="detail")
 					{
 					$announce = 'The trial  is expired.';
@@ -350,7 +352,7 @@ class MW_Mcore_Helper_Data extends Mage_Core_Helper_Abstract
 				}
 				else 
 				{				  					
-					$announce = ' is disabled. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a> <span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a> <span style="padding: 0 5px;">|</span> <a href="'.$url.'">Extend 7 days trial</a>';	
+					$announce = ' is disabled. <a  href="javascript:void(0)" onclick="'.$linkactive.'">Activate for Live site</a> <span style="padding: 0 5px;">|</span> <a  href="javascript:void(0)" onclick="'.$linkactivedev.'">Activate for Development</a> <span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->getModuleUrl($modulename).'">Buy this module</a> <span style="padding: 0 5px;">|</span> <a href="'.$url.'">Extend 7 days trial</a><span style="padding: 0 5px;">|</span> <a target="_blank" href="'.$this->guide_url.'">Activation Guide</a>';	
 					if($position=="detail")
 					{
 					 $announce = 'The extension is expired.';
@@ -370,10 +372,11 @@ class MW_Mcore_Helper_Data extends Mage_Core_Helper_Abstract
 	function getCommentExtendTrial($modulename,$endtime)
 	{
 		$timeexpried = $this->showTimeTrial($modulename, $endtime);
-		return '<font style="color:black; font-weight:bold">Trial</font><p class="note"><span>
+		return '<font style="color:black; font-weight:bold">Your license is currently in Trial Mode</font><p class="note"><span>
 			                   		 			<span class="mw_announce">'.$timeexpried.'</span><br> <a id="mcore_active_'.$modulename.'" class="mw_active">Activate for Live site</a>
 			                   		 			<span style="padding:5px;">|</span> <a id="mcore_dev_'.$modulename.'" class="mw_dev">Activate for Development</a> 
 			                   		 			<span style="padding:5px;">|</span> <a class="mw_buy" href="'.$this->getModuleUrl($modulename).'" target="_blank">Buy This Module</a>
+			                   		 			<span style="padding:5px;">|</span> <a class="mw_guide"  target="_blank" href="'.$this->guide_url.'">Activation Guide</a>
 						 					</span></p>';
 	}
 	
@@ -731,22 +734,53 @@ class MW_Mcore_Helper_Data extends Mage_Core_Helper_Abstract
 	
 	public function disableConfig($module_name)
 	{
-		$module_name=$this->getModuleRealKey($module_name);				
-		$moduleconfig=$this->getModuleConfig($module_name);
-		if(trim($moduleconfig)!="")				
-			Mage::getSingleton('core/config')->saveConfig($moduleconfig,0);				
-		Mage::getModel('core/config')->saveConfig("advanced/modules_disable_output/".$module_name,1);		
-		Mage::getConfig()->reinit();
+		if(strtolower($module_name) != "mw_onestepcheckout")
+		{
+			$module_name=$this->getModuleRealKey($module_name);				
+			$moduleconfig=$this->getModuleConfig($module_name);
+			if(trim($moduleconfig)!="")				
+				Mage::getSingleton('core/config')->saveConfig($moduleconfig,0);				
+			Mage::getModel('core/config')->saveConfig("advanced/modules_disable_output/".$module_name,1);		
+			Mage::getConfig()->reinit();
+		}
+		else 
+		{
+			Mage::getSingleton('core/config')->saveConfig(Mage::helper('onestepcheckout')->myConfig(),0);
+			$websites  = Mage::getModel('core/website')->getCollection()->getData();
+    		foreach($websites as $row)
+    		{
+    			if($row['code']!="admin")
+    			Mage::getSingleton('core/config')->deleteConfig(Mage::helper('onestepcheckout')->myConfig(),'websites',$row['website_id']);
+    		}   	  
+    		
+    	   $stores  = Mage::getModel('core/store')->getCollection()->getData();
+    		foreach($stores as $row)
+    		{
+    			if($row['code']!="admin")
+    			Mage::getSingleton('core/config')->deleteConfig(Mage::helper('onestepcheckout')->myConfig(),'stores',$row['store_id']);
+    		}
+    		
+			Mage::getConfig()->reinit();	
+		}
 	}
 	
 	public function enableConfig($module_name)
 	{
-		$module_name=$this->getModuleRealKey($module_name);	
-		$moduleconfig=$this->getModuleConfig($module_name);		
-		if(trim($moduleconfig)!="")
-			Mage::getSingleton('core/config')->saveConfig($moduleconfig,1);
-		Mage::getModel('core/config')->saveConfig("advanced/modules_disable_output/".$module_name,0);
-		Mage::getConfig()->reinit();
+		if(strtolower($module_name)!="mw_onestepcheckout")
+		{
+			$module_name=$this->getModuleRealKey($module_name);	
+			$moduleconfig=$this->getModuleConfig($module_name);		
+			if(trim($moduleconfig)!="")
+				Mage::getSingleton('core/config')->saveConfig($moduleconfig,1);
+			Mage::getModel('core/config')->saveConfig("advanced/modules_disable_output/".$module_name,0);
+			Mage::getConfig()->reinit();
+		}
+		else
+		{
+			Mage::getSingleton('core/config')->saveConfig(Mage::helper('onestepcheckout')->myConfig(),1);
+			Mage::getModel('core/config')->saveConfig("advanced/modules_disable_output/".$module_name,0);		
+    		Mage::getConfig()->reinit();
+		}
 	}
 	
 	public function setModuleSpecial($module)

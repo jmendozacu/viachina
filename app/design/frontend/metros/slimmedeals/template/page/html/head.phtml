@@ -1,0 +1,995 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php 
+function themeOptions ($themeOption)
+{
+	switch ($themeOption)
+	{
+            
+        /* background color and Pattern */
+	    
+	    
+	    case 'background_pattern':
+		return Mage::getStoreConfig('mygeneral/background/background_pattern', Mage::app()->getStore()->getId());
+	    break; 
+	    case 'background_color':
+		return Mage::getStoreConfig('mygeneral/background/background_color', Mage::app()->getStore()->getId());
+	    break;
+	    case 'background_image':
+		return Mage::getStoreConfig('mygeneral/background/background_image', Mage::app()->getStore()->getId());
+	    break;
+	    case 'bg_repeat':
+		return Mage::getStoreConfig('mygeneral/background/bg_repeat', Mage::app()->getStore()->getId());
+	    break;  
+	    case 'bg_attachment':
+		return Mage::getStoreConfig('mygeneral/background/bg_attachment', Mage::app()->getStore()->getId());
+	    break;  
+	    case 'bg_position_x':
+		return Mage::getStoreConfig('mygeneral/background/bg_position_x', Mage::app()->getStore()->getId());
+	    break; 
+	    case 'bg_position_y':
+		return Mage::getStoreConfig('mygeneral/background/bg_position_y', Mage::app()->getStore()->getId());
+	    break;   
+	
+            
+            
+            
+         /* PRODUCT LIST */
+     
+	    case 'column_count':
+		return Mage::getStoreConfig('mygeneral/product_list/column_count', Mage::app()->getStore()->getId());
+	    break;
+	    case 'productlayout':
+		return Mage::getStoreConfig('mygeneral/product_list/productlayout', Mage::app()->getStore()->getId());
+	    break;
+	    
+        
+        
+        
+            /* COLORS */
+            
+            case 'primary_color':
+                return Mage::getStoreConfig('mygeneral/colors/primary_color');
+             break;
+	     case 'secondary_color':
+                return Mage::getStoreConfig('mygeneral/colors/secondary_color');
+             break;
+	
+
+	
+	/* Menu */
+            
+            case 'menu_background':
+                return Mage::getStoreConfig('mygeneral/menu/menu_background');
+             break;
+	     case 'menu_fonts':
+                return Mage::getStoreConfig('mygeneral/menu/menu_fonts');
+             break;
+	     case 'menu_title_fonts_color':
+                return Mage::getStoreConfig('mygeneral/menu/menu_title_fonts_color');
+             break;
+	     case 'menu_title_fonts_size':
+                return Mage::getStoreConfig('mygeneral/menu/menu_title_fonts_size');
+             break;
+	     case 'menu_fonts_color':
+                return Mage::getStoreConfig('mygeneral/menu/menu_fonts_color');
+             break;
+	     case 'menu_fonts_size':
+                return Mage::getStoreConfig('mygeneral/menu/menu_fonts_size');
+             break;
+	     case 'menu':
+                return Mage::getStoreConfig('mygeneral/menu/menu');
+             break;
+	     case 'menu_withlogo':
+                return Mage::getStoreConfig('mygeneral/menu/menu_withlogo');
+             break;
+	
+	/* Sidebar */
+            
+            case 'sidebar_background_color':
+                return Mage::getStoreConfig('mygeneral/sidebar/sidebar_background_color');
+             break;
+	     case 'sidebar_title_fonts':
+                return Mage::getStoreConfig('mygeneral/sidebar/sidebar_title_fonts');
+             break;
+	     case 'sidebar_title_fonts_color':
+                return Mage::getStoreConfig('mygeneral/sidebar/sidebar_title_fonts_color');
+             break;
+	     case 'sidebar_title_fonts_size':
+                return Mage::getStoreConfig('mygeneral/sidebar/sidebar_title_fonts_size');
+             break;
+	     case 'sidebar_fonts_color':
+                return Mage::getStoreConfig('mygeneral/sidebar/sidebar_fonts_color');
+             break;
+	
+	/* product Grid View */
+            
+            case 'product_grid_box_border':
+                return Mage::getStoreConfig('mygeneral/product_grid_view/product_grid_box_border');
+             break;
+	    case 'product_grid_box_hovereffect':
+                return Mage::getStoreConfig('mygeneral/product_grid_view/product_grid_box_hovereffect');
+             break;
+	     case 'product_grid_box_image_bgcolor':
+                return Mage::getStoreConfig('mygeneral/product_grid_view/product_grid_box_image_bgcolor');
+             break;
+	     case 'product_grid_box_color':
+                return Mage::getStoreConfig('mygeneral/product_grid_view/product_grid_box_color');
+             break;
+	     case 'product_grid_box_font_color':
+                return Mage::getStoreConfig('mygeneral/product_grid_view/product_grid_box_font_color');
+             break;
+	     
+        
+	/* product List View */
+            
+            case 'product_list_image_border':
+                return Mage::getStoreConfig('mygeneral/product_list_view/product_list_image_border');
+             break;
+	     case 'product_list_active_color':
+                return Mage::getStoreConfig('mygeneral/product_list_view/product_list_active_color');
+             break;
+	     case 'product_grid_box_font_color':
+                return Mage::getStoreConfig('mygeneral/product_list_view/product_grid_box_font_color');
+             break;
+	
+	/* footer */
+            
+            case 'footer_background_color':
+                return Mage::getStoreConfig('mygeneral/footer/footer_background_color');
+             break;
+	     case 'footer_title_font_color':
+                return Mage::getStoreConfig('mygeneral/footer/footer_title_font_color');
+             break;
+	     case 'footer_text_font_color':
+                return Mage::getStoreConfig('mygeneral/footer/footer_text_font_color');
+             break;
+	     case 'footer_link_font_color':
+                return Mage::getStoreConfig('mygeneral/footer/footer_link_font_color');
+             break;
+	
+
+	/*  Extra settings */
+	
+	     case 'backtotop':
+                return Mage::getStoreConfig('mygeneral/extra_settings/backtotop');
+             break;
+	     case 'instock':
+                return Mage::getStoreConfig('mygeneral/extra_settings/instock');
+             break;
+	     case 'responsiveness':
+                return Mage::getStoreConfig('mygeneral/extra_settings/responsiveness');
+             break;
+	     case 'ajaxcart':
+                return Mage::getStoreConfig('mygeneral/extra_settings/ajaxcart');
+             break;
+	
+	}
+}
+?>
+
+
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title><?php echo $this->getTitle() ?></title>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<meta name="google-site-verification" content="lE-2R8qZKJHY2oUZNKspNIlLd--2q2CXrSSAnvNnwY0" />
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+
+<!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+//]]>
+</script>
+<![endif]-->
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+
+<?php
+$responsiveness = themeOptions('responsiveness');
+if($responsiveness == null || $responsiveness == '1' ) {
+?>
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl(); ?>css/mobile.css" type="text/css" />
+<?php
+}
+?>
+
+<script>
+	function successMessage(message,message1,message2)
+		{
+		    jQuery('body').append('<div class="alert"></div>');
+		    var $alert = jQuery('.alert');
+		    $alert.fadeIn(400);
+		    $alert.html(message).append('<button class="close"></button>');
+		    $alert.html(message1).append('<a class="close cart" href="<?php echo $this->getUrl('checkout/cart') ?>"><?php echo $this->__('GO TO CART');?></a>');
+		    $alert.html(message2).append('<a class="close continue">CONTINUE SHOPPING</a>');
+		    jQuery('.close').click(function () {
+			$alert.fadeOut(400);
+		    });
+		    $alert.fadeIn('400', function () {
+			setTimeout(function () {
+			    $alert.fadeOut('400', function () {
+				jQuery(this).fadeOut(400, function(){ jQuery(this).detach(); })
+			    });
+			}, 10000)
+		    });
+		}
+</script>
+
+<?php
+function is_mobile()
+    {
+	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+	$mobiles = array("android", "iphone", "ipod", "ipad",
+		"blackberry", "palm", "mobile", "mini", "kindle");
+	foreach($mobiles as $mobile)
+	{
+		if(strpos($ua,$mobile)) return true;
+	}
+	return false;
+    }
+?>
+
+<?php if(is_mobile() == false) { ?>
+	<script type="text/javascript" src="<?php echo $this->getSkinUrl('mobilemenu/css3-mediaqueries.js'); ?>"></script>
+<?php } ?>
+
+<?php
+
+/* Start primary Color */
+
+$primary_color = Array();
+$primary_color['primary_color'] = '
+
+.customized .best_theme h2,
+.block .block-title strong,
+#footer_part .footer_link_box .footer_link_box_right .link h1,
+#nav li.active a span,
+#nav li.active ul li ul li a span,
+#nav li ul li ul li a span,
+#nav ul a:hover,
+#nav li.active ul li a span:hover,
+.bestseller-product h2,
+.bestseller-product .bestseller-grid .special-price .price,
+.bestseller-product .bestseller-grid .old-price .price,
+.bestseller-product .bestseller-grid .regular-price .price ,
+.sort_box .sort_pan,
+.sort_icon.selected,
+.sort_detail a:hover,
+.show_box .show_pan,
+.show_detail a:hover, .show_icon.selected,
+.pager .pages .current,
+.product-essential h1,
+.product-view .product-shop .price-box .old-price .price,
+.product-view .product-shop .special-price .price,
+.product-view .product-shop .add-to-links a,
+.tabs li.active a span,
+.tabs li a:hover,
+.product-view .box-tags .form-add label,
+.product-collateral .padder .form-add h3, h4,
+.product-view .product-shop .regular-price .price,
+.cart .page-title h1,
+.page-title h1, .page-title h2,
+.opc .active .step-title h2,
+.col2-set .col-1 h4 ,
+.f-left,
+.block-progress .block-title strong span,
+.opc .active .step-title .number,
+.sp-methods dt,
+.subtitle, .sub-title,
+.block-poll .block-subtitle,
+.block-account .block-content li.current,
+.dashboard .welcome-msg p strong,
+.box-account .box-head h2,
+.dashboard .box-tags .tags strong,
+.fieldset .legend,
+.block-account .block-content li a:hover,
+.dashboard .box-content a,
+.addresses-list h2,
+.addresses-list a,
+#wishlist-table .old-price .price,
+#wishlist-table .special-price .price,
+#wishlist-table .regular-price .price,
+.checkout-progress li.active,
+.multiple-checkout .col2-set h2.legend,
+.multiple-checkout h3, .multiple-checkout h4,
+.multiple-checkout .box h2,
+.multiple-checkout .place-order .grand-total big,
+.products-list .product-name a,
+.products-list .price-box .old-price .price,
+.products-list .price-box .special-price .price,
+.products-list .add-to-links li a.link-wishlist, .link-compare,
+.products-list .price-box .regular-price .price,
+.products-list .ratings .rating-links a,
+.multiple-checkout .place-order .grand-total .price,
+.block-wishlist .old-price .price,
+.block-wishlist .special-price .price,
+.block-wishlist .link-cart,
+.block-wishlist .regular-price .price,
+.block-wishlist .actions a,
+.compare-table .old-price .price,
+.compare-table .special-price .price,
+.compare-table .regular-price .price,
+.link-print,
+.compare-table tbody th span,
+#opc-login h4,
+.order-info .current,
+.order-items h2,
+.my-tag-edit strong,
+#my-tags-table .old-price .price,
+#my-tags-table .special-price .price,
+#my-tags-table .regular-price .price,
+.products-list .add-to-links .separator,
+.product-view .product-shop .add-to-links li .separator,
+.products-list .ratings .rating-links .separator,
+.product-view .product-shop .ratings .rating-links a,
+.product-view .product-shop .ratings .rating-links .separator,
+.page-head h3,
+.onepagecheckout_datafields .op_block_title,
+DIV.ajaxcartpro_progress,
+DIV.ajaxcartpro_progress1,
+.advanced-search-summary strong,
+.product-view .box-reviews dt a,
+.cross .old-price .price, .cross .special-price .price, .cross .regular-price .price,
+.cross .add-to-links .link-wishlist,
+.cross .add-to-links .separator,
+.block-layered-nav #narrow-by-list dd ol li,
+.block-category-nav .block-content dd ol li,
+.currency_detail a:hover, .currency_icon.selected, .language_detail a:hover, .currency_icon.selected,
+.language_detail a:hover, .language_icon.selected, .language_detail a:hover, .language_icon.selected,
+.block-related .block-subtitle a,
+.block-related .old-price .price,
+.block-related .special-price .price, .block-related .regular-price .price,
+.block-related .link-wishlist,
+.header .form-search .search-autocomplete li .amount,
+.default-container #nav li ul li a span:hover,
+.default-container #nav li.active ul li a span:hover,
+.default-container #nav li ul li ul li a span:hover,
+.default-container #nav li.active ul li ul li a span:hover,
+.default-container #nav a:hover,
+.email-friend a,
+.product-view .product-shop .no-rating a,
+.sorter .view-mode .grid:hover,
+.sorter .view-mode .list:hover,
+.sorter .view-mode .grid-mode-active,
+.sorter .view-mode .list-mode-active,
+.products-grid .actions .add-to-links a.link-wishlist:hover,
+.products-grid .actions .add-to-links a.link-compare:hover,
+.product-latest .actions .add-to-links a.link-wishlist:hover,
+.product-latest .actions .add-to-links a.link-compare:hover,
+.email-friend .separator
+
+';
+
+$primary_background = Array();
+$primary_background['primary_background'] = '
+
+.banner .container,
+.customized .best_theme a span,
+button.button,
+#footer_part1,
+.cart-table .btn-update,
+.cart-table .btn-continue, .cart-table .btn-empty,
+.cart .totals .checkout-types button.btn-checkout:hover,
+.buttons-set .back-link a,
+.block-progress dt.complete,
+.dashboard .box-tags .number,
+.category-content,
+.dashboard .box-reviews .number,
+.latest-product .latest-area,
+.product-latest li.latest-product .actions,
+.products-grid .productgrid-area,
+.products-grid li.item:hover .productgrid-area,
+.note-msg, .notice-msg, .error-msg, .success-msg,
+.btn-edit,
+#banner-slider .container,
+.toggleMenu,
+div.alert,
+.quick-view
+
+';
+
+
+$primary_border = Array();
+$primary_border['primary_border'] = '
+
+.checkout-progress li.active,
+.opc .active .step-title .number,
+.products-grid li.item,
+.product-latest li.latest-product.item,
+.products-list .product-image
+
+';
+
+/* End primary Color */
+
+
+/* Start Secondary Color */
+
+
+$secondary = Array();
+$secondary['secondary_background'] = '
+
+.header .quick-access,
+#nav ul,
+#nav li.over, #nav li:hover,
+.bestseller-product,
+.block-layered-nav,
+.block-category-nav,
+.block-viewed,
+.block-compared,
+.block-compare,
+.block-poll,
+.block-banner, .block-tags, .block-subscribe,
+.footer-container,
+.customized,
+.cart .discount, .cart .shipping,
+.cart .totals,
+.col2-set .col-1,
+.col2-set .col-2,
+.checkout-multishipping-shipping .box-sp-methods,
+.block-account .block-title,
+.block-account .block-content,
+.block-reorder,
+.block-wishlist,
+.compare-table tbody th
+
+';
+
+/* End Secondary Color */
+
+/* Start Menu */
+
+$menu_background = Array();
+$menu_background['menu_background'] = '
+
+#nav ul,
+#nav li.over, #nav li:hover,
+.default-container #nav li.over a, .default-container #nav a:hover
+
+';
+
+$menu_title_fonts_color = Array();
+$menu_title_fonts_color['menu_title_fonts_color'] = '
+
+#nav li ul li a,
+#nav li.active ul li a span,
+.default-container #nav li ul li a span,
+.default-container #nav li.active ul li a span,
+#nav li a span
+
+';
+
+$menu_title_fonts_size = Array();
+$menu_title_fonts_size['menu_title_fonts_size'] = '
+
+#nav li ul li a span,
+#nav li.active ul li a span,
+.default-container #nav li ul li a span,
+.default-container #nav li.active ul li a span,
+#nav li a span
+
+';
+
+$menu_fonts_color = Array();
+$menu_fonts_color['menu_fonts_color'] = '
+
+#nav li ul li ul li a span,
+#nav li.active ul li ul li a span,
+.default-container #nav li ul li ul li a span,
+.default-container #nav li.active ul li ul li a span
+
+
+';
+
+$menu_fonts_size = Array();
+$menu_fonts_size['menu_fonts_size'] = '
+
+#nav li ul li ul li a span,
+#nav li.active ul li ul li a span,
+.default-container #nav li ul li ul li a span,
+.default-container #nav li.active ul li ul li a span
+';
+
+$menu_font = Array();
+$menu_font['menu_font'] = '
+#nav li ul li a,
+#nav li ul li ul li a span
+
+';
+
+/* End Menu */
+
+/* Start Sidebar */
+
+$sidebar_background_color = Array();
+$sidebar_background_color['sidebar_background_color'] = '
+
+.bestseller-product,
+.block-layered-nav,
+.block-category-nav,
+.block-viewed,
+.block-compare,
+.block-compared,
+.block-poll,
+.block-banner, .block-tags, .block-subscribe,
+.block-account .block-title,
+.block-account .block-content,
+.block-reorder,
+.block-wishlist
+
+';
+
+$sidebar_title_fonts = Array();
+$sidebar_title_fonts['sidebar_title_fonts'] = '
+
+.block .block-title strong,
+.bestseller-product h2
+
+';
+
+$sidebar_title_fonts_color = Array();
+$sidebar_title_fonts_color['sidebar_title_fonts_color'] = '
+
+.block .block-title strong,
+.bestseller-product h2
+
+';
+
+$sidebar_title_fonts_size = Array();
+$sidebar_title_fonts_size['sidebar_title_fonts_size'] = '
+
+.block .block-title strong,
+.bestseller-product h2
+
+';
+
+$sidebar_fonts_color = Array();
+$sidebar_fonts_color['sidebar_fonts_color'] = '
+
+.block-layered-nav dt,
+.block-layered-nav #narrow-by-list dd ol li a,
+.block-category-nav .block-content dd ol li a,
+.block-category-nav .block-content dd ol li,
+.block-layered-nav #narrow-by-list dd ol li,
+.bestseller-product .bestseller-grid .product-name a,
+.bestseller-product .bestseller-grid .old-price .price,
+.bestseller-product .bestseller-grid .special-price .price,
+.bestseller-product .bestseller-grid .regular-price .price,
+.block-viewed .block-content .product-name a,
+#compare-items .product-name a,
+#recently-compared-items .product-name a,
+.block .actions a,
+.block-poll .block-subtitle,
+.block-poll label,
+.block-wishlist .block-subtitle,
+.block-wishlist .product-name a,
+.block-wishlist .old-price .price,
+.block-wishlist .special-price .price,
+.block-wishlist .regular-price .price,
+.block-wishlist .link-cart,
+.block-subscribe label,
+.block-reorder .block-content p,
+.block-reorder .product-name a,
+.block-account .block-content li a,
+.block .block-content .tags-list li a
+
+';
+
+/* End Sidebar */
+
+/* Start Product Grid View */
+
+
+$product_grid_box_border = themeOptions('product_grid_box_border');
+$product_grid_box_hovereffect = themeOptions('product_grid_box_hovereffect');
+
+$product_grid_box_color = Array();
+$product_grid_box_color['product_grid_box_color'] = '
+
+.products-grid .productgrid-area,
+.products-grid li.item:hover .productgrid-area
+
+';
+
+$product_grid_box_image_bgcolor = Array();
+$product_grid_box_image_bgcolor['product_grid_box_image_bgcolor'] = '
+.latest-product .latest-image,
+.data-table td a img,
+.mini-products-list .product-image,
+.products-list .product-image,
+.bestseller-product .bestseller-grid li a.product-image,
+.product-view .product-img-box .product-image,
+.product-view .product-img-box .more-views li a,
+.cart .crosssell .product-image,
+.my-wishlist .product-image
+
+';
+
+$product_grid_box_font_color = Array();
+$product_grid_box_font_color['product_grid_box_font_color'] = '
+
+.products-grid .product-name a,
+.productgrid-area .price-box, .productgrid-area .price-box .special-price .price, .productgrid-area .price-box .regular-price .price,
+.products-grid .actions button.button,
+.products-grid li.item:hover .old-price .price
+
+';
+
+/* End Product Grid View */
+
+
+/* Start Product List View */
+
+
+$product_list_image_border = themeOptions('product_list_image_border');
+
+$product_list_active_color = Array();
+$product_list_active_color['product_list_active_color'] = '
+
+.products-list .product-name a,
+.products-list .price-box .old-price .price,
+.products-list .price-box .special-price .price,
+.products-list .price-box .regular-price .price,
+.products-list .add-to-links li a.link-wishlist, .link-compare,
+.products-list .ratings .rating-links a,
+
+';
+
+/* End Product List View */
+
+/* Start Footer */
+
+$footer_background_color = Array();
+$footer_background_color['footer_background_color'] = '
+
+.footer-container
+
+';
+
+$footer_title_font_color = Array();
+$footer_title_font_color['footer_title_font_color'] = '
+
+#footer_part .footer_link_box .footer_link_box_right .link h1
+
+';
+
+$footer_text_font_color = Array();
+$footer_text_font_color['footer_text_font_color'] = '
+
+#footer_part .footer_link_box .sweet_box_left p,
+.footer_link_box_right pre,
+.footer_link_box_right .link p,
+.footer address
+
+';
+
+$footer_link_font_color = Array();
+$footer_link_font_color['footer_link_font_color'] = '
+
+#footer_part .footer_link_box .footer_link_box_right .link ul li a,
+.footer a
+
+';
+
+/* End Footer */
+
+
+/* Start Title Font */
+
+$title_font = Array();
+$title_font['title_font'] = '
+
+.page-title h1,
+.page-title h2,
+.cms-home .subtitle,
+.customized .best_theme h2,
+.block .block-title strong,
+.detail-block h2,
+.bestseller-product h2,
+.product-essential h1,
+.cart .page-title h1,
+.customized h3,
+.banner .container h1,
+.category-content h1
+
+';
+
+/* End Title Font */
+
+/* Start Content Font */
+$content_font = Array();
+$content_font['content_font'] = 'body, input,select,textarea,button,.footer_link_box_right pre';
+
+/* End Content Font */
+
+/* Start mask */
+
+$maskcolor = Array();
+$maskcolor['mask_color'] = '
+
+';
+
+/* End mask */
+
+/* Define variable for Each Option */
+
+$background_color = themeOptions('background_color');
+$background_pattern = themeOptions('background_pattern');
+$background_image = themeOptions('background_image');
+
+
+
+$bodyfont = Mage::getStoreConfig('gfont/gfont_config/bodyfont');
+$titlefont = Mage::getStoreConfig('gfont/gfont_config/titlefont');
+$menufont = themeOptions('menu_fonts');
+$sidebartitlefont = themeOptions('sidebar_title_fonts');
+
+
+/* End Define variable for Each Option */
+
+function jsString($str='') { 
+        return trim(preg_replace("/('|\"|\r?\n)/", '', $str)); 
+    }     
+
+
+?>
+
+
+<?php
+
+/* Function For Convert RGB To Hex */
+
+function html2rgb($rgb)
+{
+    if ($rgb[0] == '#')
+        $rgb = substr($rgb, 1);
+
+    if (strlen($rgb) == 6)
+        list($r, $g, $b) = array($rgb[0].$rgb[1],
+                                 $rgb[2].$rgb[3],
+                                 $rgb[4].$rgb[5]);
+    elseif (strlen($rgb) == 3)
+        list($r, $g, $b) = array($rgb[0].$rgb[0], $rgb[1].$rgb[1], $rgb[2].$rgb[2]);
+    else
+        return false;
+
+    $r = hexdec($r); $g = hexdec($g); $b = hexdec($b);
+ 
+    return array($r, $g, $b);
+}
+
+ $hex =  "#".themeOptions('primary_color'); 
+$val = html2rgb($hex);
+
+/* End Function For Convert RGB To Hex */
+
+?>
+
+<!-- Active Color -->
+
+
+
+<style type="text/css">
+        /* Active Color */
+        <?php echo jsString($primary_color['primary_color']); ?>              {  color: #<?php echo themeOptions('primary_color') ?>; }
+        
+        <?php echo jsString($primary_background['primary_background']); ?>         {  background-color: #<?php echo themeOptions('primary_color') ?>; }
+	
+	<?php echo jsString($secondary['secondary_background']); ?>         {  background-color: #<?php echo themeOptions('secondary_color') ?>; }
+        
+        <?php echo jsString($primary_border['primary_border']); ?>         {  border-color:  #<?php echo themeOptions('primary_color') ?>; }
+        
+        <?php echo jsString($maskcolor['mask_color']); ?>         {background-color: rgba(<?php echo $val[0]; ?>,<?php echo $val[1]; ?>,<?php echo $val[2]; ?>, 0.8);}
+	
+</style>
+
+<style>
+	
+	<?php echo jsString($menu_background['menu_background']); ?>         {  background-color: #<?php echo themeOptions('menu_background') ?>!important; }
+	
+	<?php echo jsString($menu_title_fonts_color['menu_title_fonts_color']); ?>    { color: #<?php echo themeOptions('menu_title_fonts_color') ?>!important; }
+	
+	<?php echo jsString($menu_title_fonts_size['menu_title_fonts_size']); ?>    { font-size: <?php echo themeOptions('menu_title_fonts_size') ?>px; }
+	
+	<?php echo jsString($menu_fonts_color['menu_fonts_color']); ?>         { color: #<?php echo themeOptions('menu_fonts_color') ?>!important; }
+	
+	<?php echo jsString($menu_fonts_size['menu_fonts_size']); ?>         { font-size: <?php echo themeOptions('menu_fonts_size') ?>px; }
+	
+</style>
+
+<style>
+	<?php echo jsString($sidebar_title_fonts_color['sidebar_title_fonts_color']); ?>    {  color: #<?php echo themeOptions('sidebar_title_fonts_color') ?>!important; }
+	
+	<?php echo jsString($sidebar_title_fonts_size['sidebar_title_fonts_size']); ?>    {  font-size: <?php echo themeOptions('sidebar_title_fonts_size') ?>px; }
+	
+	<?php echo jsString($sidebar_background_color['sidebar_background_color']); ?>  {  background-color: #<?php echo themeOptions('sidebar_background_color') ?>!important; }
+	
+	<?php echo jsString($sidebar_fonts_color['sidebar_fonts_color']); ?>    {  color: #<?php echo themeOptions('sidebar_fonts_color') ?>!important; }
+</style>
+
+<style>
+	<?php echo jsString($product_grid_box_font_color['product_grid_box_font_color']); ?>    {  color: #<?php echo themeOptions('product_grid_box_font_color') ?>!important; }
+	
+	<?php echo jsString($product_grid_box_color['product_grid_box_color']); ?>  {  background-color: #<?php echo themeOptions('product_grid_box_color') ?>!important; }
+	
+	<?php echo jsString($product_grid_box_image_bgcolor['product_grid_box_image_bgcolor']); ?>  {  background-color: #<?php echo themeOptions('product_grid_box_image_bgcolor') ?>; }
+</style>
+
+<style>
+	<?php echo jsString($product_list_active_color['product_list_active_color']); ?>    {  color: #<?php echo themeOptions('product_list_active_color') ?>!important; }
+	
+	
+</style>
+
+<style>
+	
+	
+	<?php echo jsString($footer_background_color['footer_background_color']); ?>  {  background-color: #<?php echo themeOptions('footer_background_color') ?>!important; }
+	
+	<?php echo jsString($footer_title_font_color['footer_title_font_color']); ?>    {  color: #<?php echo themeOptions('footer_title_font_color') ?>!important; }
+	
+	<?php echo jsString($footer_text_font_color['footer_text_font_color']); ?>    {  color: #<?php echo themeOptions('footer_text_font_color') ?>!important; }
+	
+	<?php echo jsString($footer_link_font_color['footer_link_font_color']); ?>    {  color: #<?php echo themeOptions('footer_link_font_color') ?>!important; }
+</style>
+
+
+
+
+<!-- product Grid Box border  -->
+
+<?php
+if($product_grid_box_border == '0' ) { ?>
+
+<style>
+    
+    .products-grid li.item {border: 0px;}
+    
+    
+</style>
+
+<?php } ?>
+
+
+<!-- product List Box border  -->
+
+<?php
+if($product_list_image_border == '0' ) { ?>
+
+<style>
+    
+    .products-list .product-image {border: 0px;}
+    
+</style>
+
+<?php } ?>
+
+<!-- Hover effect -->
+<?php $product_grid_box_hovereffect ;
+if($product_grid_box_hovereffect == 'bottom' ) { ?>
+
+<style>
+    
+    .products-grid li.item:hover .productgrid-area {bottom: -87px; z-index: 2000;}
+    #secondary-slider .slides{margin-bottom: 60px;}
+    
+    
+</style>
+
+<?php } ?>
+
+
+<!-- Background Option -->
+
+
+        <?php
+    if(isset($background_color) && $background_color != null){  ?>
+	
+	<style>
+            body
+                {
+                    background:#<?php echo themeOptions('background_color') ?>;
+                }
+        </style><?php	}
+        
+    elseif(isset($background_pattern) && $background_pattern != null){ ?>
+        <style>
+            body
+                {
+                    background-image: url(<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'pattern/'.themeOptions('background_pattern') ?>);
+                }    
+        </style><?php }
+        
+    elseif(isset($background_image) && $background_image != null){ ?>
+        <style>
+                body            
+                {
+                        background-image: url(<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'custom/image/'.themeOptions('background_image') ?>);
+                        background-attachment: <?php echo themeOptions('bg_attachment') ?>;
+                         background-position: <?php echo themeOptions('bg_position_y') ?> <?php echo themeOptions('bg_position_x') ?>;
+                        background-repeat: <?php echo themeOptions('bg_repeat') ?>;
+                }    
+        </style>
+    <?php } else{} ?>
+
+
+<!-- menu fonts -->
+
+<?php
+    if(isset($menufont) && $menufont != null && $menufont != '--select--')
+        {  ?>
+            <link href='//fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $menufont); ?>' rel='stylesheet' type='text/css'>
+            <style>
+            <?php echo jsString($menu_font['menu_font']); ?> {font-family: '<?php echo $menufont; ?>'!important;}
+            </style>
+        <?php
+        } ?>
+
+
+<!-- Sidebar Title fonts -->
+
+<?php
+    if(isset($sidebartitlefont) && $sidebartitlefont != null && $sidebartitlefont != '--select--')
+        {  ?>
+            <link href='//fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $sidebartitlefont); ?>' rel='stylesheet' type='text/css'>
+            <style>
+            <?php echo jsString($sidebar_title_fonts['sidebar_title_fonts']); ?> {font-family: '<?php echo $sidebartitlefont; ?>'!important;}
+            </style>
+        <?php
+        } ?>
+
+
+<!-- Google Fonts -->
+
+
+        <?php
+    if(isset($bodyfont) && $bodyfont != null && $bodyfont != '--select--')
+        {  ?>
+            <link href='//fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $bodyfont); ?>' rel='stylesheet' type='text/css'>
+            <style>
+            <?php echo jsString($content_font['content_font']); ?> {font-family: '<?php echo $bodyfont; ?>';}
+            </style>
+        <?php
+        }
+    if(isset($titlefont) && $titlefont != null && $titlefont != '--select--')
+        {
+            
+        ?>
+	<link href='//fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $titlefont); ?>' rel='stylesheet' type='text/css'>
+            <style>
+            <?php echo jsString($title_font['title_font']); ?>                  { font-family: '<?php echo $titlefont; ?>'; }
+            </style>
+        <?php
+        }?>

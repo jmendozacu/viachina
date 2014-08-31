@@ -28,6 +28,8 @@ class MW_Dailydeal_Block_Showtabs_Active extends Mage_Catalog_Block_Product_List
             $collection->getSelect()->where("stock.is_in_stock = " . Mage_CatalogInventory_Model_Stock_Status::STATUS_IN_STOCK);
 
             $this->_productCollection = $collection;
+            
+            
         }
         return $this->_productCollection;
     }

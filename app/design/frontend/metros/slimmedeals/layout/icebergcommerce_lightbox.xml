@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+
+	<!-- 
+	This block of code will make the light box available on ALL pages 
+	If you are going to make it available on all pages, comment out the other 2 blocks in this layout file
+	-->
+	<!--
+	<default>
+		<block name="root">
+			<block name="head">
+				<action method="addJs"><script>iceberg/lightbox/lightbox.js</script></action>
+				<action method="addCss"><stylesheet>iceberg/lightbox/css/lightbox.css</stylesheet></action>
+			</block>
+		</block>
+	</default>
+	-->
+	
+	<!-- This block of code will make the light box available on product view pages -->
+	<catalog_product_view>
+    	<reference name="head">
+			<action method="addJs"><script>iceberg/lightbox/lightbox.js</script></action>
+			<action method="addCss"><stylesheet>iceberg/lightbox/css/lightbox.css</stylesheet></action>
+		</reference>
+	</catalog_product_view>
+	
+	<!-- This block of code will make the light box available on all cms pages -->
+	<!--
+	<cms_page>
+    	<reference name="head">
+			<action method="addJs"><script>iceberg/lightbox/lightbox.js</script></action>
+			<action method="addCss"><stylesheet>iceberg/lightbox/css/lightbox.css</stylesheet></action>
+		</reference>
+	</cms_page>
+	-->
+</layout>

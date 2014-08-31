@@ -1,0 +1,51 @@
+<?php
+/**
+ * Sample File - Shadowbox
+ * For use with http://www.shadowbox-js.com/
+ * to use, please rename this file to media.phtml
+ * 
+ * This is a modified version of the core catalog/product/view/media.phtml
+ * 
+ * Any changes you had made to the previous media file must be changed here as well for changes to take effect.
+ */
+?>
+
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+
+<div style="position: relative;">
+<?php echo $this->getImagesMedia(); ?>
+	<?php if (count($this->getVideoGallery()) > 0): ?>
+	<div class="more-views">
+	    <h2><?php echo $this->__('Videos') ?></h2>
+	    <?php 
+		/**
+		 * Video Gallery Links. 
+		 *  
+		 *  Very similar in structure to the Images Gallery, this is for Videos.
+		 *  If adding functionality, note that destination link contains a flash video player.
+		 */
+		 ?>
+		<?php if (count($this->getVideoGallery()) > 0): ?>
+	    <ul class="video-gallery-links">
+	    <?php foreach ($this->getVideoGallery() as $_video): ?>
+	        <li>
+				<a rel="shadowbox;width=650;height=420;player=iframe" href="<?php echo $this->getVideoGalleryUrl( $_video ); ?>" target="_blank" title="<?php echo $this->htmlEscape($_video['label']) ?>" style="height: 42px;">
+					<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_video['file'])->resize(56,42); ?>" width="56" height="42" alt="<?php echo $this->htmlEscape($_video['label']) ?>" />
+				</a>
+	        </li>
+	    <?php endforeach; ?>
+	    </ul>
+	    <?php endif;?>
+	</div>
+	<?php endif; ?>
+</div>
+
+<script type="text/javascript">
+Shadowbox.init({
+	language: 'en',
+	players:  ['img', 'html', 'iframe']
+}); 
+</script>

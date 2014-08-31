@@ -1,0 +1,15 @@
+<?php
+    $_product = Mage::registry('brand_product');
+?>
+<?php if($_product): ?>
+    <div class="product-name text-center"><span><?php echo $_product->getName() ?></span></div>
+    <div class="thumbnail-box">
+        <a href="<?php echo $_product->getProductUrl() ?>" class="product-thumbnail">
+            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize(250); ?>" alt="" />
+        </a>
+    </div>
+<?php else: ?>
+    <div class="empty">
+        <img class="thumbnail" src="<?php echo $this->helper('catalog/image')->init(Mage::getModel('catalog/product')->load($_product->getId()), 'thumbnail')->resize(200) ?>">
+    </div>
+<?php endif; ?>

@@ -8,8 +8,9 @@
 <config>
     <modules>
         <Amasty_Sorting>
-            <active>true</active>
-            <codePool>local</codePool>
+            <active>false</active>
+            <codePool>local</codePool>        
+            <priority>1000</priority>
         </Amasty_Sorting>
     </modules>
 </config>

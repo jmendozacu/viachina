@@ -1,0 +1,45 @@
+<?php if (($_products = $this->getProductCollection()) && $_products->getSize()): ?>
+<div class="bestseller-product">
+<div class="page-title">
+    <h2><?php echo $this->__('Best Seller') ?></h2>
+</div>
+<?php $_collectionSize = count($_products->getItems()) ?>
+<div class="bestseller-grid">
+<?php $i=1; foreach ($_products->getItems() as $_product): ?>
+    <?php if ($i%1!==0): ?>
+    <ul>
+    <?php endif ?>
+        <li id="td_<?php echo $i;?>" <?php if($i%5==0 or $i==$_collectionSize){echo 'class="last"';} ?> >
+        <?php// contentBlock('top') ?>
+        <div id="cont_<?php echo $i;?>">
+            
+            <a class="product-image" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>">
+                <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->constrainOnly(true)->keepAspectRatio(true)->resize(55, 55); ?>" width="55" height="55" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" title="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" />
+            </a>
+	    <div class="bestseller-area">
+	<?php	$productName = $this->htmlEscape($_product->getName());
+									if(strlen($productName) > 21) {
+										$productName = substr($productName,0,21)."...";
+									} ?>
+	    <h3 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>"><?php echo $productName; ?></a></h3>
+            <a class="aero-image" href="<?php echo $_product->getProductUrl() ?>"></a>
+	    
+	    <?php echo $this->getPriceHtml($_product, true) ?>
+	    </div>
+	    
+        </div>
+    </li>
+    <?php if ($i%5==0 or $i==$_collectionSize): ?>
+   </ul>
+    <?php endif ?>
+  <?php $i++; endforeach; $kol = $_collectionSize; ?>
+</div>
+
+
+</div>
+<?php endif; ?>
+
+
+
+
+

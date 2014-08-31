@@ -77,7 +77,7 @@ $_helper = $this->helper('catalog/output');
 <?php if (!$_pastdealsCollection->count()): ?>
     <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
-    <div class="category-products">
+    <div class="category-products responsive-list">
         <?php echo $this->getToolbarHtml() ?>
         <?php // List mode ?>
         <?php if ($this->getMode() != 'grid'): ?>
@@ -91,7 +91,7 @@ $_helper = $this->helper('catalog/output');
                     ?>
                     <li class="item<?php if (++$_iterator == sizeof($_pastdealsCollection)): ?> last<?php endif; ?>">
                         <?php // Product Image  ?>
-                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->constrainOnly(true)->keepAspectRatio(true)->resize(232,256); ?>" width="232" height="256" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img class="image-responsive" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(300); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a> 
                         <?php // Product description  ?>
                         <div class="product-shop">
                             <div class="f-fix">
@@ -100,9 +100,40 @@ $_helper = $this->helper('catalog/output');
                                 <?php if ($_product->getRatingSummary()): ?>
                                     <?php echo $this->getReviewsSummaryHtml($_product) ?>
                                 <?php endif; ?>
-                                <?php echo $this->getPriceHtml($_product, true) ?>
+                                <?php //echo $this->getPriceHtml($_product, true) ?>
                                 
                                     
+                                <?php
+                                $_coreHelper = $this->helper('core');
+                                $_taxHelper = $this->helper('tax');
+                                $_regularPrice = $_taxHelper->getPrice($_product, $_product->getPrice());
+                                $_finalPrice = $_pastdeal->getDailydealPrice();
+                                ?>
+                                <?php if($_pastdeal->checkDealPrice($_product)){ ?>
+                                <p class="old-price" >
+                                <?php echo Mage::helper('dailydeal')->__('Regular Price:'); ?>
+                                <span class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>-related">
+                                    <span class="price"><?php echo $_coreHelper->currency($_regularPrice, true, false) ?></span>
+                                </span>
+                            </p>
+                            
+                            <p class="special-price">
+                                <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                                    <?php echo Mage::helper('dailydeal')->__('Special Price:'); ?>
+                                    <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>
+                                </span>
+                            </p>
+                            <?php }else{
+                                $_pastdeal->setMinPriceFollowProductType($_product);?>
+                            <p class="special-price">
+                                <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                                    <?php echo Mage::helper('dailydeal')->__('Special Price:'); ?>
+            <?php echo $_coreHelper->currency($_product->getData('min_price'), true, false) ?>
+                                </span>
+                            </p>
+                                
+                            <?php } ?>
+
                                 <div class="mwdld_coming_date">
                                     <?php if ($soldqty > 1 || $soldqty == 0) { ?>
                                         <?php echo Mage::helper('dailydeal')->__('There are <span class="deal-qty-one">%s items</span> sold.', $soldqty); ?> 				
@@ -124,25 +155,6 @@ $_helper = $this->helper('catalog/output');
         <?php else: ?>
 
             <?php // Grid Mode  ?>
-            
-                <?php
-	
-	    $_columnCount = $this->getColumnCount();
-	    
-	    if($_columnCount == 4){
-            $imgwidth = 197;
-            
-            }elseif($_columnCount == 2){
-             $imgwidth = 422;
-            
-            
-	    }elseif($_columnCount == 3){
-             $imgwidth = 272;
-             
-           
-	
-	    }
-	?>
 
             <?php
             $_collectionSize = $_pastdealsCollection->count();
@@ -159,33 +171,55 @@ $_helper = $this->helper('catalog/output');
                 $_product = Mage::getModel('catalog/product')->load($_pastdeal->getProductId());
                 ?>
                     <?php if ($i++ % $_columnCount == 0): ?>
-                    <ul class="products-grid">
+                    <ul class="products-grid items-columns<?php echo $_columnCount;?>">
             <?php endif ?>
-                    <li class="column<?php echo $_columnCount ?> item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
-                    <!--
                     <li class="item<?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?>" style="height: 215px;">
-                    -->
-                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->constrainOnly(true)->keepAspectRatio(true)->resize($imgwidth,385); ?>" width="<?php echo $imgwidth;?>" height="385" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
-                        <div  class="productgrid-area"> 
-                        
+                        <div> <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img class="image-responsive" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(300); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
                             <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
                             <?php if ($_product->getRatingSummary()): ?>
                                 <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
                             <?php endif; ?>
-                            <?php echo $this->getPriceHtml($_product, true) ?>
+                            <?php //echo $this->getPriceHtml($_product, true) ?>
+                            <?php
+                            $_coreHelper = $this->helper('core');
+                            $_taxHelper = $this->helper('tax');
+                            $_regularPrice = $_taxHelper->getPrice($_product, $_product->getPrice());
+                            $_finalPrice = $_pastdeal->getDailydealPrice();
+                            ?>
                             
+                            <?php if($_pastdeal->checkDealPrice($_product)){ ?>
+                                <p class="old-price" >
+                                <?php echo Mage::helper('dailydeal')->__('Regular Price:'); ?>
+                                <span class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>-related">
+                                    <span class="price"><?php echo $_coreHelper->currency($_regularPrice, true, false) ?></span>
+                                </span>
+                            </p>        
+                            <p class="special-price">
+                                <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                                    <?php echo Mage::helper('dailydeal')->__('Special Price:'); ?>
+                                    <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>
+                                </span>
+                            </p>
+                            <?php }else{
+                                $_pastdeal->setMinPriceFollowProductType($_product);?>
+                            <p class="special-price">
+                                <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                                    <?php echo Mage::helper('dailydeal')->__('Special Price:'); ?>
+            <?php echo $_coreHelper->currency($_product->getData('min_price'), true, false) ?>
+                                </span>
+                            </p>
+                                
+                            <?php } ?>
                             
                         
                         </div>
-                        <div class="actions">
-                            <div class="mwdld_coming_date add-to-links">
-                                    <?php if ($soldqty > 1 || $soldqty == 0) { ?>
-                                        <?php echo Mage::helper('dailydeal')->__('There are <span class="deal-qty-one">%s items</span> sold.', $soldqty); ?>
-                                    <?php } elseif ($soldqty == 1) { ?>
-                                        <?php echo Mage::helper('dailydeal')->__('There are <span class="deal-qty-one">%s items</span> sold.', $soldqty); ?>
+                        <div class="mwdld_coming_date">
+                                <?php if ($soldqty > 1 || $soldqty == 0) { ?>
+                                    <?php echo Mage::helper('dailydeal')->__('There are <span class="deal-qty-one">%s items</span> sold.', $soldqty); ?>
+                                <?php } elseif ($soldqty == 1) { ?>
+                                    <?php echo Mage::helper('dailydeal')->__('There are <span class="deal-qty-one">%s items</span> sold.', $soldqty); ?>
 
-                                    <?php } ?>	            
-                            </div>
+                                <?php } ?>	            
                         </div>
                     </li>
                 <?php if ($i % $_columnCount == 0 || $i == $_collectionSize): ?>
@@ -200,67 +234,3 @@ $_helper = $this->helper('catalog/output');
         </div>
     </div>
 <?php endif; ?>
-
-<script type="text/javascript">
-     <?php if($ajaxcart == '1' || $ajaxcart == '2') { ?>
-	jQuery.noConflict();
-	
-	jQuery('.fancybox').live('click', function() {
-	    jQuery('#fancybox-loading').show();
-        });
-	
-	jQuery('.fancybox').fancybox(
-			{
-			   hideOnContentClick : true,
-			   width: 630,
-			   autoDimensions: true,
-               type : 'iframe',
-			   showTitle: false,
-			   scrolling: 'no',
-			   onComplete: function(){
-				jQuery('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
-					jQuery('#fancybox-loading').hide();
-					jQuery('#fancybox-content').height(jQuery(this).contents().find('body').height()+30);
-					jQuery.fancybox.resize();
-				 });
-
-			   }
-			}
-		);
-	
-	function showOptions(id){
-		jQuery('#fancybox'+id).trigger('click');
-	}
-		
-	function setAjaxData(data,iframe){
-		if(data.status == 'ERROR'){
-			alert(data.message);
-		}else{
-		    successMessage(data.message);
-			if(jQuery('.block-cart')){
-	            jQuery('.block-cart').replaceWith(data.sidebar);
-	        }
-	        if(jQuery('.header .links')){
-	            jQuery('.header .links').replaceWith(data.toplink);
-	        }
-	        jQuery.fancybox.close();
-		}
-	}
-	function setLocationAjax(url,id){
-		url += 'isAjax/1';
-		url = url.replace("checkout/cart","ajax/index");
-		jQuery('#ajax_loader'+id).show();
-		try {
-			jQuery.ajax( {
-				url : url,
-				dataType : 'json',
-				success : function(data) {
-					jQuery('#ajax_loader'+id).hide();
-         			setAjaxData(data,false);           
-				}
-			});
-		} catch (e) {
-		}
-	}
-	 <?php } ?>
-</script>

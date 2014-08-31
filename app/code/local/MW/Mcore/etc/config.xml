@@ -2,7 +2,7 @@
 <config>
     <modules>
         <MW_Mcore>
-            <version>3.0.1</version>
+            <version>3.0.4</version>
         </MW_Mcore>
     </modules>
     <frontend>
@@ -382,14 +382,20 @@
 						<url>http://www.mage-world.com/magento-store-credit-extension.html</url>
 						<config>storecreditpro/config/enabled</config>
 					</extension29>
-					<extension30>
-  		        		<key>MW_AffiliateLite</key>
-  		        		<name>Affiliate Lite</name>
-  		        		<url>http://www.mage-world.com/affiliate-lite-magento-extension.html</url>
-  		        		<config>affiliate/config/enabled</config>        		
-  		        	</extension30> 
 
-															
+					<extension30>
+        		<key>MW_AffiliateLite</key>
+        		<name>Affiliate Lite</name>
+        		<url>http://www.mage-world.com/affiliate-lite-magento-extension.html</url>
+        		<config>affiliate/config/enabled</config>        		
+        	</extension30> 
+
+					<extension31>
+        		<key>MW_AjaxCart</key>
+        		<name>Ajax Cart Pro</name>
+        		<url>http://www.mage-world.com/magento-ajax-cart-extension.html</url>
+        		<config>ajaxcart/config/enabled</config>        		
+        	</extension31> 
 				</extensions> 
        		 	
        		 	

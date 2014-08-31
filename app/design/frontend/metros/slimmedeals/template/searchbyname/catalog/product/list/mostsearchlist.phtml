@@ -1,0 +1,41 @@
+<?php
+$mostSearched = $this->getMostSearchedCollection();
+$_helper = $this->helper('catalog/output');
+?>
+<div class="products">
+    <?php if($mostSearched): ?>
+    <dl class="row">
+    <?php foreach($mostSearched as $product): ?>
+        <?php $_product = Mage::getModel('catalog/product')->loadByAttribute('name', $product->getName()) ?>
+        <?php if($_product): ?>
+        <dd class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <div class="product-main">
+                <div class="product-image">
+                    <a href="<?php echo Mage::getUrl()."searchbyname/result/?q=".$_product->getName() ?>">
+                        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize(250) ?>" />
+                    </a>
+                </div>
+                <div class="product-name">
+                    <a href="<?php echo $_product->getProductUrl()?>"><?php echo $_product->getName() ?></a>
+                </div>
+            </div>
+        </dd>
+        <?php endif; ?>
+
+        <?php $count++ ?>
+        <?php if($count == 4): ?>
+    </dl>
+    <div class="more-view-link">
+        <a href="" class="more-view"><span><?php echo $this->__('More SmartPhones ') ?></span><img src="<?php echo $this->getSkinUrl('images/searchbyname/more_btn2.jpg')?>"></a>
+    </div>
+    <div class="clearfix"></div>
+    <dl class="product-line row">
+        <?php endif; ?>
+
+        <?php endforeach; ?>
+    </dl>
+    <?php endif; ?>
+    <div class="more-view-link">
+        <a href="" class="more-view"><span><?php echo $this->__('More SmartPhones ') ?></span><img src="<?php echo $this->getSkinUrl('images/searchbyname/more_btn2.jpg') ?>"></a>
+    </div>
+</div>
