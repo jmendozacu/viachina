@@ -2,11 +2,25 @@
 <layout version="0.1.0">
     <default>
         <reference name="head">
+            <block type="magiczoomplus/header" name="magiczoomplus_header" before="magic360_header" />
             <action method="addCss">
                 <stylesheet>mw_dailydeal/css/promo_group.css</stylesheet>
             </action>
-            <block type="core/template"  name="dailydeal.countdown" as="countdown" template="mw_dailydeal/countdown.phtml"/>
+            <block type="core/template"  name="dailydeal.countdown" as="countdown" template="mw_dailydeal/countdown.phtml"/>            
+            
+            <action method="addJs"><script>scriptaculous/scriptaculous.js</script></action>
+            <action method="addJs"><script>varien/product.js</script></action>
+            <action method="addCss"><stylesheet>iceberg/videogallery/css/videogallery.css</stylesheet></action>
+            
+            <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+        
         </reference>
+        <reference name="head">
+            <remove name="store_language" />            
+        </reference>
+        
         <reference name="left">
             <block type="dailydeal/sidebar_todaydeal" name="todaydeal_left" before="-">
                 <action method="setTemplate">
@@ -42,10 +56,8 @@
             </block>								
         </reference>
     </default>
-	
-    
-    
-    
+
+                            
     <dailydeal_comming_index>
         <remove name="todaydeal_right"/>
         <remove name="activedeal_right"/>
@@ -105,30 +117,51 @@
     
     
     <dailydeal_index_index>
-        <remove name="todaydeal_right"/>
-        <remove name="activedeal_right"/>
-        <remove name="calendar_right"/>
-        <remove name="todaydeal_left"/>
-        <remove name="activedeal_left"/>
-        <remove name="calendar_left"/>
-        <reference name="root">
-            <action method="setTemplate">
-                <template helper="dailydeal/data/chooseColumnLayout"/>
-            </action>
-        </reference>
-        <reference name="content">
-            <block type="dailydeal/showtabs_active" name="content_tab" template="mw_dailydeal/showtabs/active.phtml">
-                <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
-                    <block type="page/html_pager" name="product_list_toolbar_pager"/>
+            <remove name="todaydeal_right"/>
+            <remove name="activedeal_right"/>
+            <remove name="calendar_right"/>
+            <remove name="todaydeal_left"/>
+            <remove name="activedeal_left"/>
+            <remove name="calendar_left"/>
+            <reference name="root">
+                <action method="setTemplate">
+                    <template helper="dailydeal/data/chooseColumnLayout"/>
+                </action>
+            </reference>
+            <reference name="content">
+                
+                <block type="dailydeal/showtabs_active" name="content_tab" template="mw_dailydeal/showtabs/active.phtml">
+                    
+                        
+                    <!--
+                    <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/summary.phtml</template></action>
+                    <action method="addReviewSummaryTemplate"><type>short</type><template>review/helper/summary_short.phtml</template></action>
+                    <action method="addReviewSummaryTemplate"><type>...</type><template>...</template></action>
+                    -->
+                    
+                    <block type="videogallery/video" name="product.info.media" as="media">        
+                    
+                        <action method="setTemplate">
+                            <template helper="magiczoomplus/settings/getBlockTemplate">
+                                <name>product.info.media</name>
+                                <template>magiczoomplus/media.phtml</template>
+                            </template>
+                        </action>
+                    </block>                                                         
+                    <block type="core/text_list" name="alert.urls" as="alert_urls" translate="label">
+                        <label>Alert Urls</label>
+                    </block>
+
+                           
+                    
+                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
                 </block>
-                <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
-                <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
-                <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
-                <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
-                <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
-                <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
-            </block>
-        </reference>
+            </reference>
     </dailydeal_index_index>
 
     <catalog_product_view>
@@ -140,6 +173,7 @@
       		<remove name="activedeal_left"/>
       		<remove name="calendar_left"/> 
       		-->
+       
     </catalog_product_view>
     <!-- Support for all type product -->
     

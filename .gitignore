@@ -6,3 +6,4 @@
 /lib/Mage/
 /lib/Varien/
 *.bak
+.idea/

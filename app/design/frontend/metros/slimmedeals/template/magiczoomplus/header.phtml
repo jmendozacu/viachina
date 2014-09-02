@@ -42,12 +42,14 @@ if($force ||
         $scroll = $magicToolboxHelper->loadScroll();
         echo $scroll->getHeadersTemplate(str_replace('/magicscroll.js', '', $this->getSkinUrl('js/magicscroll.js')), str_replace('/magicscroll.css', '', $this->getSkinUrl('css/magiczoomplus/magicscroll.css')));
     }
+    
     if($page == 'product' && $this->getRequest()->getModuleName() != 'review') {
         $current_product = Mage::registry('current_product');
         if($current_product) {
             $current_product_id = $current_product->getId();
         }
 ?>
+
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/magictoolbox_utils.js'); ?>"></script>
 <script type="text/javascript">
     var magicToolboxProductId = <?php echo $current_product_id; ?>;
