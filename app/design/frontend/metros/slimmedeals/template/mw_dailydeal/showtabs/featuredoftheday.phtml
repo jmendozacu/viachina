@@ -97,7 +97,7 @@ $_helper = $this->helper('catalog/output');
                     ?>
                     <li class="item<?php if (++$_iterator == sizeof($_activedealsCollection)): ?> last<?php endif; ?> product-view">
                         <?php // Product Image ?>
-                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image horizontal-image">
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image horizontal-image product-img-box">
                             <img class="image-responsive" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
                         </a>
                         <?php // Product description ?>
@@ -116,16 +116,14 @@ $_helper = $this->helper('catalog/output');
                                 <?php if($_activedeal->checkDealPrice($_product)){ ?>
 
                                     <p class="old-price" >
-                                        <?php echo Mage::helper('dailydeal')->__('Regular Price:'); ?>
-                                            <span class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>-related">
-                                            <span class="price"><?php echo $_coreHelper->currency($_regularPrice, true, false) ?></span>
+                                        <span class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>-related">
+                                            <span class="price">Van <?php echo $_coreHelper->currency($_regularPrice, true, false) ?>,-</span>
                                         </span>
                                     </p>
 
                                     <p class="special-price">
                                     <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
-                                        <?php echo Mage::helper('dailydeal')->__('Special Price:'); ?>
-                                        <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>
+                                        Voor <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>,-
                                     </span>
                                     </p>
 
@@ -142,22 +140,16 @@ $_helper = $this->helper('catalog/output');
                                 <?php } ?>
                                 </div>
                                 <div class="discount-block">
-                                    -70%;
+                                    -70%
                                 </div>
+                                <div style="clear: both"></div>
 
-                            <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
-                            <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></a></h2>
+                                <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+                                <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></a></h2>
                             <?php if ($_product->getRatingSummary()): ?>
                                 <?php echo $this->getReviewsSummaryHtml($_product) ?>
                             <?php endif; ?>
 
-                                <div class="mwdld_coming_date">
-                                    <?php if ($soldqty > 1 || $soldqty == 0) { ?>
-                                        <?php echo Mage::helper('dailydeal')->__('There are <span class="deal-qty-one">%s items</span> sold.', $soldqty); ?>                 
-                                    <?php } elseif ($soldqty == 1) { ?>
-                                        <?php echo Mage::helper('dailydeal')->__('There are <span class="deal-qty-one">%s items</span> sold.', $soldqty); ?>                 
-                                    <?php } ?>                
-                                </div>
                                 <div class="desc std">
                                     <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
                                     <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>

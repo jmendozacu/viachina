@@ -652,6 +652,7 @@ span.deal-qty{
     width: 100%;
     overflow: auto;
     position: relative;
+    
 }
 
 .tab-deal .tabs{
@@ -927,7 +928,7 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
 }
 
 .deals-block .block-subscribe{
-    width: 400px;
+    width: 300px;
     display: inline-block;
     float: right;
     margin-bottom: 0px;
@@ -966,12 +967,54 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
 .deals-block .price-block{
     display: inline-block;
     width: 300px;
-    vertical-align: top;
+    vertical-align: middle;
+    float: left;
 }
 
 .deals-block .discount-block{
     display: inline-block;
-    width: 200px;
+    text-align: right;
+    font-size: 44px !important;
+    background-color: #FB6605;
+    color: white;
+    font-family: "Helvetica";
+    font-weight: bold;
+    float: right;
+}
+
+.deals-block .old-price{
+    width: auto;
+}
+
+.deals-block .old-price{
+    text-decoration: none;
+}
+
+.deals-block  .product-view .horizontal-shop{
+    padding-left: 20px;
+}
+
+.deals-block .product-view .product-shop h2{
+    display: block;
+    font-family: 'Helvetica';
+    font-size: 24px;
+}
+
+.deals-block .product-view .product-shop .regular-price .price {
+    font-size: 32px !important;
+    color: rgb(118,113,113);
+    font-family: 'Helvetica';
+}
+
+.deals-block .product-view .product-shop .special-price .price {
+    font-size: 44px !important;
+    color: #FB6605;
+    font-family: 'Helvetica';
+    font-weight: bold;
+}
+
+.deals-block .f-fix{
+    width: 95%;
 }
 
 
@@ -980,5 +1023,76 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
 .tab-title{
     color: #0270c0;
     width: 300px;
+    margin-left: 20px;
     display: inline-block;
+}
+
+@media only screen and (max-width: 1023px) and (min-width: 768px){
+    .deals-block{
+        width:770px;
+    }
+    .tab-deal .tabs li.featured {
+        margin-left: 9%;
+    }
+
+    .deals-block .discount-block{
+        float: left;
+    }
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 1024px){
+    .deals-block{
+        width:1010px;
+    }
+
+    .deals-block .discount-block{
+        float: left;
+    }
+
+    .tab-deal .tabs li.featured {
+        margin-left: 20%;
+    }
+}
+
+@media only screen and (max-width: 767px) and (min-width: 480px){
+     .tab-deal .tabs li.featured {
+        margin-left: 15%;
+    }
+    .tab-deal .tabs li {        
+        width: 100px;        
+    }
+
+    .deals-block .discount-block{
+        float: left;
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    .deals-block{
+        width:312px;
+    }
+    .tab-deal .tabs li {       
+        width: 100%;
+        margin: 0px;
+    }
+    .tab-deal .tabs li.featured {
+        margin: 0px;
+    }
+    .deals-block .product-view .product-img-box {        
+        width: 302px;
+    }
+
+    .col1-layout .deals-block  .product-view .horizontal-shop{
+        width: 302px;
+    }
+
+    .deals-block .discount-block{
+        float: left;
+    }
+
+    .deals-block .product-view .product-shop .special-price .price{
+        float: left;
+        font-size: 40px !important;
+    }
+
 }
