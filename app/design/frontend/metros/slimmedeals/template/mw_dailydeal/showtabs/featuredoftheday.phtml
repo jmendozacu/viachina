@@ -95,17 +95,15 @@ $_helper = $this->helper('catalog/output');
                     $soldqty = $_activedeal->getSoldQty();
                     $_product = Mage::getModel('catalog/product')->load($_activedeal->getProductId());
                     ?>
-                    <li class="item<?php if (++$_iterator == sizeof($_activedealsCollection)): ?> last<?php endif; ?>">
+                    <li class="item<?php if (++$_iterator == sizeof($_activedealsCollection)): ?> last<?php endif; ?> product-view">
                         <?php // Product Image ?>
-                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img class="image-responsive" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(300); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image horizontal-image">
+                            <img class="image-responsive" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                        </a>
                         <?php // Product description ?>
-                        <div class="product-shop">
-                            <div class="f-fix"> 
-                                <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
-                                <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></a></h2>
-                                <?php if ($_product->getRatingSummary()): ?>
-                                    <?php echo $this->getReviewsSummaryHtml($_product) ?>
-                                <?php endif; ?>
+                        <div class="horizontal-shop product-shop">
+                            <div class="f-fix">
+
                                 <?php //echo $this->getPriceHtml($_product, true) ?>
                                 <?php
                                 $_coreHelper = $this->helper('core');
@@ -113,30 +111,45 @@ $_helper = $this->helper('catalog/output');
                                 $_regularPrice = $_taxHelper->getPrice($_product, $_product->getPrice());
                                 $_finalPrice = $_activedeal->getDailydealPrice();
                                 ?>
+
+                                <div class="price-block">
                                 <?php if($_activedeal->checkDealPrice($_product)){ ?>
-                                <p class="old-price" >
-                                <?php echo Mage::helper('dailydeal')->__('Regular Price:'); ?>
-                                <span class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>-related">
-                                    <span class="price"><?php echo $_coreHelper->currency($_regularPrice, true, false) ?></span>
-                                </span>
-                            </p>
-                            
-                            <p class="special-price">
-                                <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
-                                    <?php echo Mage::helper('dailydeal')->__('Special Price:'); ?>
-                                    <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>
-                                </span>
-                            </p>
-                            <?php }else{
-                                $_activedeal->setMinPriceFollowProductType($_product);?>
-                            <p class="special-price">
-                                <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
-                                    <?php echo Mage::helper('dailydeal')->__('Special Price:'); ?>
-            <?php echo $_coreHelper->currency($_product->getData('min_price'), true, false) ?>
-                                </span>
-                            </p>
+
+                                    <p class="old-price" >
+                                        <?php echo Mage::helper('dailydeal')->__('Regular Price:'); ?>
+                                            <span class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>-related">
+                                            <span class="price"><?php echo $_coreHelper->currency($_regularPrice, true, false) ?></span>
+                                        </span>
+                                    </p>
+
+                                    <p class="special-price">
+                                    <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                                        <?php echo Mage::helper('dailydeal')->__('Special Price:'); ?>
+                                        <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>
+                                    </span>
+                                    </p>
+
+
+                                <?php }else{
+                                    $_activedeal->setMinPriceFollowProductType($_product);?>
+                                <p class="special-price">
+                                    <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                                        <?php echo Mage::helper('dailydeal')->__('Special Price:'); ?>
+                                    <?php echo $_coreHelper->currency($_product->getData('min_price'), true, false) ?>
+                                    </span>
+                                </p>
                                 
-                            <?php } ?>
+                                <?php } ?>
+                                </div>
+                                <div class="discount-block">
+                                    -70%;
+                                </div>
+
+                            <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+                            <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></a></h2>
+                            <?php if ($_product->getRatingSummary()): ?>
+                                <?php echo $this->getReviewsSummaryHtml($_product) ?>
+                            <?php endif; ?>
 
                                 <div class="mwdld_coming_date">
                                     <?php if ($soldqty > 1 || $soldqty == 0) { ?>
