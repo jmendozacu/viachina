@@ -5,6 +5,10 @@
             <action method="addCss">
                 <stylesheet>mw_dailydeal/css/promo_group.css</stylesheet>
             </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>mw_dailydeal/js/mw_deal.js</name>
+            </action>
             <block type="core/template"  name="dailydeal.countdown" as="countdown" template="mw_dailydeal/countdown.phtml"/>
         </reference>
         <reference name="left">

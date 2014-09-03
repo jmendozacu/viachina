@@ -94,6 +94,10 @@ $_helper = $this->helper('catalog/output');
                     $dealqty = $_activedeal->getDealQty();
                     $soldqty = $_activedeal->getSoldQty();
                     $_product = Mage::getModel('catalog/product')->load($_activedeal->getProductId());
+
+                    Mage::unregister('product');
+                    Mage::register('product', $_product);
+
                     ?>
                     <li class="item<?php if (++$_iterator == sizeof($_activedealsCollection)): ?> last<?php endif; ?> product-view">
                         <?php // Product Image ?>
@@ -146,25 +150,30 @@ $_helper = $this->helper('catalog/output');
 
                                 <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
                                 <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></a></h2>
-                            <?php if ($_product->getRatingSummary()): ?>
-                                <?php echo $this->getReviewsSummaryHtml($_product) ?>
-                            <?php endif; ?>
 
                                 <div class="desc std">
                                     <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
-                                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
+                                    <a  class="link-learn more-info">Meer informatie...</a>
                                 </div>
 
-                                <ul class="add-to-links">
-                                    <?php if ($this->helper('wishlist')->isAllow()) : ?>
-                                        <li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
-                                    <?php endif; ?>
-                                    <?php if ($_compareUrl = $this->getAddToCompareUrl($_product)): ?>
-                                        <li><span class="separator">|</span> <a href="<?php echo $_compareUrl ?>" class="link-compare"><?php echo $this->__('Add to Compare') ?></a></li>
-                                    <?php endif; ?>
-                                </ul>
                             </div>
                         </div>
+
+                        <div style="clear: both"> </div>
+
+                        <div >
+                            <?php
+                                $countdown = $this->getLayout()->createBlock('dailydeal/deal');
+                                $countdown->setData('product', $_product);
+                                echo $countdown->setTemplate('mw_dailydeal/catalog/product/countdown.phtml')->toHtml();
+                            ?>
+                        </div>
+
+                        <?php
+                        echo $this->getLayout()->createBlock('catalog/product_view_attributes')->setTemplate('catalog/product/view/attributes.phtml')->toHtml();
+                        ?>
+
+
                     </li>
                 <?php endforeach; ?>
         </ol>
