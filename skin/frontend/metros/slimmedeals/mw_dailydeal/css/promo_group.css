@@ -859,6 +859,8 @@ span.deal-qty{
     clear: both;
     width: 50%;
     padding-left: 20px;
+    display: inline-block;
+    vertical-align: top;
 }
 img.mwdld_img_sale{position: absolute; top: 15px; left: 15px; z-index: 10;}
 .products-list li.item img.mwdld_img_sale{top: 10px; left: 10px;}
@@ -1035,75 +1037,6 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     display: inline-block;
 }
 
-@media only screen and (max-width: 1023px) and (min-width: 768px){
-    .deals-block{
-        width:770px;
-    }
-    .tab-deal .tabs li.featured {
-        margin-left: 9%;
-    }
-
-    .deals-block .discount-block{
-        float: left;
-    }
-}
-
-@media only screen and (max-width: 1199px) and (min-width: 1024px){
-    .deals-block{
-        width:1010px;
-    }
-
-    .deals-block .discount-block{
-        float: left;
-    }
-
-    .tab-deal .tabs li.featured {
-        margin-left: 20%;
-    }
-}
-
-@media only screen and (max-width: 767px) and (min-width: 480px){
-     .tab-deal .tabs li.featured {
-        margin-left: 15%;
-    }
-    .tab-deal .tabs li {        
-        width: 100px;        
-    }
-
-    .deals-block .discount-block{
-        float: left;
-    }
-}
-
-@media only screen and (max-width: 479px) {
-    .deals-block{
-        width:312px;
-    }
-    .tab-deal .tabs li {       
-        width: 100%;
-        margin: 0px;
-    }
-    .tab-deal .tabs li.featured {
-        margin: 0px;
-    }
-    .deals-block .product-view .product-img-box {        
-        width: 302px;
-    }
-
-    .col1-layout .deals-block  .product-view .horizontal-shop{
-        width: 302px;
-    }
-
-    .deals-block .discount-block{
-        float: left;
-    }
-
-    .deals-block .product-view .product-shop .special-price .price{
-        float: left;
-        font-size: 40px !important;
-    }
-
-}
 
 .more-info{
     cursor: pointer;
@@ -1148,7 +1081,110 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     margin-top: 6px;
 }
 
+.btn_buy{
+    display: inline-block;
+    width: 45%;
+    padding-left: 20px;
+    margin-top: 38px;
+}
+
+.btn_buy button.button{
+    background-color: #FB6605;
+    padding: 0px 15px 0px 13px;
+    font-family: 'FontAwesome';
+    font-size: 46px;
+    text-transform: none;
+}
+
+.btn_buy button:before {
+    content: "\f07a";
+}
 
 
 
+@media only screen and (max-width: 1023px) and (min-width: 768px){
+    .deals-block{
+        width:770px;
+    }
+    .tab-deal .tabs li.featured {
+        margin-left: 9%;
+    }
 
+    .deals-block .discount-block{
+        float: left;
+    }
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 1024px){
+    .deals-block{
+        width:1010px;
+    }
+
+    .deals-block .discount-block{
+        float: left;
+    }
+
+    .tab-deal .tabs li.featured {
+        margin-left: 20%;
+    }
+}
+
+@media only screen and (max-width: 767px) and (min-width: 480px){
+     .tab-deal .tabs li.featured {
+        margin-left: 15%;
+    }
+    .tab-deal .tabs li {        
+        width: 100px;        
+    }
+
+    .deals-block .discount-block{
+        float: left;
+    }
+
+    .mwdld_display_cate{
+        width: 100%;
+    }
+    .btn_buy{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    .deals-block{
+        width:312px;
+    }
+    .tab-deal .tabs li {       
+        width: 100%;
+        margin: 0px;
+    }
+    .tab-deal .tabs li.featured {
+        margin: 0px;
+    }
+    .deals-block .product-view .product-img-box {        
+        width: 302px;
+    }
+
+    .col1-layout .deals-block  .product-view .horizontal-shop{
+        width: 302px;
+    }
+
+    .deals-block .discount-block{
+        float: left;
+    }
+
+    .deals-block .product-view .product-shop .special-price .price{
+        float: left;
+        font-size: 40px !important;
+    }
+
+    .mwdld_display_cate{
+        width: 100%;
+    }
+    .btn_buy {
+        width: 100%;
+    }
+
+    .btn_buy button.button{
+        font-size: 42px;
+    }
+}
