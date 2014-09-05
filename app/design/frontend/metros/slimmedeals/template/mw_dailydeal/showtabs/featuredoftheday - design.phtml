@@ -1,0 +1,194 @@
+<?php $_dld_color_title = Mage::helper('dailydeal')->getConfigSchemeColor(); ?>
+<?php $_dld_color_coundown = Mage::helper('dailydeal')->getConfigCountdownColor(); ?>
+<?php $_dld_color_lighight = Mage::helper('dailydeal')->getConfigHighlightColor(); ?> 
+<?php
+	function colourBrightnesstab($hex, $percent) {
+	$hash = '';
+	if (stristr($hex,'#')) {
+		$hex = str_replace('#','',$hex);
+		$hash = '#';
+	}
+	/// HEX TO RGB
+	$rgb = array(hexdec(substr($hex,0,2)), hexdec(substr($hex,2,2)), hexdec(substr($hex,4,2)));
+	//// CALCULATE
+	for ($i=0; $i<3; $i++) {
+		// See if brighter or darker
+		if ($percent > 0) {
+			// Lighter
+			$rgb[$i] = round($rgb[$i] * $percent) + round(255 * (1-$percent));
+		} else {
+			// Darker
+			$positivePercent = $percent - ($percent*2);
+			$rgb[$i] = round($rgb[$i] * $positivePercent) + round(0 * (1-$positivePercent));
+		}
+		// In case rounding up causes us to go to 256
+		if ($rgb[$i] > 255) {
+			$rgb[$i] = 255;
+		}
+	}
+	//// RBG to Hex
+	$hex = '';
+	for($i=0; $i < 3; $i++) {
+		// Convert the decimal digit to hex
+		$hexDigit = dechex($rgb[$i]);
+		// Add a leading zero if necessary
+		if(strlen($hexDigit) == 1) {
+		$hexDigit = "0" . $hexDigit;
+		}
+		// Append to the hex string
+		$hex .= $hexDigit;
+	}
+	return $hash.$hex;
+}
+?>
+
+<div class="tab-deal">
+    <ul id="tabs" class="tabs" >      
+      <li class="active featured">
+        <a href="<?php echo Mage::helper('dailydeal')->getUrlHttp('dailydeal/index'); ?>">
+            <span>Deal van de Dag</span>
+        </a>
+      </li>
+      <li>
+        <a href="<?php echo Mage::helper('dailydeal')->getUrlHttp('dailydeal/index'); ?>">
+            <span>Alle Deals</span>
+        </a>
+      </li>
+      <li class="past">
+        <a href="<?php echo Mage::helper('dailydeal')->getUrlHttp('dailydeal/past'); ?>">
+            <span>Gemiste Deals</span>
+        </a>
+      </li>
+    </ul>
+</div>
+
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<?php
+$_activedealsCollection = $this->getActivedeals();
+$_helper = $this->helper('catalog/output');
+?>
+
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_abc')->toHtml(); ?>
+
+<?php if (!$_activedealsCollection->count()): ?>
+    <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+    <div class="category-products responsive-list list-actdeals deals-block">
+        
+        <?php // List mode ?>
+        <div class="tab-title">
+            <h1 >Deal van de Dag</h1>
+        </div>
+
+        <?php
+            echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('newsletter/subscribe4.phtml')->toHtml();
+        ?>
+
+        <?php $_iterator = 0; ?>
+        <ol class="products-list" id="products-list">
+           <?php foreach ($_activedealsCollection as $_activedeal): ?>
+                    <?php
+                    $dealqty = $_activedeal->getDealQty();
+                    $soldqty = $_activedeal->getSoldQty();
+                    $_product = Mage::getModel('catalog/product')->load($_activedeal->getProductId());
+
+                    Mage::unregister('product');
+                    Mage::register('product', $_product);
+
+                    ?>
+                    <li class="item<?php if (++$_iterator == sizeof($_activedealsCollection)): ?> last<?php endif; ?> product-view">
+                        <?php // Product Image ?>
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image horizontal-image product-img-box">
+                            <img class="image-responsive" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                        </a>
+                        <?php // Product description ?>
+                        <div class="horizontal-shop product-shop">
+                            <div class="f-fix">
+
+                                <?php //echo $this->getPriceHtml($_product, true) ?>
+                                <?php
+                                $_coreHelper = $this->helper('core');
+                                $_taxHelper = $this->helper('tax');
+                                $_regularPrice = $_taxHelper->getPrice($_product, $_product->getPrice());
+                                $_finalPrice = $_activedeal->getDailydealPrice();
+                                ?>
+
+                                <div class="price-block">
+                                <?php if($_activedeal->checkDealPrice($_product)){ ?>
+
+                                    <p class="old-price" >
+                                        <span class="regular-price" id="product-price<?php echo $this->getIdSuffix() ?>-related">
+                                            <span class="price">Van <?php echo $_coreHelper->currency($_regularPrice, true, false) ?>,-</span>
+                                        </span>
+                                    </p>
+
+                                    <p class="special-price">
+                                    <span class="price" id="product-price-<?php echo $this->getIdSuffix() ?>">
+                                        Voor <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>,-
+                                    </span>
+                                    </p>
+
+
+                                <?php }else{
+                                    $_activedeal->setMinPriceFollowProductType($_product);?>
+                                <p class="special-price">
+                                    <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                                        <?php echo Mage::helper('dailydeal')->__('Special Price:'); ?>
+                                    <?php echo $_coreHelper->currency($_product->getData('min_price'), true, false) ?>
+                                    </span>
+                                </p>
+                                
+                                <?php } ?>
+                                </div>
+                                <div class="discount-block">
+                                    -70%
+                                </div>
+                                <div style="clear: both"></div>
+
+                                <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+                                <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></a></h2>
+
+                                <div class="desc std">
+                                    <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+                                    <a  class="link-learn more-info">Meer informatie...</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div style="clear: both"> </div>
+
+                        <div >
+                            <?php
+                                $countdown = $this->getLayout()->createBlock('dailydeal/deal');
+                                $countdown->setData('product', $_product);
+                                echo $countdown->setTemplate('mw_dailydeal/catalog/product/countdown.phtml')->toHtml();
+                            ?>
+                            <div class="btn_buy">
+                                <button type="button" title="In winkelwagen" class="button btn-cart" onclick="productAddToCartForm.submit(this)">
+
+                                    <span><span>Nu Kopen!</span></span>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <?php
+                        echo $this->getLayout()->createBlock('catalog/product_view_attributes')->setTemplate('catalog/product/view/attributes.phtml')->toHtml();
+                        ?>
+
+                        <div class="hr"></div>
+
+                    </li>
+                <?php endforeach; ?>
+        </ol>
+        <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+        
+    </div>
+<?php endif; ?>

@@ -108,6 +108,7 @@ class MW_Dailydeal_Block_Symbolic extends Mage_Core_Block_Template
         $tblCatalogStockItem = Mage::getSingleton('core/resource')->getTableName('cataloginventory_stock_item');
         $currenttime = date('Y-m-d H:i:s', Mage::getModel('core/date')->timestamp(time()));
 
+
         $collection = MW_Dailydeal_Model_Dailydeal::getModel()->getCollection()
                 ->addFieldToFilter('status', MW_Dailydeal_Model_Status::STATUS_ENABLED)
                 ->addFieldToFilter('expire', MW_Dailydeal_Model_Status::STATUS_EXPIRE_FALSE)
