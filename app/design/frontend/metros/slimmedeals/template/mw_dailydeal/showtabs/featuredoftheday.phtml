@@ -75,7 +75,7 @@ $_helper = $this->helper('catalog/output');
 ?>
 
 <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_abc')->toHtml(); ?>
-1111111111111111111111111
+
 <?php if (!$_activedealsCollection->count()): ?>
     <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
@@ -182,6 +182,8 @@ $_helper = $this->helper('catalog/output');
                         <?php
                         echo $this->getLayout()->createBlock('catalog/product_view_attributes')->setTemplate('catalog/product/view/attributes.phtml')->toHtml();
                         ?>
+
+                        <div class="hr"></div>
 
                     </li>
                 <?php endforeach; ?>

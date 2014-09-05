@@ -1100,6 +1100,100 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     content: "\f07a";
 }
 
+.slimmedeal-footer-container{
+    margin-top: 30px;
+}
+
+.slimmedeal-footer-container .nl-pamyant{
+    margin-top: 10px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slimmedeal-footer-container .nl-pamyant .nl1{
+    width: 320px;
+    margin-right: 25px;
+}
+
+.slimmedeal-footer-container .nl-pamyant .nl1 img{
+    width: 100%;
+    height: 40px;
+}
+
+.slimmedeal-footer-container .nl-pamyant .nl2{
+    width: 250px;
+    margin-right: 10px;
+}
+
+.slimmedeal-footer-container .nl-pamyant .nl2 img{
+    width: 100%;
+    height: 35px;
+}
+
+.slimmedeal-footer-container .nl-pamyant .nl3 {
+    width: 100px;
+}
+
+.slimmedeal-footer-container .nl-pamyant .nl3 img{
+    width: 100%;
+    margin-left: 6px;
+    height: 35px;
+    margin-top: 0px;
+}
+
+
+.slimmedeal-footer-container #footer_part .footer_link_box{
+    width: 80%;
+    float: none;
+    margin-top: 10px;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slimmedeal-footer-container #footer_part .footer_link_box .footer_link_box_right{
+    width: 100%;
+}
+
+.slimmedeal-footer-container #footer_part .footer_link_box .footer_link_box_right .link{
+    float: none;
+    display: inline-block;
+    padding-left: 1%;
+    width: auto;
+}
+
+
+.footer #footer_part{
+    border: 5px solid #FB6605;
+    padding-bottom: 5px;
+}
+
+.hr {
+    border-bottom: 1px solid #0270C0;
+    height: 1px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.last .hr {
+    display: none;
+}
+
+.data{
+    border: none;
+}
+
+.data-table tbody td{
+    border-bottom: none;
+}
+
+.products-list li.item{
+    border-bottom: none;
+}
+
+
+
 
 
 @media only screen and (max-width: 1023px) and (min-width: 768px){
@@ -1186,5 +1280,13 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
 
     .btn_buy button.button{
         font-size: 42px;
+    }
+
+    .slimmedeal-footer-container .nl-pamyant{
+        width: 100%;
+    }
+
+    .slimmedeal-footer-container .nl-pamyant .nl1 img {
+        width: 95;
     }
 }
