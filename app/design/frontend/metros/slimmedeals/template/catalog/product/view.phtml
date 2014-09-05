@@ -62,7 +62,7 @@ if ($layout == null || $layout == 'default')
             <?php echo $this->getChildHtml('media') ?>
         </div>
         <div class="default-shop product-shop">
-            
+
 
             <?php if ($this->canEmailToFriend()): ?>
                 <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
@@ -74,18 +74,18 @@ if ($layout == null || $layout == 'default')
             <?php echo $this->getTierPriceHtml() ?>
             <?php echo $this->getChildHtml('extrahint') ?>
 
-            
-            
+
+
             <?php if ($_product->getShortDescription()):?>
                 <div class="short-description">
                     <h2><?php echo $this->__('Quick Overview') ?></h2>
                     <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
                 </div>
             <?php endif;?>
-            
-            
-            
-            
+
+
+
+
             <?php if (!$this->hasOptions()):?>
                 <div class="add-to-box">
                     <?php if($_product->isSaleable()): ?>
@@ -103,20 +103,20 @@ if ($layout == null || $layout == 'default')
                 </div>
             <?php endif; ?>
 
-            
+
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
             <?php endif;?>
-            
-            
+
+
 
             <?php echo $this->getChildHtml('other');?>
 
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                 <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
             <?php endif;?>
-            
-            
+
+
              <div class="sharing-button">
 	     <!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style ">
@@ -133,12 +133,12 @@ if ($layout == null || $layout == 'default')
 
         </div>
 
-        
+
         <div class="product-right">
         <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('detail-block1')->toHtml() ?>
         </div>
         <div class="clearer"></div>
-        
+
     </form>
     <script type="text/javascript">
     //<![CDATA[
@@ -159,7 +159,7 @@ if ($layout == null || $layout == 'default')
 			url = url.replace("checkout/cart","ajax/index"); // New Code
 			var data = jQuery('#product_addtocart_form').serialize();
 			data += '&isAjax=1';
-			
+
 			jQuery('#ajax_loader').show();
 			try {
 				jQuery.ajax( {
@@ -167,7 +167,7 @@ if ($layout == null || $layout == 'default')
 					dataType : 'json',
 					type : 'post',
 					data : data,
-					
+
 					success : function(data) {
 					    //alert("dd");
 						jQuery('#ajax_loader').hide();
@@ -196,7 +196,7 @@ if ($layout == null || $layout == 'default')
 			}
 		}
 	}.bind(productAddToCartForm);
-	
+
     productAddToCartForm.submitLight = function(button, url){
             if(this.validator) {
                 var nv = Validation.methods;
@@ -212,9 +212,9 @@ if ($layout == null || $layout == 'default')
                 Object.extend(Validation.methods, nv);
             }
         }.bind(productAddToCartForm);
-	
+
     <?php } else { ?>
-	
+
 	var productAddToCartForm = new VarienForm('product_addtocart_form');
         productAddToCartForm.submit = function(button, url) {
             if (this.validator.validate()) {
@@ -262,7 +262,7 @@ if ($layout == null || $layout == 'default')
                 Object.extend(Validation.methods, nv);
             }
         }.bind(productAddToCartForm);
-	
+
     <?php } ?>
     //]]>
     </script>
@@ -271,10 +271,11 @@ if ($layout == null || $layout == 'default')
     <div class="product-collateral">
          <?php echo $this->getChildHtml('info_tabs') ?>
          <?php echo $this->getChildHtml('upsell_products') ?>
+
          <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('detail-block2')->toHtml() ?>
-         
+
     </div>
-    
+
 </div>
 
 
@@ -303,7 +304,7 @@ elseif ($layout == 'horizontal')
             <?php echo $this->getChildHtml('media') ?>
         </div>
         <div class="horizontal-shop product-shop">
-            
+
 
             <?php if ($this->canEmailToFriend()): ?>
                 <!--<p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>-->
@@ -315,18 +316,18 @@ elseif ($layout == 'horizontal')
             <?php echo $this->getTierPriceHtml() ?>
             <?php echo $this->getChildHtml('extrahint') ?>
 
-            
-            
+
+
             <?php if ($_product->getShortDescription()):?>
                 <div class="short-description">
                     <h2><?php echo $this->__('Quick Overview') ?></h2>
                     <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
                 </div>
             <?php endif;?>
-            
-            
-            
-            
+
+
+
+
             <?php if (!$this->hasOptions()):?>
                 <div class="add-to-box">
                     <?php if($_product->isSaleable()): ?>
@@ -344,20 +345,20 @@ elseif ($layout == 'horizontal')
                 </div>
             <?php endif; ?>
 
-            
+
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
             <?php endif;?>
-            
-            
+
+
 
             <?php echo $this->getChildHtml('other');?>
 
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                 <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
             <?php endif;?>
-            
-            
+
+
              <div class="sharing-button">
 	     <!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style ">
@@ -374,10 +375,10 @@ elseif ($layout == 'horizontal')
 
         </div>
 
-        
-        
+
+
         <div class="clearer"></div>
-        
+
     </form>
     <script type="text/javascript">
     //<![CDATA[
@@ -398,7 +399,7 @@ elseif ($layout == 'horizontal')
 			url = url.replace("checkout/cart","ajax/index"); // New Code
 			var data = jQuery('#product_addtocart_form').serialize();
 			data += '&isAjax=1';
-			
+
 			jQuery('#ajax_loader').show();
 			try {
 				jQuery.ajax( {
@@ -406,7 +407,7 @@ elseif ($layout == 'horizontal')
 					dataType : 'json',
 					type : 'post',
 					data : data,
-					
+
 					success : function(data) {
 					    //alert("dd");
 						jQuery('#ajax_loader').hide();
@@ -435,7 +436,7 @@ elseif ($layout == 'horizontal')
 			}
 		}
 	}.bind(productAddToCartForm);
-	
+
     productAddToCartForm.submitLight = function(button, url){
             if(this.validator) {
                 var nv = Validation.methods;
@@ -451,9 +452,9 @@ elseif ($layout == 'horizontal')
                 Object.extend(Validation.methods, nv);
             }
         }.bind(productAddToCartForm);
-	
+
     <?php } else { ?>
-	
+
 	var productAddToCartForm = new VarienForm('product_addtocart_form');
         productAddToCartForm.submit = function(button, url) {
             if (this.validator.validate()) {
@@ -501,7 +502,7 @@ elseif ($layout == 'horizontal')
                 Object.extend(Validation.methods, nv);
             }
         }.bind(productAddToCartForm);
-	
+
     <?php } ?>
     //]]>
     </script>
@@ -540,7 +541,7 @@ elseif ($layout == 'vertical')
             <?php echo $this->getChildHtml('media') ?>
         </div>
         <div class="vertical-shop product-shop">
-            
+
 
             <?php if ($this->canEmailToFriend()): ?>
                 <!--<p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>-->
@@ -552,18 +553,18 @@ elseif ($layout == 'vertical')
             <?php echo $this->getTierPriceHtml() ?>
             <?php echo $this->getChildHtml('extrahint') ?>
 
-            
-            
+
+
             <?php if ($_product->getShortDescription()):?>
                 <div class="short-description">
                     <h2><?php echo $this->__('Quick Overview') ?></h2>
                     <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
                 </div>
             <?php endif;?>
-            
-            
-            
-            
+
+
+
+
             <?php if (!$this->hasOptions()):?>
                 <div class="add-to-box">
                     <?php if($_product->isSaleable()): ?>
@@ -581,20 +582,20 @@ elseif ($layout == 'vertical')
                 </div>
             <?php endif; ?>
 
-            
+
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
             <?php endif;?>
-            
-            
+
+
 
             <?php echo $this->getChildHtml('other');?>
 
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                 <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
             <?php endif;?>
-            
-            
+
+
              <div class="sharing-button">
 	     <!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style ">
@@ -611,12 +612,12 @@ elseif ($layout == 'vertical')
 
         </div>
 
-        
+
         <div class="product-right">
         <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('detail-block1')->toHtml() ?>
         </div>
         <div class="clearer"></div>
-        
+
     </form>
     <script type="text/javascript">
     //<![CDATA[
@@ -637,7 +638,7 @@ elseif ($layout == 'vertical')
 			url = url.replace("checkout/cart","ajax/index"); // New Code
 			var data = jQuery('#product_addtocart_form').serialize();
 			data += '&isAjax=1';
-			
+
 			jQuery('#ajax_loader').show();
 			try {
 				jQuery.ajax( {
@@ -645,7 +646,7 @@ elseif ($layout == 'vertical')
 					dataType : 'json',
 					type : 'post',
 					data : data,
-					
+
 					success : function(data) {
 					    //alert("dd");
 						jQuery('#ajax_loader').hide();
@@ -674,7 +675,7 @@ elseif ($layout == 'vertical')
 			}
 		}
 	}.bind(productAddToCartForm);
-	
+
     productAddToCartForm.submitLight = function(button, url){
             if(this.validator) {
                 var nv = Validation.methods;
@@ -690,9 +691,9 @@ elseif ($layout == 'vertical')
                 Object.extend(Validation.methods, nv);
             }
         }.bind(productAddToCartForm);
-	
+
     <?php } else { ?>
-	
+
 	var productAddToCartForm = new VarienForm('product_addtocart_form');
         productAddToCartForm.submit = function(button, url) {
             if (this.validator.validate()) {
@@ -740,7 +741,7 @@ elseif ($layout == 'vertical')
                 Object.extend(Validation.methods, nv);
             }
         }.bind(productAddToCartForm);
-	
+
     <?php } ?>
     //]]>
     </script>
@@ -749,7 +750,9 @@ elseif ($layout == 'vertical')
     <div class="product-collateral">
          <?php echo $this->getChildHtml('info_tabs') ?>
           <?php echo $this->getChildHtml('upsell_products') ?>
+
          <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('detail-block2')->toHtml() ?>
+
     </div>
 </div>
 

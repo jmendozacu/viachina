@@ -27,12 +27,26 @@
 <div class="footer-container">
     <div id="footer_part1">
         <div id="footer_part2">
-    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer-block1')->toHtml() ?>
-    </div >
+
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer-block1')->toHtml() ?>
+        </div >
     </div>
     <div class="footer">
         <div id="footer_part">
-        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer-block2')->toHtml() ?>
+
+            <?php
+                // Normal Code is not working properly, so I changed
+                $block = Mage::getModel('cms/block')
+                    ->setStoreId(Mage::app()->getStore()->getId())
+                    ->load('footer-block2');
+
+                $helper = Mage::helper('cms');
+                $processor = $helper->getBlockTemplateProcessor();
+                $html = $processor->filter($block->getContent());
+                echo $html;
+            
+            ?>
+
         </div>
         <?php echo $this->getChildHtml() ?>
         <p class="bugs"><?php echo $this->__('Help Us to Keep Magento Healthy') ?> - <a href="http://www.magentocommerce.com/bug-tracking" onclick="this.target='_blank'"><strong><?php echo $this->__('Report All Bugs') ?></strong></a> <?php echo $this->__('(ver. %s)', Mage::getVersion()) ?></p>
@@ -44,21 +58,21 @@
 	    if($backtotop == '1' ) { ?>
 <a href="#" class="scrollup"></a>
 <script type="text/javascript">
-    jQuery(document).ready(function(){ 
- 
+    jQuery(document).ready(function(){
+
         jQuery(window).scroll(function(){
             if (jQuery(this).scrollTop() > 100) {
                 jQuery('.scrollup').fadeIn();
             } else {
                 jQuery('.scrollup').fadeOut();
             }
-        }); 
- 
+        });
+
         jQuery('.scrollup').click(function(){
             jQuery("html, body").animate({ scrollTop: 0 }, 600);
             return false;
         });
- 
+
     });
 </script>
 <?php } ?>
