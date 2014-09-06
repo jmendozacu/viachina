@@ -920,6 +920,7 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     border: 5px solid #FB6605;
     margin-top: -5px;    
     padding-top: 20px;
+    background-color: white;
 }
 
 .deals-block .products-list .product-image{
@@ -1081,14 +1082,23 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     margin-top: 6px;
 }
 
-.btn_buy{
+.mwdld_display_cate .past_date{
+    color: #0270C0;
+    font-size: 40px;
+    font-family: 'Helvetica';
+    margin-top: 38px;
+    margin-left: 10px;
+}
+
+.btn_buy, .buy_yet{
     display: inline-block;
     width: 45%;
     padding-left: 20px;
     margin-top: 38px;
 }
 
-.btn_buy button.button{
+
+.btn_buy button.button, .buy_yet button.button{
     background-color: #FB6605;
     padding: 0px 15px 0px 13px;
     font-family: 'FontAwesome';
@@ -1096,7 +1106,7 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     text-transform: none;
 }
 
-.btn_buy button:before {
+.btn_buy button:before, .buy_yet button:before {
     content: "\f07a";
 }
 
@@ -1193,14 +1203,24 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     border-bottom: none;
 }
 
+.page{
+    background:url(../images/background.jpg);
+}
 
-
+.header .quick-access{
+    border-bottom: 0px;
+    background-color: transparent !important;
+}
 
 
 @media only screen and (max-width: 1023px) and (min-width: 768px){
     .deals-block{
         width:770px;
     }
+    .footer #footer_part{
+        width: 770px;
+    }
+
     .tab-deal .tabs li.featured {
         margin-left: 9%;
     }
@@ -1208,10 +1228,18 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     .deals-block .discount-block{
         float: left;
     }
+
+    .buy_yet button.button{
+        font-size: 40px;
+    }
 }
 
 @media only screen and (max-width: 1199px) and (min-width: 1024px){
     .deals-block{
+        width:1010px;
+    }
+
+    .footer #footer_part{
         width:1010px;
     }
 
@@ -1239,7 +1267,7 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     .mwdld_display_cate{
         width: 100%;
     }
-    .btn_buy{
+    .btn_buy, .buy_yet{
         width: 100%;
     }
 }
@@ -1275,12 +1303,17 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     .mwdld_display_cate{
         width: 100%;
     }
-    .btn_buy {
+    .btn_buy, .buy_yet {
         width: 100%;
     }
 
+
     .btn_buy button.button{
         font-size: 42px;
+    }
+
+    .buy_yet button.button{
+        font-size: 32px;
     }
 
     .slimmedeal-footer-container .nl-pamyant{

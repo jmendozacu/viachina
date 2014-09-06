@@ -71,13 +71,13 @@ function colourBrightnesstab($hex, $percent) {
 ?>
 <?php
 //$_activedealsCollection = $this->getActivedeals();
-$_activedealsCollection = $this->getDeals();
+$_featuredCollection = $this->getDeals();
 $_helper = $this->helper('catalog/output');
 ?>
 
 <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_abc')->toHtml(); ?>
 
-<?php if (!$_activedealsCollection->count()): ?>
+<?php if (!$_featuredCollection->count()): ?>
     <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
     <div class="category-products responsive-list list-actdeals deals-block">
@@ -93,7 +93,7 @@ $_helper = $this->helper('catalog/output');
 
         <?php $_iterator = 0; ?>
         <ol class="products-list" id="products-list">
-            <?php foreach ($_activedealsCollection as $_activedeal): ?>
+            <?php foreach ($_featuredCollection as $_activedeal): ?>
                 <?php
                 $dealqty = $_activedeal->getDealQty();
                 $soldqty = $_activedeal->getSoldQty();
@@ -162,7 +162,9 @@ $_helper = $this->helper('catalog/output');
                                 <?php } ?>
                             </div>
                             <div class="discount-block">
-                                -70%
+                                -<?php
+                                echo round((1.0-$_finalPrice/$_regularPrice)*100);
+                                ?>%
                             </div>
                             <div style="clear: both"></div>
 

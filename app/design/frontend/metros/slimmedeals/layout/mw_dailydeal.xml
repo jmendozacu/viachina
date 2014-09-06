@@ -46,10 +46,10 @@
             </block>								
         </reference>
     </default>
-	
-    
-    
-    
+
+
+
+
     <dailydeal_comming_index>
         <remove name="todaydeal_right"/>
         <remove name="activedeal_right"/>
@@ -88,7 +88,7 @@
         <remove name="calendar_left"/>
         <reference name="root">
             <action method="setTemplate">
-                <template helper="dailydeal/data/chooseColumnLayout"/>
+                <template helper="dailydeal/data/chooseColumnLayout">page/1column.phtml</template>
             </action>
         </reference>
         <reference name="content">
