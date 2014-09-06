@@ -186,8 +186,7 @@ $_helper = $this->helper('catalog/output');
                         echo $countdown->setTemplate('mw_dailydeal/catalog/product/countdown.phtml')->toHtml();
                         ?>
                         <div class="btn_buy">
-                            <button type="button" title="In winkelwagen" class="button btn-cart" onclick="productAddToCartForm.submit(this)">
-
+                            <button type="button" title="In winkelwagen" class="button btn-cart" onclick="window.location.href = '<?php echo $_product->getProductUrl(); ?>'">
                                 <span><span>Nu Kopen!</span></span>
                             </button>
                         </div>
@@ -207,3 +206,4 @@ $_helper = $this->helper('catalog/output');
 
     </div>
 <?php endif; ?>
+
