@@ -115,9 +115,10 @@
         <remove name="todaydeal_left"/>
         <remove name="activedeal_left"/>
         <remove name="calendar_left"/>
+
         <reference name="root">
             <action method="setTemplate">
-                <template helper="dailydeal/data/chooseColumnLayout"/>
+                <template helper="dailydeal/data/chooseColumnLayout">page/1column.phtml</template>
             </action>
         </reference>
         <reference name="content">
