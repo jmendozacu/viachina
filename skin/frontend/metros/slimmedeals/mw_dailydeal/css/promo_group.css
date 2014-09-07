@@ -1221,6 +1221,10 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
         width: 770px;
     }
 
+    .slimmedeal-footer-container .nl-pamyant{
+        width: 720px;
+    }
+    
     .tab-deal .tabs li.featured {
         margin-left: 9%;
     }
@@ -1241,6 +1245,10 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
 
     .footer #footer_part{
         width:1010px;
+    }
+
+    .slimmedeal-footer-container .nl-pamyant{
+        width: 720px;
     }
 
     .deals-block .discount-block{
@@ -1270,6 +1278,8 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     .btn_buy, .buy_yet{
         width: 100%;
     }
+
+
 }
 
 @media only screen and (max-width: 479px) {
