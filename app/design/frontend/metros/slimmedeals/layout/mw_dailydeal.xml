@@ -1,16 +1,6 @@
 <?xml version="1.0" ?>
 <layout version="0.1.0">
     <default>
-        <reference name="head">
-            <action method="addCss">
-                <stylesheet>mw_dailydeal/css/promo_group.css</stylesheet>
-            </action>
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>mw_dailydeal/js/mw_deal.js</name>
-            </action>
-            <block type="core/template"  name="dailydeal.countdown" as="countdown" template="mw_dailydeal/countdown.phtml"/>
-        </reference>
         <reference name="left">
             <block type="dailydeal/sidebar_todaydeal" name="todaydeal_left" before="-">
                 <action method="setTemplate">
@@ -51,6 +41,16 @@
 
 
     <dailydeal_comming_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>mw_dailydeal/css/promo_group.css</stylesheet>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>mw_dailydeal/js/mw_deal.js</name>
+            </action>
+            <block type="core/template"  name="dailydeal.countdown" as="countdown" template="mw_dailydeal/countdown.phtml"/>
+        </reference>
         <remove name="todaydeal_right"/>
         <remove name="activedeal_right"/>
         <remove name="calendar_right"/>
@@ -80,6 +80,16 @@
     </dailydeal_comming_index>
     
     <dailydeal_past_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>mw_dailydeal/css/promo_group.css</stylesheet>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>mw_dailydeal/js/mw_deal.js</name>
+            </action>
+            <block type="core/template"  name="dailydeal.countdown" as="countdown" template="mw_dailydeal/countdown.phtml"/>
+        </reference>
         <remove name="todaydeal_right"/>
         <remove name="activedeal_right"/>
         <remove name="calendar_right"/>
@@ -109,6 +119,16 @@
     
     
     <dailydeal_index_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>mw_dailydeal/css/promo_group.css</stylesheet>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>mw_dailydeal/js/mw_deal.js</name>
+            </action>
+            <block type="core/template"  name="dailydeal.countdown" as="countdown" template="mw_dailydeal/countdown.phtml"/>
+        </reference>
         <remove name="todaydeal_right"/>
         <remove name="activedeal_right"/>
         <remove name="calendar_right"/>
