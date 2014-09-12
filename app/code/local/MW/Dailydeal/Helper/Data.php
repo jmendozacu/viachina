@@ -1673,12 +1673,15 @@ class MW_Dailydeal_Helper_Data extends Mage_Core_Helper_Abstract
      * Get url follow http or https
      */
     public function getUrlHttp($url = '', $rewrite_url = false){
+
         if($rewrite_url == true){
             $url = $this->getRewriteUrl($url);
         }else{
             
         }
+
         $link = Mage::getUrl($url,array('_secure'=>Mage::app()->getFrontController()->getRequest()->isSecure()));
+
         return $link;
     }
     
