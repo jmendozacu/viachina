@@ -214,5 +214,5 @@
 
 SetEnvIf Host www\.slimmedeals\.nl MAGE_RUN_CODE=slimme_deal
 SetEnvIf Host www\.slimmedeals\.nl MAGE_RUN_TYPE=website
-SetEnvIf Host slimmedeals\.nl MAGE_RUN_CODE=slimme_deals
+SetEnvIf Host slimmedeals\.nl MAGE_RUN_CODE=slimme_deal
 SetEnvIf Host ^slimmedeals\.nl MAGE_RUN_TYPE=website

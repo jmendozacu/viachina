@@ -681,7 +681,7 @@ span.deal-qty{
 }
 
 .tab-deal .tabs li{
-    background-color: #FB6605;
+    background-color: #0270C0;
     color: #fff;
     width: 200px;
     text-align: center;
@@ -708,12 +708,12 @@ span.deal-qty{
     
 .tab-deal .tabs li.active ,
 .tab-deal .tabs li:hover{
-	background-color: #0270C0;	
+	background-color: #FB6605;
 	
 }
 
 .tab-deal .tabs li.active a span{
-    background-color: #0270C0;
+    background-color: #FB6605;
     color: white;
 }
 
@@ -985,7 +985,7 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     font-size: 44px !important;
     background-color: #FB6605;
     color: white;
-    font-family: "Helvetica";
+    font-family: "Abel";
     font-weight: bold;
     padding-right: 5px;
     padding-left: 5px;
@@ -1006,21 +1006,21 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
 
 .deals-block .product-view .product-shop h2{
     display: block;
-    font-family: 'Helvetica';
+    font-family: 'Ubuntu';
     font-size: 24px;
 }
 
 .deals-block .product-view .product-shop .regular-price .price {
     font-size: 32px !important;
     color: rgb(118,113,113);
-    font-family: 'Helvetica';
+    font-family: 'Abel';
     text-decoration: none;
 }
 
 .deals-block .product-view .product-shop .special-price .price {
     font-size: 44px !important;
     color: #FB6605;
-    font-family: 'Helvetica';
+    font-family: 'Abel';
     font-weight: bold;
 }
 
@@ -1028,7 +1028,15 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     width: 95%;
 }
 
+.deals-block .tab-title{
+    font-family: 'Abel';
+    font-size: 32px;
+}
 
+.deals-block .product-view .product-shop .std{
+    font-family: 'Ubuntu';
+    font-size: 16px;
+}
 
 
 .tab-title{
@@ -1048,7 +1056,7 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
 }
 
 .counter-info{
-    font-family: Helvetica;
+    font-family: 'Ubuntu';
     font-size: 20px;
     color: rgb(118,113,113)
 }
@@ -1201,10 +1209,6 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
 
 .products-list li.item{
     border-bottom: none;
-}
-
-.page{
-    background:url(../images/background.jpg);
 }
 
 .header .quick-access{
