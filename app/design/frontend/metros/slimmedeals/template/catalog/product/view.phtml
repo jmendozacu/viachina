@@ -54,10 +54,10 @@ if ($layout == null || $layout == 'default')
             <input type="hidden" name="related_product" id="related-products-field" value="" />
         </div>
         <div class="view-name">
-        <div class="product-name">
-                <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+            <div class="product-name">
+                    <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                </div>
             </div>
-        </div>
         <div class="default-image product-img-box">
             <?php echo $this->getChildHtml('media') ?>
         </div>
@@ -294,10 +294,10 @@ elseif ($layout == 'horizontal')
             <input type="hidden" name="related_product" id="related-products-field" value="" />
         </div>
         <div class="view-name">
-        <div class="product-name">
-                <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+            <div class="product-name">
+                    <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                </div>
             </div>
-        </div>
         <div class="horizontal-image product-img-box">
             <?php echo $this->getChildHtml('media') ?>
         </div>

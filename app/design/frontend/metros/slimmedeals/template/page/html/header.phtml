@@ -127,24 +127,14 @@ case 'eu':
         <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
         <?php endif?>
         <div class="head-full-cont">
-            <div class="left head-70p search-bar"><div class="searchlogo"><?php echo $this->getChildHtml('topSearch') ?></div></div>
-            <div class="right head-30per thuisw-img">        
-		    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('cert-header-img')->toHtml(); ?>
+            <div class="right">
+                <div class="shopping_bg">
+                                    <div class="cartlogo"></div>
+                    <!--<h1><?php echo $this->__('Shopping Bag') ?></h1>-->
+
+                                    <?php echo $this->getChildHtml('cart_sidebar') ?>
+                </div>
             </div>
-        </div>
-        <div class="clearboth"></div>
-        <div class="head-full-cont">
-        <div class="left head-80per"><?PHP $menuwithlogo = themeOptions('menu_withlogo'); ?>
-	    <?php
-	    if($menuwithlogo == null || $menuwithlogo == '1' ) { ?>
-		<?php echo $this->getChildHtml('topMenu') ?>
-		<?php } ?></div>
-        <div class="right"><div class="shopping_bg">
-                                <div class="cartlogo"></div> 
-				<!--<h1><?php echo $this->__('Shopping Bag') ?></h1>-->
-			
-                                <?php echo $this->getChildHtml('cart_sidebar') ?>
-		</div></div>
         </div>
 		
 		<div class="clearboth"></div>
