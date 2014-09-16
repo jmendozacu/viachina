@@ -84,8 +84,6 @@ if ($layout == null || $layout == 'default')
             <?php endif;?>
 
 
-
-
             <?php if (!$this->hasOptions()):?>
                 <div class="add-to-box">
                     <?php if($_product->isSaleable()): ?>
@@ -324,9 +322,6 @@ elseif ($layout == 'horizontal')
                     <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
                 </div>
             <?php endif;?>
-
-
-
 
             <?php if (!$this->hasOptions()):?>
                 <div class="add-to-box">
