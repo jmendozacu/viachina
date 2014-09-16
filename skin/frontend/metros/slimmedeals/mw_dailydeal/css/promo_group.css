@@ -939,7 +939,7 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     width: 300px;
     display: inline-block;
     float: right;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
     padding: 0px;
     background: none;
 }
@@ -1207,8 +1207,14 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     border-bottom: none;
 }
 
-.products-list li.item{
+.deals-block .products-list li.item{
     border-bottom: none;
+    margin-bottom: 0px;
+}
+
+.deals-block  .products-list .product-name{
+    padding-left: 20px;
+    font-family: 'Abel';
 }
 
 .header .quick-access{
@@ -1221,6 +1227,10 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     border: 5px solid #FB6605;
     box-sizing: border-box;
     padding-left: 20px;
+}
+
+.deals-block .product-view{
+    border: 0px;
 }
 
 .col1-layout .product-view .horizontal-shop {
@@ -1351,6 +1361,10 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
         width: 95;
     }
 
-
+    .deals-block .products-list .product-image img{
+        max-width: 280px;
     }
+
+
+ }
 
