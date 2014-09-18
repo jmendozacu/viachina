@@ -1213,8 +1213,8 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
 }
 
 .deals-block  .products-list .product-name{
-    padding-left: 20px;
     font-family: 'Abel';
+    font-size: 38px;
 }
 
 .header .quick-access{
@@ -1237,6 +1237,9 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     width: 625px;
 }
 
+.checkout_box{
+    padding-top: 30px;
+}
 
 @media only screen and (max-width: 1023px) and (min-width: 768px){
     .deals-block{

@@ -1294,7 +1294,7 @@ width: 61%;
 
 /* Regular price */
 .regular-price { color:#FFF; font-weight:normal; }
-.regular-price .price { font-family:'open_sans_lightregular'; font-size:30px; color:#FFF; font-weight:normal; width:120px; height:27px;}
+.regular-price .price { font-family:'open_sans_lightregular'; font-size:30px; color:#FFF; font-weight:normal; width:120px; }
 .block .regular-price,
 .block .regular-price .price { color:#03997e; }
 
