@@ -1233,6 +1233,10 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     border: 0px;
 }
 
+.deals-block .add-to-box .button{
+    display: none;
+}
+
 .col1-layout .product-view .horizontal-shop {
     width: 625px;
 }
