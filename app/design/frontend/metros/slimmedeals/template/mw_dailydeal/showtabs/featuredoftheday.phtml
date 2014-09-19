@@ -174,15 +174,15 @@ $_helper = $this->helper('catalog/output');
                                         <?php if($_activedeal->checkDealPrice($_product)){ ?>
 
                                             <p class="old-price" >
-                                    <span class="regular-price" id="product-price<?php echo $this->getIdSuffix() ?>-related">
-                                        <span class="price">Van <?php echo $_coreHelper->currency($_regularPrice, true, false) ?>,-</span>
-                                    </span>
+                                                <span class="regular-price" id="product-price<?php echo $this->getIdSuffix() ?>-related">
+                                                    <span class="price">Van <?php echo $_coreHelper->currency($_regularPrice, true, false) ?>,-</span>
+                                                </span>
                                             </p>
 
                                             <p class="special-price">
-                                <span class="price" id="product-price-<?php echo $this->getIdSuffix() ?>">
-                                    Voor <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>,-
-                                </span>
+                                                <span class="price" id="product-price-<?php echo $this->getIdSuffix() ?>">
+                                                    Voor <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>,-
+                                                </span>
                                             </p>
 
 

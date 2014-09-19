@@ -1306,7 +1306,12 @@ width: 61%;
 /* Special price */
 .special-price { margin:0; padding:3px 0; float: left;    width: 110px; clear:both; }
 .special-price .price-label { font-size:13px; font-weight:bold; white-space:nowrap; color:#cd5033; }
-.special-price .price { font-family: 'open_sans_lightregular';font-size: 36px;color:white; font-weight:normal;}
+.special-price .price {
+    font-size: 44px !important;
+    color: #FB6605 !important;
+    font-family: 'Abel' !important;
+    font-weight: bold !importnat;
+}
 .latest-product .special-price .price-label {display:none;}
 
 /* Minimal price (as low as) */
@@ -1511,7 +1516,13 @@ a.prev:hover {background:#03997e url(../images/11.png) left center no-repeat;}
 .product-view .product-shop .price-box .old-price .price-label {display:none;}
 .product-view .product-shop .price-box .special-price .price-label {display:none;}
 .product-view .product-shop .price-box .old-price .price { color:#03997e;}
-.product-view .product-shop .regular-price .price {font-size:40px !important; color:#03997e; font-family:'Abel'; margin-right:30px; font-weight: normal !important;}
+.product-view .product-shop .regular-price .price {
+
+     font-size: 32px !important;
+    color: rgb(118,113,113) !important;
+    font-family: 'Abel' !important;
+    text-decoration: none;
+}
 .product-view .product-shop .special-price .price {font-size:40px; color:#03997e; font-family:'open_sans_lightregular'; margin-right:30px;}
 .product-view .product-shop h2 {display:none;}
 .product-view .product-shop .std {line-height: 1.78;color: #2E2E2E;font-size: 12px;}

@@ -1010,16 +1010,16 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     font-size: 24px;
 }
 
-.deals-block .product-view .product-shop .regular-price .price {
+.product-view .product-shop .regular-price .price {
     font-size: 32px !important;
-    color: rgb(118,113,113);
+    color: rgb(118,113,113) !important;
     font-family: 'Abel';
     text-decoration: none;
 }
 
-.deals-block .product-view .product-shop .special-price .price {
+ .product-view .product-shop .special-price .price {
     font-size: 44px !important;
-    color: #FB6605;
+    color: #FB6605 !important;
     font-family: 'Abel';
     font-weight: bold;
 }
