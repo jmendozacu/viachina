@@ -1109,14 +1109,11 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
 .btn_buy button.button, .buy_yet button.button{
     background-color: #FB6605;
     padding: 0px 15px 0px 13px;
-    font-family: 'FontAwesome';
+    font-family: 'Abel';
     font-size: 46px;
     text-transform: none;
 }
 
-.btn_buy button:before, .buy_yet button:before {
-    content: "\f07a";
-}
 
 .slimmedeal-footer-container{
     margin-top: 30px;
