@@ -141,7 +141,9 @@ ul,ol         { list-style:none; }
 .page-print { background:#fff; padding:25px 30px; text-align:left; }
 .page-empty { background:#fff; padding:20px; text-align:left; }
 .page-popup { background:#fff; padding:25px 30px; text-align:left; }
-.main-container {  }
+.main-container {
+    margin-top: 15px;
+}
 .main { width:1200px; margin:0 auto; min-height:400px; padding:0px 0px 0px 0px;  text-align:left; }
 
 /* Base Columns */
