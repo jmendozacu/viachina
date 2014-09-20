@@ -148,8 +148,8 @@ function colourBrightnesstab($hex, $percent) {
                                 <?php } ?>
                             </div>
                             <div class="discount-block">
-                                -<?php
-                                echo round((1.0-$_finalPrice/$_regularPrice)*100);
+                                <?php
+                                echo -round((1.0-$_finalPrice/$_regularPrice)*100);
                                 ?>%
                             </div>
                             <div style="clear: both"></div>
