@@ -1234,12 +1234,47 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     display: none;
 }
 
+.product-options{
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+}
+
+.product-options dt{
+    padding-top: 4px;
+}
+
+.product-shop .product-options-bottom{
+    margin: 0px;
+    display: inline-block;
+    width: 40%;
+}
+
+.add-to-cart .qty{
+    height: 30px;
+}
+
+ .product-options-bottom .add-to-cart{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    border-bottom: 0px;
+}
+
+ .product-view .product-shop .add-to-cart label{
+    padding-top: 6px;
+}
+
 .col1-layout .product-view .horizontal-shop {
     width: 625px;
 }
 
 .checkout_box{
-    padding-top: 30px;
+    padding-top: 5px;
+}
+
+.product-options-bottom .price-block{
+    display: none;
 }
 
 @media only screen and (max-width: 1023px) and (min-width: 768px){
@@ -1265,6 +1300,13 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
     .buy_yet button.button{
         font-size: 40px;
     }
+    .product-options{
+        width: 100%;
+    }
+
+    .product-shop .product-options-bottom{
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 1199px) and (min-width: 1024px){
@@ -1288,6 +1330,14 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
         margin-left: 20%;
     }
 
+     .product-options{
+        width: 100%;
+    }
+
+    .product-shop .product-options-bottom{
+        width: 100%;
+    }
+
 }
 
 @media only screen and (max-width: 767px) and (min-width: 480px){
@@ -1309,7 +1359,13 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
         width: 100%;
     }
 
+     .product-options{
+        width: 100%;
+    }
 
+    .product-shop .product-options-bottom{
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 479px) {
@@ -1369,6 +1425,12 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
         max-width: 280px;
     }
 
+     .product-options{
+        width: 100%;
+    }
 
+    .product-shop .product-options-bottom{
+        width: 100%;
+    }
  }
 

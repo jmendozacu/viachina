@@ -1563,7 +1563,7 @@ a.prev:hover {background:#03997e url(../images/11.png) left center no-repeat;}
 .product-options ul.options-list label { font-weight:normal; }
 .product-options ul.validation-failed { padding:0 7px; }
 .product-options p.note { margin:0; font-size:11px; }
-.product-options p.required { position:absolute; right:20px; top:20px; }
+.product-options p.required { position:absolute; right:20px; top:20px; display: none;}
 
 .product-options-bottom {  }
 .product-options-bottom .add-to-cart label {margin-right:0px; width:95px;}
