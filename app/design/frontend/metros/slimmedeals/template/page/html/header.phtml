@@ -129,12 +129,16 @@ case 'eu':
         <div class="head-full-cont">
             <div class="right">
                 <div class="shopping_bg">
-                                    <div class="cartlogo"></div>
+                    <div class="cartlogo"></div>
                     <!--<h1><?php echo $this->__('Shopping Bag') ?></h1>-->
 
-                                    <?php echo $this->getChildHtml('cart_sidebar') ?>
+                    <?php echo $this->getChildHtml('cart_sidebar') ?>
                 </div>
             </div>
+            <div class="right head-30per thuisw-img">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('cert-header-img')->toHtml(); ?>
+            </div>
+
         </div>
 		
 		<div class="clearboth"></div>

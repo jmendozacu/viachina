@@ -79,7 +79,7 @@ function colourBrightnesstab($hex, $percent) {
 <?php if (!$_pastdealsCollection->count()): ?>
     <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
-    <div class="category-products responsive-list list-actdeals deals-block">
+    <div class="category-products responsive-list list-actdeals deals-block past-deals">
 
         <?php // List mode ?>
 
@@ -157,7 +157,7 @@ function colourBrightnesstab($hex, $percent) {
 
                             <div class="desc std">
                                 <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
-                                <a  class="link-learn more-info">Meer informatie...</a>
+                                <a  class="link-learn more-info">Volledige specificatie...</a>
                             </div>
 
                         </div>

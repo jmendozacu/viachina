@@ -852,7 +852,7 @@ span.deal-qty{
 
 
 /* daily deal category page ==================================================*/
-.product-essential{position: relative;}
+.product-essential{position: relative; padding-bottom: 20px;}
 .mw_pro_dld{position: relative;}
 .products-list li.item{position: relative;}
 .mwdld_display_cate{
@@ -1274,6 +1274,26 @@ ol.mini-products-list { padding-left:0px !important; margin-bottom: 1px;}
 }
 
 .product-options-bottom .price-block{
+    display: none;
+}
+
+.truncated {
+    display: none;
+}
+
+.tital .hr{
+    border-bottom: 0px;
+    height: 20px;
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+}
+
+.buy_yet button.button{
+    display: none;
+}
+
+.past-deals .link-learn{
     display: none;
 }
 
